@@ -94,10 +94,10 @@ signature. This makes the process more complex, but removes the
 dependence on a single server.
 
 The signing process is usually overseen by a _signature aggregator_
-who passes everything to the participants without having any special
-privileges. Again, the literal middle-man can be cut out if desired,
-in which case all elements of the signing process must be broadcast in
-a secure way.
+(or _cooridnator_) who passes everything to the participants without
+having any special privileges. Again, the literal middle-man can be
+cut out if desired, in which case all elements of the signing process
+must be broadcast in a secure way.
 
 The next chapter, [§1.2: The FROST Signature
 Process](01_2_FROST_Signature_Process.md), details these specifics in
