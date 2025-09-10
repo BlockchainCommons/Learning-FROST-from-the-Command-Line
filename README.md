@@ -23,8 +23,7 @@ https://github.com/ChristopherA/intro-mac-command-line._
 * [1.0: Introduction to FROST](01_0_Introduction.md)
   * [1.1: Introducing FROST](01_1_Introducing_FROST.md)
   * [1.2: The FROST Signature Process](01_2_FROST_Signature_Process.md)
-  * [1.3: The Power of Schnorr](01_3_Power_of_Schnorr.md)
-  * [1.4: FROST vs MuSig2](01_4_FROST_vs_MuSig.md)
+  * [1.3: FROST vs MuSig2](01_4_FROST_vs_MuSig.md)
  
 ### PART TWO: FROST FROM THE COMMAND LINE
 
