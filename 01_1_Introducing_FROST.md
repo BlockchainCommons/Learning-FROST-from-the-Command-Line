@@ -40,13 +40,13 @@ shares. The original key can then be reconstructed from "m" of the
 shares where "m≤n", but if fewer than "m" of the shares are brought
 together, they tell nothing about the secret.
 
-> :book: ***What is VSS?*** VSS, or Feldman VSS, or Verifiable Secret
-Sharing, is a variant of Shamir's Secret Sharing. It allows the
-verification of shares, so that recipients know they actually define a
-secret, which is crucial to some FROST methods of key generation. (VSS
-shares can also prove the continued existence of the shares without
-actually revealing them, which is great for secret resilience, but
-less important for FROST itself.)
+> :book: ***What is VSS?*** VSS, or Verifiable Secret Sharing, is a
+variant of Shamir's Secret Sharing. It allows the verification of
+shares, so that recipients know they actually define a secret, which
+is crucial to some FROST methods of key generation. (VSS shares can
+also prove the continued existence of the shares without actually
+revealing them, which is great for secret resilience, but less
+important for FROST itself.)
 
 Beyond being a threshold signature system, FROST is also a Schnorr
 signature system, which refers to the exact process (algorithm) used
