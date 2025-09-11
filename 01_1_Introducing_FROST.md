@@ -38,10 +38,15 @@ so can prove that the owner controls a specific public key.
 such as Shamir's Secret Sharing. This generates a set of "n"
 shares. The original key can then be reconstructed from "m" of the
 shares where "m≤n", but if fewer than "m" of the shares are brought
-together, they tell nothing about the secret. A variant of Shamir's
-Secret Sharing called Verifiable Secret Sharing, or VSS, allows for
-the existence of the shares to be verified without actually revealing
-them. This is what's used by FROST.
+together, they tell nothing about the secret.
+
+> :book: ***What is VSS?*** VSS, or Feldman VSS, or Verifiable Secret
+Sharing, is a variant of Shamir's Secret Sharing. It allows the
+verification of shares, so that recipients know they actually define a
+secret, which is crucial to some FROST methods of key generation. (VSS
+shares can also prove the continued existence of the shares without
+actually revealing them, which is great for secret resilience, but
+less important for FROST itself.)
 
 Beyond being a threshold signature system, FROST is also a Schnorr
 signature system, which refers to the exact process (algorithm) used
@@ -68,10 +73,10 @@ to potentially be stolen.
 
 **Distributed Key Generation (DKG):** This is a more secure, but also
 newer and more complex method. It takes advantage of Secure
-Multi-Party Computing (MPC). The members of the FROST group work
-together to generate their shares of the private key, with each member
-creating their personal share over the course of the ceremony, but
-with the combined private key never coming into existence, and no
+Multi-Party Computing (MPC) and VSS. The members of the FROST group
+work together to generate their shares of the private key, with each
+member creating their personal share over the course of the ceremony,
+but with the combined private key never coming into existence, and no
 member ever learning any share but their own.
 
 Whichever way the individual shares are generated, the process will
