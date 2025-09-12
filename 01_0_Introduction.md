@@ -24,5 +24,4 @@ Supporting objectives include the ability to:
 
   * [Section One: Introducing FROST](01_1_Introducing_FROST.md)
   * [Section Two: The FROST Signature Process](01_2_FROST_Signature_Process.md)
-  * [Section Three: The Power of Schnorr](01_3_Power_of_Schnorr.md)
-  * [Section FOUR: FROST vs MuSig2](01_4_FROST_vs_MuSig.md)
+  * [Section Three: FROST vs MuSig2](01_3_FROST_vs_MuSig.md)

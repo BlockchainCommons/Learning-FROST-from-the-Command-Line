@@ -7,7 +7,7 @@ paper](https://eprint.iacr.org/2020/852.pdf) by Chelsea Komlo and Ian
 Goldberg that gives all the specifics, this section is intended to
 offer a more accessible introduction to the technology.
 
-## The FROST Overview
+## The Power of FROST
 
 FROST is a threshold signature scheme. That means that a group of
 participants each hold a share of a private key. The private key does
