@@ -26,6 +26,7 @@ Supporting objectives include the ability to:
 ## Table of Contents
 
   * [Section One: Installing the FROST Tools](02_1_Installing_FROST_Tools.md)
-  * [Section Two: Creating Trusted Dealer Shares](02_2_Creating_FROST_Secret_Shares.md)
-  * [Section Four: Creating a FROST Signature](02_3_Creating_FROST_Signature.md)
-  * [Section Five: Checking a FROST Signature](02_4_Checking_FROST_Signature.md)
+  * [Section Two: Creating Trusted Dealer Shares with TDG](02_2_Creating_FROST_Secret_Shares_with_TDG.md)
+  * [Section Three: Creating a FROST Signature](02_3_Creating_FROST_Signature.md)
+  * [Section Four: Checking a FROST Signature](02_4_Checking_FROST_Signature.md)
+  * [Section Five: Creating Trusted Dealer Shares with TDG](02_5_Creating_FROST_Secret_Shares_with_DKG.md)

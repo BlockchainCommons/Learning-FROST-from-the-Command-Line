@@ -120,4 +120,4 @@ Rust before, you might need to download that software first.
 
 ## What's Next
 
-Continue onward with "Signing with FROST" by [§2.2: Creating FROST Secret Shares](02_2_Creating_FROST_Secret_Shares.md).
+Continue onward with "Signing with FROST" by [§2.2: Creating FROST Secret Shares with TDG](02_2_Creating_FROST_Secret_Shares_with_TDG.md).

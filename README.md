@@ -29,9 +29,10 @@ https://github.com/ChristopherA/intro-mac-command-line._
 
 * [2.0: Signing with FROST](02_0_Signing_with_FROST.md)
   * [2.1: Installing the FROST Tools](02_1_Installing_FROST_Tools.md)
-  * [2.2: Creating Trusted Dealer Shares](02_2_Creating_FROST_Secret_Shares.md)
+  * [2.2: Creating Trusted Dealer Shares with TDG](02_2_Creating_FROST_Secret_Shares_with_TDG.md)
   * [2.3: Creating a FROST Signature](02_3_Creating_FROST_Signature.md)
   * [2.4: Checking a FROST Signature](02_4_Checking_FROST_Signature.md)
+  * [2.5: Creating Trusted Dealer Shares with DKG](02_5_Creating_FROST_Secret_Shares_with_DKG.md)  
 * [3.0: Using FROST with Bitcoin](03_0_FROST_and_Bitcoin.md)
   * [3.1: Installing the Bitcoin Tools](03_1_Installing_Bitcoin_Tools.md)
   * [3.2: Signing PSBTs with FROST](03_2_Signing_PSBTs_with_FROST.md)
