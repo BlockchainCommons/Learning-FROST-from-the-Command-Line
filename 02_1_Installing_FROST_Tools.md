@@ -104,8 +104,12 @@ DEVELOPER.md		Makefile.toml		zcash-sign
 You can then change into the crate root and run `cargo build`:
 ```
 % cd frost-tools
-% cargo build
+% cargo install --path frost-client  
+``
+You should see the client-side ZF FROST Tools installed:
 ```
+Installed package `frost-client v0.1.0 (/Users/ShannonA/Documents/GitHub/FROST/frost-tools/frost-client)` (executables `coordinator`, `dkg`, `frost-client`, `participant`, `trusted-dealer`)
+````
 You're now ready to use the ZF FROST Tools!
 
 ## Summary: Installing the FROST Tools
