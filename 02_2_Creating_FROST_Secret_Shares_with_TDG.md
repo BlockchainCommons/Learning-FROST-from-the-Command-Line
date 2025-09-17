@@ -106,8 +106,8 @@ advantage of the security of FROST signing.
 Trusted Dealer Generation is the simplest but also least secure way to
 use FROST. It allows quick and easy generation of secret shares, but
 the Trusted Dealer must actually be trusted and it must be secure, as
-it represents a Single Point of Failure (SPOF) until the shares have
-been distributed and securely removed.
+it represents a Single Point of Compromise (SPOC) until the shares
+have been distributed and securely removed.
 
 (Nonetheless, it's a great way to get a first hint at how FROST works.)
 
