@@ -36,7 +36,7 @@ the `frost-client` package.
 The `coordinator` binary may be run with the following flags as options:
 
 | Flag | Description | Default | Options |
-| -----|---------|---------|
+|-----|---------|---------|
 | -C | Ciphersuite | ed25519 | redpallas |
 | --cli | Interactive | <yes> |
 | -i | IP Address | 0.0.0.0 |
