@@ -29,11 +29,11 @@ Decisions:
 FROST signing usually requires a coordinator. In the case of the ZF
 FROST Tools, that's the `coordinator` app. It also needs a way for the
 group members to connect with the `coordinator`. In the ZF FROST
-Tools, that's done with the `participant` binary. Both should have
+Tools, that's done with the `participant` app. Both should have
 been installed when you ran the `cargo install`, as they're part of
 the `frost-client` package.
 
-The `coordinator` binary may be run with the following flags as options:
+The `coordinator` app may be run with the following flags as options:
 
 | Flag | Description | Default | Options |
 | ----- | --------- | --------- | --- |
@@ -58,7 +58,7 @@ program sometimes did not deliver commitments when initially run, in
 which case `participant` was shut down (^C) and restarted.
 
 The following command will start `coordinator` on `localhost:443`. It
-will require two signatures to sign `board-meeting-250917.bin` and
+will require two signatures to sign `board-meeting-250917.txt` and
 place the signature in `board-meeting-250917.sig`:
 
 ```
@@ -125,9 +125,10 @@ Message to be signed (hex-encoded):
 
 ### Checking Your Message
 
-But that message doesn't look anything like the text file of your
-minutes! That's because it's been converted to hex, which is typical
-for digital signing.
+But that message (displayed in "Message to be signed (hex-encoded):")
+doesn't look anything like the text file of your minutes! That's
+because it's been converted to hex, which is typical for digital
+signing.
 
 You can (and should!) check the message before you sign it. This is
 done with `xxd -r -p`, which will convert hex to ASCII.
@@ -149,8 +150,8 @@ participating signers has verified the message, they can sign.
 ### Finalizing the Signature
 
 When the participants agree to sign, they send their signing shares to
-the `coordinator`. When the `coordinator` has receiveed enough, it
-will aggregate a signature for the binary file:
+the `coordinator`. When the `coordinator` has received enough, it
+will aggregate a signature for the message file:
 ```
 Waiting for participants to send their SignatureShares...
 Received: {"SignatureShare":{"header":{"version":0,"ciphersuite":"FROST-ED25519-SHA512-v1"},"share":"6682858a180be6f0527a6733d33c5c957a9c2e6ff91345bfbf15f53ff4d8d608"}}
