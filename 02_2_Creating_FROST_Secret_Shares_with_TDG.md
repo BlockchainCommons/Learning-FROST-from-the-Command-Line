@@ -26,7 +26,7 @@ to actually distribute the shares.
 The `trusted-dealer` binary may be run with the following flags:
 
 | Flag | Description | Default | Options |
-| -----|---------|---------|
+|-----|---------|---------|
 | -C | Ciphersuite | ed25519 | redpallas |
 | --cli | Interactive | <no> |
 | -k | Key Filenames| key-package-{}.json |
