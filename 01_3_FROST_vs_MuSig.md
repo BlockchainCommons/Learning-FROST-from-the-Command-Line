@@ -33,7 +33,7 @@ systems is that they're aggregateable. If you have a signature A and a
 signature B, you can add them together to create a new signature AB
 that is the same size as A or B. This is particularly notable when
 multiple parties are signing multisigs or threshold signatures, where
-the signature will validate when enough people have signed it. This
+the signature will verify when enough people have signed it. This
 creates some of the advantages that were mentioned in
 [§1.1](01_1_Introducing_FROST.md).
 
@@ -45,7 +45,7 @@ valid!
 
 The aggregatability of Schnorr allows for the creation of adaptor
 signatures where a signature is "tweaked" by adding some secret value
-to it. The tweaked signature can be validated, but the secret value
+to it. The tweaked signature can be verified, but the secret value
 must be revealed to make the signature valid.
 
 It also allows for the creation of blind signatures, where someone can

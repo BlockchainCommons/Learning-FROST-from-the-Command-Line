@@ -22,13 +22,13 @@ two shares is required to sign, or two out of three, or three out of
 five, respectively.
 
 There is also a public key, which does exist in full, and can be used
-to validate signatures made by the private key shares. It's sometimes
+to verify signatures made by the private key shares. It's sometimes
 called a _group verifying key_.
 
 > :book: ***What is a Public Key?*** A public key is a publicly
 distributed cryptographic code that might act as an address or an
 identifier. It is generated from a private key and can be used to
-validate signatures made by the private key.
+verify signatures made by the private key.
 
 > :book: ***What is a Private Key?*** A private key is a secret
 cryptographic code. It is often used to digitally sign things. Doing
@@ -80,7 +80,7 @@ but with the combined private key never coming into existence, and no
 member ever learning any share but their own.
 
 Whichever way the individual shares are generated, the process will
-also generate a combined public key that can be used to validate
+also generate a combined public key that can be used to verify
 signatures made by the private key shares.
 
 Once the members of FROST group have created their signing shares,

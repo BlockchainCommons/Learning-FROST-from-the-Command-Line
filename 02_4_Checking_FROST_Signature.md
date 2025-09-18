@@ -1,17 +1,17 @@
 # 2.4: Checking FROST Signatures
 
 If you receive a FROST signature, obviously you must be able to
-validate it!
+check it!
 
-> :book: ***What is Required to Validate a Signature?*** Validation of
+> :book: ***What is Required to Verify a Signature?*** Verification of
 a signature can typically be accomplished with three items: the
 message, the signature, and the public key (which is typically called
 the "verifying key" in relation to FROST).
 
-Following are some methodologies for validating the ed25519 signature
+Following are some methodologies for verifying the ed25519 signature
 you created in [§2,3](02_3_Creating_FROST_Signature.md).
 
-## Validating on the Command Line
+## Verifying on the Command Line
 
 If you want to do additional work with `ed25519` signatures on the
 command line,
@@ -23,11 +23,11 @@ of converting file formats.
 We hope to have better command-line solutions here as the FROST
 ecosystem matures.
 
-## Validating on the Web
+## Verifying on the Web
 
 Currently, [cyphr.me](https://cyphr.me/ed25519_tool/ed.html) offers
-the best option for validating the signature you made with the ZF
-FROST Tools. It's a web site that can be used to safely validate
+the best option for verifying the signature you made with the ZF
+FROST Tools. It's a web site that can be used to safely verify
 ed25519-signed messages with public keys.
 
 ![](images/web-ed25519-validation.jpg)
@@ -45,13 +45,21 @@ To use it:
 * You should see "Valid Signature".
 
 The three items you pasted in were the three that we earlier listed as
-requirements for signature validation: the message, the signature, and
-the public (verifying) key.
+requirements for signature verification: the message, the signature,
+and the public (verifying) key.
 
-## Validating with Code
+> :book: ***Is It Verify or Validate?*** [RFC
+4949](https://datatracker.ietf.org/doc/html/rfc4949) suggests that
+validate should refer to correctness and verify should refer to
+truth. These are also the most common definitions in the cryptographic
+world, so you verify a signature to see that its authentic, though you
+might validate that it's the right format, the right length, etc.
+
+
+## Verifying with Code
 
 The [ZF FROST Book](https://frost.zfnd.org/tutorial/signing.html)
-notes that if you use the ZF FROST crates, you can simply validate a
+notes that if you use the ZF FROST crates, you can simply verify a
 signature with the following code:
 
 ```
@@ -87,7 +95,7 @@ You should have a good understanding of:
 
 * What an m-of-n FROST group is.
 * How signatures are created in two rounds, with commitments, then signatures, followed by aggregation.
-* How you can use a message, signature, and verifying (public) key to validate a signature..
+* How you can use a message, signature, and verifying (public) key to verify a signature..
 
 That's the basics!
 

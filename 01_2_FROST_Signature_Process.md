@@ -150,14 +150,14 @@ a result could censor the process if they wanted.
 
 3. Coordinator transmits message to chosen members to sign.
 4. Coordinator transmits relevant commitments to chosen members.
-5. Each member validates this information.
+5. Each member checks this information.
 6. Each member uses their secret key share and nonce to sign.
 7. Each member transmits the resultant signature share to coordinator.
 8. Each member deletes the nonce used and corresponding commitment.
 
 **Post:**
 
-9. Coordinator validates signature shares.
+9. Coordinator checks signature shares.
 10. Coordinator aggregates signature shares to produce signature.
 
 ```mermaid
@@ -195,14 +195,14 @@ signatures are preprocessed:
 3. Coordinator selects next commitments from list for chosen members.
 4. Coordinator transmits message to chosen members to sign.
 5. Coordinator transmits relevant commitments to chosen members.
-6. Each member validates this information.
+6. Each member checks this information.
 7. Each member uses their secret key share and nonce to sign.
 8. Each member transmits the resultant signature share to coordinator.
 9. Each member deletes the nonce used and corresponding commitment.
 
 **Post:**
 
-10. Coordinator validates signature shares.
+10. Coordinator checks signature shares.
 11. Coordinator aggregates signature shares to produce signature.
 
 ```mermaid
