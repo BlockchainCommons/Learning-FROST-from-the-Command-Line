@@ -26,14 +26,14 @@ to actually distribute the shares.
 The `trusted-dealer` binary may be run with the following flags:
 
 | Flag | Description | Default | Options |
-|-----|---------|---------|
-| -C | Ciphersuite | ed25519 | redpallas |
-| --cli | Interactive | <no> |
-| -k | Key Filenames| key-package-{}.json |
-| --key | Secret for Splitting | <random> |
-| -n | Maximum Signers | 3 | 2+ & t+ |
-| -P | Public Key Filename | public-key-package.json |
-| -t | Threshold Signers | 2 | 2+ |
+| ----- | --------- | --------- | --- |
+| \-C | Ciphersuite | ed25519 | redpallas |
+| \-\-cli | Interactive | <no> |
+| \-k | Key Filenames| key-package-{}.json |
+| \-\-key | Secret for Splitting | <random> |
+| \-n | Maximum Signers | 3 | 2+ & t+ |
+| \-P | Public Key Filename | public-key-package.json |
+| \-t | Threshold Signers | 2 | 2+ |
 
 `trusted-dealer` wwill usually be run with the `-t` and `-n`
 arguments. The following uses them to create a default 2-of-3 secret share:
@@ -113,9 +113,7 @@ have been distributed and securely removed.
 
 ## What's Next
 
-Continue onward with "Signing with FROST" by [§2.2: Creating FROST
-Secret Shares with
-TDG](02_2_Creating_FROST_Secret_Shares_with_TDG.md).
-
+Continue onward with "Signing with FROST" by
+[§2.3: Creating a FROST Signature](02_3_Creating_FROST_Signature.md).
 
 
