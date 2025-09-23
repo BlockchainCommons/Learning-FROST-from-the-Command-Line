@@ -35,7 +35,7 @@ The `trusted-dealer` binary may be run with the following flags:
 | \-P | Public Key Filename | public-key-package.json |
 | \-t | Threshold Signers | 2 | 2+ |
 
-`trusted-dealer` wwill usually be run with the `-t` and `-n`
+`trusted-dealer` will usually be run with the `-t` and `-n`
 arguments. The following uses them to create a default 2-of-3 secret share:
 
 ```
