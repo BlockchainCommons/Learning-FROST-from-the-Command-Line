@@ -9,7 +9,7 @@ Obviously, signers need something to sign. In [Chapter
 transaction. Signing transfers of digital assets are a common use case
 for FROST signatures.
 
-However, you can also sign _anything_ that requires collaborative
+However, you can also sign _anything_ that requires the collaborative
 authorization of the secret share holders. That might frequently
 include the validation of decisions made by a board of directors or
 other organization:
@@ -29,9 +29,9 @@ Decisions:
 FROST signing usually requires a coordinator. In the case of the ZF
 FROST Tools, that's the `coordinator` app. It also needs a way for the
 group members to connect with the `coordinator`. In the ZF FROST
-Tools, that's done with the `participant` app. Both should have
-been installed when you ran the `cargo install`, as they're part of
-the `frost-client` package.
+Tools, that's done with the `participant` app. Both should have been
+installed when you ran the `cargo install` for the `frost-client`
+package.
 
 The `coordinator` app may be run with the following flags as options:
 
@@ -88,9 +88,9 @@ Received: {"IdentifiedCommitments":{"identifier":"010000000000000000000000000000
 
 ```
 
-> :warning: **WARNING:** If the `participant` did not correct send the
+> :warning: **WARNING:** If the `participant` did not correctly send the
 commitment to the `coordinator`, you'll see the "Client Connected"
-message, but not "Received". In this caes, you should break out (^C)
+message, but not "Received". In this case, you should break out (^C)
 and restart `participant` for that user.
 
 ```
@@ -164,10 +164,11 @@ Raw signature written to board-meeting-250917.sig
 ## Ensuring the Division
 
 Though the above examples demonstrate signing occurring on a single
-host, the signing shares that make up a threshold should be divided by
-this point. One of the major points of using FROST (but generally, of
-using any multisignature or threshold signature algorithm) is to
-protect your authorization by dividing it up.
+host, the signing shares that make up a threshold should actually be
+divided, with multiple users holding them on multiple hosts. One of
+the major points of using FROST (but generally, of using any
+multisignature or threshold signature algorithm) is to protect your
+authorization by dividing it up.
 
 In this example, the two group members could be signing on different
 machines, which means that their actual key is never rquired to exist
@@ -185,7 +186,7 @@ described in [§1.2: The FROST Signature
 Process](01_2_FROST_Signature_Process.md). A coordinator organizes
 things; each participant sends commitments; the coordinator resends
 the commitments and the material to be signed; the participants use
-their signing shares; and the coordinator aggregates them to creat the
+their signing shares; and the coordinator aggregates them to create the
 final signature.
 
 ## What's Next
