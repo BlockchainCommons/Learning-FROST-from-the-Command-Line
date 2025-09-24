@@ -11,6 +11,14 @@ the "verifying key" in relation to FROST).
 Following are some methodologies for verifying the ed25519 signature
 you created in [§2,3](02_3_Creating_FROST_Signature.md).
 
+:warning: **WARNING:** There are some issues with the canonicity of
+some edge-case ed25519 signatures as [described
+here](https://hackmd.io/2km5DIv8R8-dd-jDPGFQTg). ZF FROST and the
+verification tools described here seem to be in
+alignment. [ZIP-215](https://zips.z.cash/zip-0215) seeks to resolve
+these issues and hopefully will be a touchstone for future ed25519
+libraries.
+
 ## Verifying on the Command Line
 
 Blockchain Commons has written
