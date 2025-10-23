@@ -1,9 +1,9 @@
 # 1.2: The FROST Signature Process
 
 So how does FROST actually work? This section describes the process
-for either method of key generation and either method of signing,
+for both methods of key generation and both methods of signing,
 without delving into the mathematical specifics. Read as much of it as
-you find useful, but the important thing is just understanding the
+you find useful: the important thing is just understanding the
 generalities.
 
 For more of the math, see [the 2020 FROST
@@ -55,8 +55,8 @@ Sharing
 (VSS)](https://link.springer.com/article/10.1007/s00145-006-0347-3). But
 since, more variants have been offered, such as
 [ChillDKG](https://github.com/BlockstreamResearch/bip-frost-dkg),
-which further modifies PedPoP into SimplPedPop, which simplifies
-PedPoP and also makes it more securely usable with Bitcoin Taproot.
+which further modifies PedPoP into SimplPedPop, simplifying PedPoP and
+also making it more securely usable with Bitcoin Taproot.
 
 > :warning: **WARNING:** The lesson here is that DKG is not fully
 defined for use with FROST. There are a number of different DKG
@@ -66,10 +66,10 @@ secure for your security assumptions.
 
 The specifics likely don't manner to you if you're using a library or
 CLI that has already determined how to generate its shares using
-DKG. However, here's the general process used by the ZF FROST package
-that's used in this tutorial. It's laid out as "inputs" to the ZF
-FROST software, "outputs" from the ZF FROST software, and "transmits"
-among members.
+DKG. However, here's the general process utilized by the ZF FROST
+package that's used in this tutorial. It's laid out as "inputs" to the
+ZF FROST software, "outputs" from the ZF FROST software, and
+"transmits" among members.
 
 **Prep:**
 
@@ -128,8 +128,8 @@ sequenceDiagram
 
 ## The Signing Process
 
-Signing with FROST is ultimately a two-round process, though the first
-round can be pre-processed to lower overhead at signing time.
+Signing with FROST is a two-round process, but the first round can be
+pre-processed to lower overhead at signing time.
 
 ### The Two-Round Process
 
@@ -244,15 +244,15 @@ through an equivalent process where the first-round has been
 pre-processed and stored.
 
 You likely don't need to know the specifics of how each works, but you
-should know the two main variations for key generation and signing, so
-that you can recognize the options offered to your by various
-libraries.
+should understand the two main variations for key generation and
+signing, so that you can recognize the options offered to your by
+various libraries.
 
 ## What's Next
 
 Continue your "Introduction to FROST" by learning more about the
 underlaying Schnorr signing system and the biggest competitor to FROST
-in [§1.3: FROST vs MuSig2](01_4_FROST_vs_MuSig.md).
+in [§1.3: FROST vs MuSig2](01_3_FROST_vs_MuSig.md).
 
 Or, if you've seen enough about the nuts and bolts, jump straight to
 [Chapter Two: Signing with FROST](02_0_Signing_with_FROST.md) for the

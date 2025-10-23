@@ -11,8 +11,8 @@ offer a more accessible introduction to the technology.
 
 FROST is a threshold signature scheme. That means that a group of
 participants each hold a share of a private key. The private key does
-not exist in full, but only in parts, as these shares. The shares can
-be used together to create signatures for the private key, with only a
+not exist in full, but only in those parts. The shares can be used
+collectively to create signatures for the private key, with only a
 "threshold" of shares required to generate the signature.
 
 This threshold is determined when the key is generated. It might be
@@ -38,7 +38,9 @@ so can prove that the owner controls a specific public key.
 such as Shamir's Secret Sharing. This generates a set of "n"
 shares. The original key can then be reconstructed from "m" of the
 shares where "m≤n", but if fewer than "m" of the shares are brought
-together, they tell nothing about the secret.
+together, they tell nothing about the secret. These shares can also be
+used for Schnorr signing schemes such as FROST, without the need to
+bring them together.
 
 > :book: ***What is VSS?*** VSS, or Verifiable Secret Sharing, is a
 variant of Shamir's Secret Sharing. It allows the verification of
@@ -56,7 +58,10 @@ below.
 
 ## FROST without the Math
 
-The FROST signature scheme has two main elements.
+The FROST signature scheme has two main elements: signature share
+generation and signing.
+
+### Frost Signature Share Generation without the Math
 
 First, the members of a FROST group must generate shares of a private
 key that they will then use to sign messages. They do so by first
@@ -67,9 +72,9 @@ done in one of two ways:
 **Trusted Dealer Generation (TDG):** This is a traditional method. One
 trusted, centralized server generates a private key (or is given a
 key), shards it, and sends out the shares to the members of the FROST
-group. The disadvantage is that the server _must_ be very trusted, and
-the key exists in a single place for at least some time, allowing it
-to potentially be stolen.
+group. The disadvantage of TDG is that the server _must_ be very
+trusted, and the key exists in a single place for at least some time,
+allowing it to potentially be stolen.
 
 **Distributed Key Generation (DKG):** This is a more secure, but also
 newer and more complex method. It takes advantage of Secure
@@ -79,16 +84,19 @@ member creating their personal share over the course of the ceremony,
 but with the combined private key never coming into existence, and no
 member ever learning any share but their own.
 
-Whichever way the individual shares are generated, the process will
-also generate a combined public key that can be used to verify
-signatures made by the private key shares.
+Whichever way the individual shares are generated, the key-generation
+ceremony will also create a combined public key ("group verifying
+key") that can be used to verify signatures made by the private key
+shares.
+
+### Frost Signing without the Math
 
 Once the members of FROST group have created their signing shares,
 they can then sign. This is done by creating a commitment to a nonce,
 then creating a signature. Again, there are two ways to do this:
 
 **Pre-Processing:** Each member of the FROST group generates a set of
-nonces and a set of commitments for those nonces, and stores the
+nonces and a set of commitments for those nonces and stores the
 commitments on a centralized server. The signing process can then be
 done in a single-round signing process
 
@@ -96,11 +104,11 @@ done in a single-round signing process
 first round to generate nonces (which they hold) and commtiments
 (which they share), and then a second round to generate the
 signature. This makes the process more complex, but removes the
-dependence on a single server.
+dependence on a centralized server.
 
 The signing process is usually overseen by a _signature aggregator_
-(or _cooridnator_) who passes everything to the participants without
-having any special privileges. Again, the literal middle-man can be
+(or _coordinator_) who passes everything to the participants without
+having any special privileges. Again, this literal middle-man can be
 cut out if desired, in which case all elements of the signing process
 must be broadcast in a secure way.
 
@@ -134,7 +142,7 @@ threshold signature systems, such as Bitcoin's multisig. Some of these
 are due to the use of Schnorr signatures, some of them are due to the
 specific design of FROST.
 
-**Small Signatures.** FROST signatures are aggregateable. The
+**Small Signatures.** FROST signatures are aggregateable: the
 individual signatures are effectively added together. As a result, the
 final multi-signature is the same size as a single signature! This
 makes it much smaller than most traditional multisigs, which instead
@@ -143,7 +151,7 @@ ever-growing message. That means that very large thresholds (say, 101
 of 200, to represent consensus for a group) are easy under FROST,
 where they were totally unfeasible under traditional systems.
 
-**Private Signatures.** You also can't distinguish between a single
+**Private Signatures.** You can't distinguish between a single
 signature and a multi-signature. It's not just that they're the same
 size, but also that they look just the same. This makes FROST
 signatures much more private because a third party doesn't know if a
@@ -167,8 +175,8 @@ allows the shares to change over time, but also allows the threshold
 to change. A 2 of 3 threshold could, for example, become a 3 of 5 with
 a few repair operations. (However, it should be noted, that old shares
 and even old participants still remain trusted by the FROST group; if
-this is not actually the case, then a FROST group needs to be entirely
-replaced with a new one.)
+this doesn't match the reality of a situation, then a FROST group
+needs to be entirely replaced with a new one.)
 
 **Strong Security with DKG.** If DKG is used, the private key never
 exists in a single place. This provides very strong security because
@@ -190,7 +198,7 @@ FROST can be used anywhere that you need to make a signature.
 
 This tutorial focused on the [ZF
 FROST](https://frost.zfnd.org/index.html) project that was initiated
-by the [Zcash Foundation](https://zfnd.org/), which has wide
+by the [Zcash Foundation](https://zfnd.org/), but which has wide
 applicability. (It's not just for Zcash.)
 
 They have a [Rust FROST
@@ -216,6 +224,10 @@ thresholds and groups after the fact.
 Continue your "Introduction to FROST" by learning some of the
 specifics of how FROST works in ["§1.2: The FROST Signature
 Process"](01_2_FROST_Signature_Process.md).
+
+Or, if you don't need those specifics, consider reading about the
+underlying Schnorr signature system in [§1.3: FROST vs
+MuSig2](01_3_FROST_vs_MuSig.md).
 
 Or, if you've seen enough about the nuts and bolts, jump straight to
 [Chapter Two: Signing with FROST](02_0_Signing_with_FROST.md) for the

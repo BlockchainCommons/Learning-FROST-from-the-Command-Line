@@ -2,8 +2,9 @@
 
 FROST combines Schnorr signatures, various DKG methods, and a specific
 signing protocol to create a powerful threshold signing system. This
-section offers some more details on Schnorr and also compares FROST to
-the other major Schnorr signing system, MuSig2.
+section offers some more details on the underlying Schnorr signature
+system and also compares FROST to the other major Schnorr signing
+system, MuSig2.
 
 ## The Power of Schnorr
 
@@ -56,7 +57,7 @@ use cases for it.)
 Beyond the various advantages related to its aggregatability, Schnorr
 also has advantages of simplicity (the math is straightforward),
 linearity (aggregatability means the signatures simply add and
-subtract), and scalability (courtesy of its compact signatures).
+subtract), and scalability (courtesy of the compact signatures).
 
 > :book: ***How Does Schnorr Integrate with Bitcoin?*** Schnorr
 signatures were introduced to Bitcoin with block 709,632, mined on
@@ -65,8 +66,8 @@ signatures with Bitcoin can be found in [BIP
 340](https://en.bitcoin.it/wiki/BIP_0340). Taproot and Tapscript,
 which support Schnorr, were adopted at the same time.
 
-However, it turns out that FROST _isn't_ the only way to take
-advantage of Schnorr.
+Though Schnorr is the heart of FROST, FROST _isn't_ the only way to
+take advantage of Schnorr.
 
 ## The Power of MuSig
 
@@ -75,20 +76,20 @@ protocol that now exists in its second major incarnation, called
 MuSig2.
 
 > :book: ***What is MuSig?*** MuSig is a Schnorr-based multisignature
-protocol created by Gregory Maxwell, Andrew Poelstra, Yannick Seurin,
+protocol designed by Gregory Maxwell, Andrew Poelstra, Yannick Seurin,
 and Pieter Wuille that creates aggregatable signatures that are
 simpler and more efficient than traditional ECDSA multsigs.
 
 > :book: ***What is MuSig2?*** MuSig was originally released as a
-three-round protocol. When it was revamped as a second version,
+three-round protocol. When it was revamped into a second version,
 MuSig2, the number of signing rounds was reduced to two. A further
 variant called MuSig-DN protects against a specific sort of attack.
 
 The biggest difference between FROST and MuSig is that FROST is
 natively a threshold signature system (m of n where m≤n) while MuSig
-is a multisig signature system (n of n), with threshold signatures
-only accessible through the construction of Merkle trees where each
-leaf holding a different n-of-n signature.
+is by default a multisig signature system (n of n), with threshold
+signatures only accessible through the construction of Merkle trees
+where each leaf holding a different n-of-n signature.
 
 The other big difference between the two is on the question of
 privacy. The privacy of FROST means that you have _deniability_: it's
