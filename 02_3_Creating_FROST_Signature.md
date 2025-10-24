@@ -5,11 +5,11 @@ With their signing shares in hand, members are now ready to sign documents.
 ## Choosing What to Sign
 
 Obviously, signers need something to sign. In [Chapter
-3](03_0_FROST_and_Bitcoin.md), this will be a Bitcoin
+4](04_0_FROST_and_Bitcoin.md), this will be a Bitcoin
 transaction. Signing transfers of digital assets are a common use case
 for FROST signatures.
 
-However, you can also sign _anything_ that requires the collaborative
+However, you can sign _anything_ that requires the collaborative
 authorization of the secret share holders. That might frequently
 include the validation of decisions made by a board of directors or
 other organization:
@@ -91,12 +91,8 @@ Received: {"IdentifiedCommitments":{"identifier":"010000000000000000000000000000
 > :warning: **WARNING:** If the `participant` did not correctly send the
 commitment to the `coordinator`, you'll see the "Client Connected"
 message, but not "Received". In this case, you should break out (^C)
-and restart `participant` for that user.
+and restart `participant` for that user. You will see `Client connected`, then `Client disconnected`.
 
-```
-Client connected
-Client disconnected
-```
 Additional members may connect until you've met your threshold:
 ```
 % participant -k key-package-2.json
@@ -131,8 +127,9 @@ because it's been converted to hex, which is typical for digital
 signing.
 
 You can (and should!) check the message before you sign it. This is
-done with `xxd -r -p`, which will convert hex to ASCII.
-
+done with `xxd -r -p`, which will convert hex to ASCII. You just need
+to copy out the "Message to be signed (hex-encoded):" and run it
+through `xxd`:
 ```
 % echo "446174653a20392f31372f32350a50726573656e743a20303130303030303030303030303030303030303030303030303030303030303030303030303030303030303030303030303030303030303030303030303030302c20303230303030303030303030303030303030303030303030303030303030303030303030303030303030303030303030303030303030303030303030303030300a0a4465636973696f6e733a0a2a20416c6c6f636174652024313020746f204a616d20696e2043656e7472616c205061726b2050617274790a2a20416c6c204d656d62657273204d75737420436f6e7472696275746520243520746f2047726f7570204b6974747920627920392f32342f32350a" | xxd -r -p
 
@@ -149,9 +146,10 @@ participating signers has verified the message, they can sign.
 
 ### Finalizing the Signature
 
-When the participants agree to sign, they send their signing shares to
-the `coordinator`. When the `coordinator` has received enough, it
-will aggregate a signature for the message file:
+When the participants agree to sign (which just requires their
+agreements in the `participant` program), they send their signing
+shares to the `coordinator`. When the `coordinator` has received
+enough, it will aggregate a signature for the message file:
 ```
 Waiting for participants to send their SignatureShares...
 Received: {"SignatureShare":{"header":{"version":0,"ciphersuite":"FROST-ED25519-SHA512-v1"},"share":"6682858a180be6f0527a6733d33c5c957a9c2e6ff91345bfbf15f53ff4d8d608"}}

@@ -1,7 +1,7 @@
 # 2.4: Checking FROST Signatures
 
-If you receive a FROST signature, obviously you must be able to
-check it!
+If you receive a FROST signature, obviously you must be able to check
+it!
 
 > :book: ***What is Required to Verify a Signature?*** Verification of
 a signature can typically be accomplished with three items: the
@@ -104,7 +104,7 @@ means.
 
 The website [cyphr.me](https://cyphr.me/ed25519_tool/ed.html) offers a
 more general method for verifying ed25519 signatures, such as the one
-you created in the last section.
+you created in this chapter.
 
 ![](images/web-ed25519-validation.jpg)
 
@@ -153,7 +153,7 @@ of your own.
 You've now experienced the basics of FROST hands-on. You created a
 FROST group in [§2.2](02_2_Creating_FROST_Secret_Shares_with_TDG.md),
 created a FROST signature in [§2.3](02_3_Creating_FROST_Signature.md),
-and checked a FROST signature here.
+and verified a FROST signature here.
 
 You should have a good understanding of:
 

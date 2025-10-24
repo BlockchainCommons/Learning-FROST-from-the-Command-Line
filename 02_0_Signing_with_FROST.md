@@ -3,12 +3,12 @@
 The Zcash Foundation has created one of the most advanced developer
 resources for FROST. They've published a [set of Rust
 crates](https://github.com/ZcashFoundation/frost) implementing FROST
-with a variety of ciphersuites and a [set of CLI
+with a variety of ciphersuites as well as a [set of CLI
 tools](https://github.com/ZcashFoundation/frost-tools).
 
-This chapter details how to use ZF FROST command-line tools to create
-FROST secret shares and to sign with them using the basic Trusted
-Dealer methodology.
+This chapter details how to use the ZF FROST command-line tools to
+create FROST secret shares and to sign with them using the basic
+Trusted Dealer methodology.
 
 ## Objectives for this Chapter
 

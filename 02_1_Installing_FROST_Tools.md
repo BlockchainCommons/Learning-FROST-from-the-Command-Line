@@ -5,17 +5,17 @@ allow you to create FROST secret shares and to sign with FROST. This
 chapter provides hands-on tutorials for using them. By following these
 tutorials, you can solidfy your understanding of how FROST works.
 
-As demonstrated here, these tools can allow signing of documents, but
-you won't be able to Bitcoin transactions yet. That will require
-additional support, as detailed in [Chapter
-3](03_0_FROST_and_Bitcoin.md).
+As demonstrated here, these tools allow the simple signing of
+documents, but you won't be able to Bitcoin transactions yet. That
+will require additional support, as detailed in [Chapter
+4](04_0_FROST_and_Bitcoin.md).
 
 ## Installing Rust
 
 The ZF Frost Tools were built with Rust using Cargo. If you've already
 installed Rust and Cargo on your system, you can continue on to
-["Installing ZF FROST Tools"](). Otherwise, you'll need to install
-Rust and Cargo first.
+["Installing ZF FROST Tools"](#installing-zf-frost-tools). Otherwise,
+you'll need to install Rust and Cargo first.
 
 > :book: ***What is a Rust?*** Rust is a programming language focused
 on performance and memory safety. Its speed and efficiency and tight
@@ -33,7 +33,7 @@ The preferred method of installing Rust and Cargo is
 
 #### Installing with Rustup on Linux & MacOS
 
-On MacOS, Linux, and other UNIX OSes, you can run the following:
+On MacOS, Linux, and other UNIX OSes, you can run the following to install `rustup`:
 ```
 % curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 ```
@@ -49,7 +49,7 @@ you run WIndows.
 
 ### Installing with Package Managers
 
-You can also install Rust and Cargo with a standard package
+You can alternatively install Rust and Cargo with a standard package
 manager. You might prefer this if you use a single package manager to
 control most of your third-party installations. Rust is supported on
 Chocolatey, Homebrew, MacPorts, pkgsrc, and Scoop.
@@ -59,7 +59,7 @@ Chocolatey, Homebrew, MacPorts, pkgsrc, and Scoop.
 When your install is complete, you should see `cargo` in your standard
 path.
 
-This is an example of a `rust-up` install:
+This is an example of a `rustup` install:
 
 ```
 % which cargo
@@ -101,7 +101,8 @@ codecov.yml		LICENSE-APACHE		supply-chain
 CONTRIBUTING.md		LICENSE-MIT		tests
 DEVELOPER.md		Makefile.toml		zcash-sign
 ```
-You can then change into the crate root and run `cargo build`:
+You can then change into the crate root and run `cargo
+install`. You'll initially be installing the `frost-client` package.
 
 ```
 % cd frost-tools
@@ -120,7 +121,7 @@ You're now ready to use the ZF FROST Tools!
 
 All you need to do to start using the ZF FROST Tools is to `clone` the
 `frost-tools` repo and build it with Rust. If you've never used Git or
-Rust before, you might need to download that software first.
+Rust before, you will need to download that software first.
 
 ## What's Next
 

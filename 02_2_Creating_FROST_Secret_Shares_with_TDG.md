@@ -3,11 +3,12 @@
 The ZF FROST Tools allow for the easy creation of FROST secret shares
 using either the Trusted Dealer Generation (TDG) or the Distributed
 Key Generation (DKG) methodology. Of these, TDG is the quickest and
-simplest.
+simplest. (DKG generation will be covered in [Chapter
+3](03_0_Advanced_FROST.md).)
 
 ## Creating TDG Shares
 
-Trusted Dealer Generation (TDG) can be conducted using the
+Trusted Dealer Generation (TDG) can be conducted using the ZF FROST
 `trusted-dealer` binary, which should now be in your `.cargo/bin`
 directory.
 
@@ -15,13 +16,13 @@ directory.
 server shards a secret (which it may create itself or import) and
 distributes the secret shares to signers.
 
-> :book: ***How Does ZF FROST Tools Support TDG?*** The
+> :book: ***How Do the ZF FROST Tools Support TDG?*** The
 `trusted-dealer` binary in the ZF FROST tools can import a key or
 create its own. It will then generate `n+1` files: one file for each
 signer, containing an identifier, secret share, and commitment (which
 verifies the secret share); and one global file, containing the
 verifying key and each of the verifying shares. It is up to the user
-to actually distribute the shares.
+running the TDG to actually distribute the shares.
 
 The `trusted-dealer` binary may be run with the following flags:
 
@@ -40,19 +41,19 @@ arguments. The following uses them to create a default 2-of-3 secret share:
 
 ```
 % trusted-dealer -t 2 -n 3 Generating 3 shares with threshold 2...
-Public key package written to public-key-package.json Key package for
-participant
+Public key package written to public-key-package.json
+Key package for participant
 0100000000000000000000000000000000000000000000000000000000000000
-written to key-package-1.json Key package for participant
+written to key-package-1.json
+Key package for participant
 0200000000000000000000000000000000000000000000000000000000000000
-written to key-package-2.json Key package for participant
+written to key-package-2.json
+Key package for participant
 0300000000000000000000000000000000000000000000000000000000000000
-written to key-package-3.json ``` It generates four files: ``` % ls
-key-package-1.json key-package-3.json key-package-2.json
-public-key-package.json
+written to key-package-3.json
 ```
 
-All of the key material is stored as files:
+All of the key material is stored as four files that it generates:
 ```
 % ls
 key-package-1.json	key-package-3.json
