@@ -4,7 +4,7 @@
 TDG](02_2_Creating_FROST_Secret_Shares_with_TDG.md) overviewed the
 simplest way to create FROST shares, using Trusted Dealer
 Generation. However, the full power of FROST comes with the use of
-Distributed Key Generation (DKG). Using this methodology, the full
+Distributed Key Generation (DKG). With this methodology, the full
 signing key never exists in a single place—not when you're creating
 the signing shares, and not when you're using them.
 
@@ -29,7 +29,7 @@ servers work together. At the end of the ceremony, each server will
 hold its own secret share without the original secret having been
 instantiated at any point.
 
-> :book: ***What is DKG Better than TDG?*** DKG is considerably more
+> :book: ***Why is DKG Better than TDG?*** DKG is considerably more
 secure than TDG. With Trusted Dealer Generation, you have to trust the
 trusted dealer (hence the name!). You have to trust not just that
 they're not going to steal your secret, but also that they're secure
@@ -41,13 +41,14 @@ compromise it is to steal multiple shares (assuming the threshold is
 larger than 1), and that should be difficult because the shares should
 be securely stored on multiple sites.
 
-> :book: ***How Does ZF FROST Tools Support DKG?*** ZF FROST offers
+> :book: ***How Do the ZF FROST Tools Support DKG?*** ZF FROST offers
 two methods for generating DKG shares. One uses the `dkg` CLI to
 generate shares, but requires the participants to do the exchange of
 commitments themselves. The other uses the `server` app, which takes
 some effort to setup, but which takes the logistical burden from the
 user. The CLI method is described in this section, the server-based
-functionality in the next section.
+functionality in the [next
+section](03_2_Creating_FROST_Secret_Shares_with_DKG_Using_Server.md)..
 
 This section demonstrates how to create DKG shares using the `dkg` CLI
 that you already installed as part of the ZF FROST `frost-client`
@@ -86,7 +87,8 @@ Round 1 Package to send to all other participants (your identifier: "01000000000
 
 Alice should send her packets out, but she should also receive
 packages from Bob and Eve. For each package that she receives, she
-enters the identifier of the sender as well as the package:
+enters the identifier of the sender as well as the package into her
+own `dkg` console:
 
 ```
 === ROUND 1: RECEIVE PACKAGES ===
@@ -170,7 +172,7 @@ wouldn't be the case in a real-world deployment) and exchanging
 information among them. It's a great hands-on example of how the
 exchange detailed in [§1.2](01_2_FROST_Signature_Process.md) works,
 but it also demonstrates how cumbersome the exchanges are for a user,
-especially as the number of members increase. If you make a single
+especially as the number of partipants increase. If you make a single
 mistake, entering in the wrong participant or the wrong package at any
 point, the entire process will fail, and you'll only know at the end!
 
