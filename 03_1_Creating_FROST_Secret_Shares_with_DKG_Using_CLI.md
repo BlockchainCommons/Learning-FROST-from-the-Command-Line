@@ -4,8 +4,8 @@
 TDG](02_2_Creating_FROST_Secret_Shares_with_TDG.md) overviewed the
 simplest way to create FROST shares, using Trusted Dealer
 Generation. However, the full power of FROST comes with the use of
-Distributed Key Generation (DKG). With this methodology, the full
-signing key never exists in a single place—not when you're creating
+Distributed Key Generation (DKG). With this methodology, the combined
+signing key never exists in a single place: not when you're creating
 the signing shares, and not when you're using them.
 
 ## Creating DKG Shares the Hard Way
@@ -211,6 +211,12 @@ Client disconnected
 Received: {"SignatureShare":{"header":{"version":0,"ciphersuite":"FROST-ED25519-SHA512-v1"},"share":"01460dba3c43ae9e481523568a95ac7cd6a2c2676ef23c673d3ce7b11574d00a"}}
 Raw signature written to board-meeting-250917.sig
 ```
+
+## Verifying with DKG Shares
+
+Because the files created by `dkg` are just like those created with
+`trusted-dealer`, you can verify in exactly the same way, as described
+in [§2.4](02_4_Checking_FROST_Signature.md).
 
 ## Summary: Creating FROST Secret Shares with DKG Using CLI
 
