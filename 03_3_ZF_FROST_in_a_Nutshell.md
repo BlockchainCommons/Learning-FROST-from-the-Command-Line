@@ -33,7 +33,7 @@ round 2. This is the heart of how FROST share creation works.)
 
 See [§3.1](03_1_Creating_FROST_Secret_Shares_with_DKG_Using_CLI.md) for more.
 
-```
+```mermaid
 flowchart LR
 A[Alice] <--> B[Bob]
 A <--> E[Eve]
@@ -53,7 +53,7 @@ flowchart TD
 DKG[frostd]
 DKG <--> A[Alice:
 frost-client dkg]
-DKG <--> B[Bob]:
+DKG <--> B[Bob:
 frost-client dkg]
 DKG <--> E[Eve:
 frost-client dkg]
