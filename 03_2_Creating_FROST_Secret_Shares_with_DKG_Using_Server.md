@@ -497,6 +497,12 @@ tool](https://github.com/BlockchainCommons/Learning-FROST-from-the-Command-Line/
 or you can just plug the `verifying key` into
 [cyphr.me](https://github.com/BlockchainCommons/Learning-FROST-from-the-Command-Line/blob/main/02_4_Checking_FROST_Signature.md#verifying-on-the-web).
 
+## Summary: Creating FROST Secret Shares with DKG Using Server
+
+Creating shares with DKG, but using the ZF FROST server, demonstrates
+how easy FROST can be (once you get the server set up!). It's a lesson
+in accessibility for FROST developers.
+
 ## What's Next
 
 To review the share creation methods demonstrated in §2.2, §3.1, and

@@ -108,6 +108,13 @@ DKG <--> E[Eve:
 frost-client participant]
 ```
 
+## Summary: ZF FROST in a Nutshell
+
+ZF FROST offers a number of different ways to create shares and sign
+with them. This section lays them out graphically, in part for
+clarity, and in part to suggest models that other developers might
+use.
+
 ## What's Next
 
 Though it's not available in the ZF FROST tools, we want to overview
