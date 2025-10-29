@@ -492,7 +492,7 @@ flag that you used previously.
 ✅ Signature verification: PASSED
 ```
 
-## Accessing the Public Key Package Programmaticaly
+## Accessing the Public Key Package Programmatically
 
 If you look at your credentials file, you'll see that the
 `public_key_package` is recorded by the ZF FROST server in hex, not an
