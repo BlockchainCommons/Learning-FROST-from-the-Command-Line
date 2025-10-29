@@ -24,6 +24,7 @@ Supporting objectives include the ability to:
 ## Table of Contents
 
   * [Section One: Creating FROST Secret Shares with DKG Using CLI](03_1_Creating_FROST_Secret_Shares_with_DKG_Using_CLI.md)
-  * [Section Two: Creating FROST Secret Shares with DKG Using Server](03_2_Creating_FROST_Secret_Shares_with_DKG_Using_Server.md)  
-  * [Section Three: Refreshing FROST Shares](03_3_Refreshing_FROST_Shares.md)
+  * [Section Two: Creating FROST Secret Shares with DKG Using Server](03_2_Creating_FROST_Secret_Shares_with_DKG_Using_Server.md)
+  * [Section Three: ZF FROST in a Nutshell](03_3_ZF_FROST_in_a_Nutshell.md)
+  * [Section Four: Refreshing FROST Shares](03_4_Refreshing_FROST_Shares.md)
   
