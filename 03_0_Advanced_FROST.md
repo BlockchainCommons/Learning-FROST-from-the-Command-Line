@@ -19,12 +19,12 @@ Supporting objectives include the ability to:
 
 * Understand the Difference Between DKG and TDG
 * Understand How FROST Shares Can Be Modified
-* Understand the Security Ramification of FROST Share Refreshes
+* Understand the Security Ramification of FROST Reshares
 
 ## Table of Contents
 
   * [Section One: Creating FROST Secret Shares with DKG Using CLI](03_1_Creating_FROST_Secret_Shares_with_DKG_Using_CLI.md)
   * [Section Two: Creating FROST Secret Shares with DKG Using Server](03_2_Creating_FROST_Secret_Shares_with_DKG_Using_Server.md)
   * [Section Three: ZF FROST in a Nutshell](03_3_ZF_FROST_in_a_Nutshell.md)
-  * [Section Four: Refreshing FROST Shares](03_4_Refreshing_FROST_Shares.md)
+  * [Section Four: Resharing FROST Shares](03_4_Refreshing_FROST_Shares.md)
   

@@ -36,7 +36,7 @@ https://github.com/ChristopherA/intro-mac-command-line._
   * [3.1: Creating FROST Secret Shares with DKG Using CLI](03_1_Creating_FROST_Secret_Shares_with_DKG_Using_CLI.md)
   * [3.2: Creating FROST Secret Shares with DKG Using Server](03_2_Creating_FROST_Secret_Shares_with_DKG_Using_Server.md)
   * [3.3: ZF FROST in a Nutshell](03_3_ZF_FROST_in_a_Nutshell.md)
-  * [3.4: Refreshing FROST Shares](03_4_Refreshing_FROST_Shares.md)
+  * [3.4: Resharing FROST Shares](03_4_Refreshing_FROST_Shares.md)
 * [4.0: Using FROST with Bitcoin](04_0_FROST_and_Bitcoin.md)
   * [4.1: Installing the Bitcoin Tools](04_1_Installing_Bitcoin_Tools.md)
   * [4.2: Signing PSBTs with FROST](04_2_Signing_PSBTs_with_FROST.md)
