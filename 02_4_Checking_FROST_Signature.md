@@ -50,6 +50,7 @@ signature. The following flags can be used with `frost-verify verify`:
 | Flag | Description | Default | Options |
 | ----- | --------- | --------- | --- |
 | -c | Ciphersuite | ed25519 | redpallas |
+| -C | Credentials | <filename> |
 | -m | Message | <filename> |
 | -P | Public Key Filename | public-key-package.json |
 | -q | Quiet Mode | |
