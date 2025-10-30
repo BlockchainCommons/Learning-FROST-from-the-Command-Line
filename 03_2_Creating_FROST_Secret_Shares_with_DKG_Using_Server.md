@@ -488,7 +488,7 @@ use the `-C` flag and list your credentials file rather than the `-P`
 flag that you used previously.
 
 ```
-% frost-verify verify -m board-meeting-250917.txt -s board-meeting-250917.sig -C alice.toml -c ed25519
+% frost-verify verify -m board-meeting-250917.txt -s board-meeting-250917.sig -C alice.toml
 ✅ Signature verification: PASSED
 ```
 
