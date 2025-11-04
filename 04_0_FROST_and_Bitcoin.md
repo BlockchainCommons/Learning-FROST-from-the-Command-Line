@@ -5,11 +5,11 @@ and management: members of a FROST group can jointly make decisions in
 an irrevocable way. Group governance and organizational
 decision-making could both benefit.
 
-However, another use case is likely to have even more immediate usage:
-controlling digital assets, in particular Bitcoin. Because the most
-mature toolset to date is focused on Zcash, working with Bitcoin is a
-bit more of a challenge. However, this chapter demonstrates that it's
-entirely possible.
+However, another use case is likely to have even more immediate
+applicability: controlling digital assets, in particular
+Bitcoin. Because ZF FROST, the most mature toolset to date, is focused
+on Zcash, working with Bitcoin is a bit more of a challenge. However,
+this chapter demonstrates that it's entirely possible.
 
 ## Objectives for this Chapter
 
