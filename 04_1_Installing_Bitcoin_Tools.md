@@ -18,6 +18,7 @@ transaction:
    * ... Using the Taproot Tweak Branch
 * The `sighash-helper` Tool   
 * The `psbt-sig-attach` Tool
+* The `jq` and `tq` stream editors
 
 Obviously, this is a complex process, though this tutorial will take
 you right through it. In walking through this process, you'll see not
@@ -290,6 +291,30 @@ Finally, install and leave the project behind:
 % cd ..
 ```
 
+## Installing `jq` and `tq`
+
+`jq` and `tq` are command-line stream editors. `jq` makes it easy to
+manipulate JSON files and `tq` makes it easy to manipulate TOML files.
+
+You should be able to install `jq` with a package manager.
+
+For UNIX:
+```
+% apt-get install jq
+```
+For Homebrew on Mac:
+```
+% brew install jq
+```
+You can also install `jq` directly from [jqlang.org](https://jqlang.org/).
+
+See [the interlude in Learning Bitcoin from the Command Line](https://github.com/BlockchainCommons/Learning-Bitcoin-from-the-Command-Line/blob/master/04_2__Interlude_Using_JQ.md) if you're interested in learning more about `jq`.
+
+You should have already installed `tq` in §3.2. If you didn't [refer
+to "Installing tomlq"
+there](https://github.com/BlockchainCommons/Learning-FROST-from-the-Command-Line/blob/main/03_2_Creating_FROST_Secret_Shares_with_DKG_Using_Server.md#installing-tomlq)
+for the easy instructions.
+
 ## Checking Your Inventory
 
 You can check your inventory on most systems with the `which`
@@ -312,6 +337,10 @@ sure your $PATH includes where the install happened.
 /Users/ShannonA/.cargo/bin/sighash-helper
 % which psbt-sig-attach
 /Users/ShannonA/.cargo/bin/psbt-sig-attach
+% which jq
+/opt/homebrew/bin/jq
+% which tq
+/Users/ShannonA/.cargo/bin/tq
 ```
 
 ## Summary Bitcoin Tools
@@ -324,6 +353,7 @@ install:
 * **bdk-cli:** The Bitcoin Dev Kit app, which provides advanced functionality.
 * **ZF FROST Tools:** An updated version of `frostd` and `frost-client`.
 * **Helper Tools:** Two small apps, `sighash-helper` and `psbt-sig-attach`, which are required to extract info from a PSBT and then import into it.
+* **tq & jq:** Stream editors for structured JSON and TOML files.
 
 ## What's Next
 
