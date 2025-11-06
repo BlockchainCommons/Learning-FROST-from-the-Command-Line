@@ -53,7 +53,7 @@ certificate for your `localhost` machine with the following commands:
 % mkcert -install
 ```
 
-On a Mac, this wiill require you to enter your password for `sudo` and
+On a Mac, this will require you to enter your password for `sudo` and
 to update your system settings. Other systems will require slightly
 different verifications.
 
@@ -303,7 +303,6 @@ Eve's will look like this:
 % frost-client dkg -d "DKG: Alice, Bob, Eve" \
 -s 127.0.0.1:2744 \
 -t 2 \
--C ed25519 \
 -c eve.toml
 ```
 Note that both omit the `-S` flag; not doing so might cause the DKG to hang.
