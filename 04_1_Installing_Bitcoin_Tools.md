@@ -3,13 +3,13 @@
 Though signing Bitcoin transactions with a FROST group is now
 possible, none of the command line tools do quite what's
 required. Doing so instead requires using a branch of the ZF FROST
-Tools and a few hand constructed tools, along with the excellent
+Tools and a few hand constructed helpers, along with the excellent
 Bitcoin command-line tool, BDK, the Bitcoin Development Kit.
 
 ## Equipment Inventory
 
 This section will take you through the installation of the following
-tools, which together will align you to sign and send a Bitcoin
+tools, which together will allow you to sign and send a Bitcoin
 transaction:
 
 * The Bitcoin Core client & server
@@ -28,13 +28,12 @@ the usage of FROST.
 
 ## Installing Bitcoin Core
 
-You will need Bitcoin Core to simulate the creation and signing of
-transactions.
+You will need Bitcoin Core to create and sign transactions.
 
 We would usually suggest [Gordian
 Server](https://github.com/BlockchainCommons/GordianServer-macOS) as a
-best solution for running a Bitcoin node, but it is limited to Macs,
-and it offers more features than is really necessary for the simple
+best solution for running a Bitcoin node, but that is limited to Macs,
+and it offers more features than are really necessary for the simple
 regtest example here.
 
 So instead we suggest downloading the appropriate version of Bitcoin
@@ -57,8 +56,12 @@ command-line client).
 
 Though Bitcoin has its own command-line app (`bitcoin-cli`), this
 example also uses `bdk-cli`, the [Bitcoin Dev Kit
-CLI](https://github.com/bitcoindevkit/bdk-cli), which provides access
-to some more complex functionality.
+CLI](https://github.com/bitcoindevkit/bdk-cli). It's primarily used
+for work involving the FROST wallet, both because `bitcoin-cli`
+doesn't work well with addresses not created by it and because
+examples are simpler if you have two different apps for the two
+different wallets: `bitcoin-cli` is used for the regular Bitcoin
+wallet and `bdk-cli` for the FROST Bitcoin wallet.
 
 This is a `bdk-cli` crate, making this an easy install.
 ```
@@ -68,11 +71,11 @@ This is a `bdk-cli` crate, making this an easy install.
 Note that the `rpc` feature must be included to allow connection to
 the `bitcoind` server that you just installed.
 
-> :book: ***What is RPC?*** RPC is the "Remote Procedure Call", used
-to communicate between processes on different systems (or even on the
-same system). It includes an authorization protocol, which allows the
-remote server to authenticate a user connecting to it, using a user
-name and password..
+> :book: ***What is RPC?*** RPC is "Remote Procedure Call", a protocol
+used to communicate between processes on different systems (or even on
+the same system). It includes an authorization protocol, which allows
+the remote server to authenticate a user connecting to it, using a
+user name and password.
 
 ## Installing the Blockchain Commons Version of FROST
 
@@ -85,7 +88,7 @@ keys.
 > :book: ***What is secp256k1?*** Bitcoin uses elliptic curve
 cryptography (ECC) for its core cryptographic functions, such as
 creating a public key from a private key. Any ECC calculations are
-done with a specific elliptic curve. For Bitcoin, the curve used for
+done with a specific elliptic curve. The curve used by Bitcoin for its
 ECC calculations is secp256k1.
 
 > :book: ***What is Taproot?*** Taproot was an upgrade to Bitcoin
@@ -110,7 +113,7 @@ includes both of these elements as follows:
 
 This will entirely replace the version of the ZF FROST tools that you
 installed in [§2.1: Installing the FROST
-Tools](02_1_Installing_FROST_Tools.md). You should messages like the
+Tools](02_1_Installing_FROST_Tools.md). You should see messages like the
 following indicating this during the installation:
 ```
 Replacing /Users/ShannonA/.cargo/bin/coordinator
@@ -138,8 +141,9 @@ Even `bdk-cli` and `bitcoin-cli` don't have everything required to
 sign a FROST transaction!
 
 To start with, there's no way to extract a signature hash from a
-transaction in a format suitable for FROST signing. The
-`sighash-helper` tool is a simple Rust program that does so.
+transaction so that it can be signed by the ZF FROST tools. The
+`sighash-helper` tool is a simple Rust program that does so. You'll
+quickly create it by hand.
 
 First, create a Rust project:
 ```
@@ -216,7 +220,8 @@ You're now ready to install your `sighash-helper`
 
 ## Creating the `psbt-sig-attach` Helper Tool
 
-There's also no way to add an arbitrary signature into a PSBT. This
+There's also no way to add an arbitrary signature to a
+PSBT. (`bitcoin-cli` and `bdk-cli` both do so internally.)  This
 requires the creation of another helper tool, `psbt-sig-attach`.
 
 ```
@@ -333,7 +338,7 @@ sure your $PATH includes where the install happened.
 /Users/ShannonA/.cargo/bin/frost-client
 % which frostd
 /Users/ShannonA/.cargo/bin/frostd
-5 which sighash-helper
+% which sighash-helper
 /Users/ShannonA/.cargo/bin/sighash-helper
 % which psbt-sig-attach
 /Users/ShannonA/.cargo/bin/psbt-sig-attach
@@ -343,14 +348,14 @@ sure your $PATH includes where the install happened.
 /Users/ShannonA/.cargo/bin/tq
 ```
 
-## Summary Bitcoin Tools
+## Summary: Installing Bitcoin Tools
 
 To get ready for FROST signing of a Bitcoin transaction, you need to
 install:
 
 * **bitcoind:** The server that will run your `regtest` environment.
-* **bitcoin-cli:** Bitcoin's app, which will provide basic functionality.
-* **bdk-cli:** The Bitcoin Dev Kit app, which provides advanced functionality.
+* **bitcoin-cli:** Bitcoin's app, which will manage your basic Bitcoin wallet.
+* **bdk-cli:** The Bitcoin Dev Kit app, which will manage your FROST Bitcoin wallet.
 * **ZF FROST Tools:** An updated version of `frostd` and `frost-client`.
 * **Helper Tools:** Two small apps, `sighash-helper` and `psbt-sig-attach`, which are required to extract info from a PSBT and then import into it.
 * **tq & jq:** Stream editors for structured JSON and TOML files.
