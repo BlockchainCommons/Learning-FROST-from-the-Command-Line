@@ -487,7 +487,7 @@ REG_NEW_ADDRESS=$(bitcoin-cli -rpcuser=$RPC_USER \
 ```
 
 > :information_source: **NOTE:** It is best practice to generate a new
-address any time you receive digital dunds.
+address any time you receive digital funds.
 
 You can now create a PSBT that sends 100,000,000 satoshis (1 BTC) from
 your FROST wallet to that address on your regular Bitcoin wallet:
