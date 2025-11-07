@@ -1,4 +1,4 @@
-p# 3.4: Resharing Shares
+# 3.4: Resharing Shares
 
 One of the notable capabilities of FROST is the ability to refresh (or
 repair) shares. This functionality is not available for demo in the ZF
