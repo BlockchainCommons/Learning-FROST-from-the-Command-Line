@@ -33,7 +33,7 @@ RPC_URL=127.0.0.1:18443
 RPC_USER=test
 RPC_PASS=test
 RPC_AUTH="$RPC_USER:$RPC_PASS"
-``
+```
 Then create your directories:
 ```
 mkdir -p "$DEMO_DIR" "$REG_DIR" "$FROST_DIR"
