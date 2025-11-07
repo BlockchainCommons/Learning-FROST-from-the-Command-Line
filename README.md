@@ -1,14 +1,14 @@
-# Learning FROST from the Command Line 0.0
+# Learning FROST from the Command Line 0.1
 ### _by Christopher Allen and Shannon Appelcline_
 
-![](https://www.blockchaincommons.com/images/projects/lbtc-screen.png)
+![](images/lbtc-frost-screen.jpg)
 
 Learning FROST from the Command Line is a tutorial that explains the
 basic of FROST and other Schnorr-based signature systems. It then uses
 hands on command-line tools to offer real examples of how to use FROST
 for general signing and specifically for signing Bitcoin transactions.
 
-> NOTE: This is a draft in progress, so that I can get some feedback
+> NOTE: This is a complete first draft, requesting feedback
 from early reviewers. It is not yet ready for use.
 
 _This tutorial assumes that you have some minimal background of how to
