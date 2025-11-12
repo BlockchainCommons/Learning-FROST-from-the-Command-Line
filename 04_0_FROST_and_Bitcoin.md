@@ -11,6 +11,8 @@ Bitcoin. Because ZF FROST, the most mature toolset to date, is focused
 on Zcash, working with Bitcoin is a bit more of a challenge. However,
 this chapter demonstrates that it's entirely possible.
 
+_You may also be interested in our [Learning Bitcoin from the Command Line course](https://github.com/BlockchainCommons/Learning-Bitcoin-from-the-Command-Line/blob/master/README.md), though it's not required for this chapter._
+
 ## Objectives for this Chapter
 
 After working through this chapter, a reader will be able to:
