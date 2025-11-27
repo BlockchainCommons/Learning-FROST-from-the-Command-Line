@@ -22,26 +22,26 @@ _You may also be interested in our [Learning Bitcoin from the Command Line cours
 
 ### PART ONE: LEARNING ABOUT FROST
 
-* [1.0: Introduction to FROST](01_0_Introduction.md)
-  * [1.1: Introducing FROST](01_1_Introducing_FROST.md)
-  * [1.2: The FROST Signature Process](01_2_FROST_Signature_Process.md)
-  * [1.3: FROST vs MuSig2](01_3_FROST_vs_MuSig.md)
+* [1.0: Introduction to FROST](docs/01_0_Introduction.md)
+  * [1.1: Introducing FROST](docs/01_1_Introducing_FROST.md)
+  * [1.2: The FROST Signature Process](docs/01_2_FROST_Signature_Process.md)
+  * [1.3: FROST vs MuSig2](docs/01_3_FROST_vs_MuSig.md)
  
 ### PART TWO: FROST FROM THE COMMAND LINE
 
-* [2.0: Signing with FROST](02_0_Signing_with_FROST.md)
-  * [2.1: Installing the FROST Tools](02_1_Installing_FROST_Tools.md)
-  * [2.2: Creating FROST Secret Shares with TDG](02_2_Creating_FROST_Secret_Shares_with_TDG.md)
-  * [2.3: Creating a FROST Signature](02_3_Creating_FROST_Signature.md)
-  * [2.4: Checking a FROST Signature](02_4_Checking_FROST_Signature.md)
-* [3.0: Advanced FROST Capabilities](03_0_Advanced_FROST.md)  
-  * [3.1: Creating FROST Secret Shares with DKG Using CLI](03_1_Creating_FROST_Secret_Shares_with_DKG_Using_CLI.md)
-  * [3.2: Creating FROST Secret Shares with DKG Using Server](03_2_Creating_FROST_Secret_Shares_with_DKG_Using_Server.md)
-  * [3.3: ZF FROST in a Nutshell](03_3_ZF_FROST_in_a_Nutshell.md)
-  * [3.4: Resharing FROST Shares](03_4_Refreshing_FROST_Shares.md)
-* [4.0: Using FROST with Bitcoin](04_0_FROST_and_Bitcoin.md)
-  * [4.1: Installing the Bitcoin Tools](04_1_Installing_Bitcoin_Tools.md)
-  * [4.2: Signing PSBTs with FROST](04_2_Signing_PSBTs_with_FROST.md)
+* [2.0: Signing with FROST](docs/02_0_Signing_with_FROST.md)
+  * [2.1: Installing the FROST Tools](docs/02_1_Installing_FROST_Tools.md)
+  * [2.2: Creating FROST Secret Shares with TDG](docs/02_2_Creating_FROST_Secret_Shares_with_TDG.md)
+  * [2.3: Creating a FROST Signature](docs/02_3_Creating_FROST_Signature.md)
+  * [2.4: Checking a FROST Signature](docs/02_4_Checking_FROST_Signature.md)
+* [3.0: Advanced FROST Capabilities](docs/03_0_Advanced_FROST.md)  
+  * [3.1: Creating FROST Secret Shares with DKG Using CLI](docs/03_1_Creating_FROST_Secret_Shares_with_DKG_Using_CLI.md)
+  * [3.2: Creating FROST Secret Shares with DKG Using Server](docs/03_2_Creating_FROST_Secret_Shares_with_DKG_Using_Server.md)
+  * [3.3: ZF FROST in a Nutshell](docs/03_3_ZF_FROST_in_a_Nutshell.md)
+  * [3.4: Resharing FROST Shares](docs/03_4_Refreshing_FROST_Shares.md)
+* [4.0: Using FROST with Bitcoin](docs/04_0_FROST_and_Bitcoin.md)
+  * [4.1: Installing the Bitcoin Tools](docs/04_1_Installing_Bitcoin_Tools.md)
+  * [4.2: Signing PSBTs with FROST](docs/04_2_Signing_PSBTs_with_FROST.md)
   
 ## Status - Alpha
 
