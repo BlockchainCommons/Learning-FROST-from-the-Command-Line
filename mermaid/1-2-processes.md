@@ -55,7 +55,7 @@ sequenceDiagram
 ### Signing with Pre-Processing
 
 ```mermaid
-equenceDiagram
+sequenceDiagram
     participant Server
     participant Coordinator
     participant Members
