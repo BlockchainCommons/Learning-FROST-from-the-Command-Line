@@ -1,4 +1,8 @@
 site_name: Learning FROST from the Command Line
 site_url: https://learningfrost.blockchaincommons.com
+repo_url: https://github.com/BlockchainCommons/Learning-FROST-from-the-Command-Line
+
 theme:
   name: material
+  icon:
+    logo: material/snowflake
