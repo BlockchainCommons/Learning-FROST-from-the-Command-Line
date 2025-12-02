@@ -30,16 +30,9 @@ shards:
 3. Trusted Dealer sends private key shares & group verifying key to FROST group members.
 4. Trusted Dealer (hopefully) erases secret & shares.
 
-```mermaid
-sequenceDiagram
-    participant Dealer
-    participant Members
-
-    Dealer->>Dealer: Create Secret
-    Dealer->>Dealer: Shard Secret
-    Dealer-->>Members: Share Shares (Private)
-    Dealer->>Dealer: Erase Secret & Shares
-```
+<a href="https://raw.githubusercontent.com/BlockchainCommons/Learning-FROST-from-the-Command-Line/refs/heads/main/images/keygen-tdg.jpg">
+  <img src="https://raw.githubusercontent.com/BlockchainCommons/Learning-FROST-from-the-Command-Line/refs/heads/main/images/keygen-tdg.jpg" style="border: 1px solid black">
+</a>
 
 The secret could also be generated in other ways, such as a member
 creating the secret and handing it to the dealer for distribution.
@@ -106,25 +99,9 @@ response packages received back from all members at the end of Round
 10. Each member outputs their share of the private key and the full
 group verifying key.
 
-```mermaid
-sequenceDiagram
-    participant Member
-    participant Others
-
-    Note left of Member: PREP
-    Member<<->>Others: Determine m & n
-
-    Note left of Member: ROUND 1
-    Member->>Member: Create Secret
-    Member->>Others: Share Commitment (Broadcast)
-
-    Note left of Member: ROUND 2
-    Others->>Others: Calc Signing Share
-    Others-->>Member: Share Commitment (Private)
-
-    Note left of Member: POST
-    Member->>Member: Finalize
-```
+<a href="https://raw.githubusercontent.com/BlockchainCommons/Learning-FROST-from-the-Command-Line/refs/heads/main/images/keygen-dkg.jpg">
+  <img src="https://raw.githubusercontent.com/BlockchainCommons/Learning-FROST-from-the-Command-Line/refs/heads/main/images/keygen-dkg.jpg" style="border: 1px solid black">
+</a>
 
 ## The Signing Process
 
@@ -160,25 +137,9 @@ a result could censor the process if they wanted.
 9. Coordinator checks signature shares.
 10. Coordinator aggregates signature shares to produce signature.
 
-```mermaid
-sequenceDiagram
-    participant Coordinator
-    participant Members
-
-    Note left of Coordinator: ROUND 1
-    Members->>Members: Create Nonces
-    Members->>Members: Create Commitments
-    Members-->>Coordinator: Share Commitments
-
-    Note left of Coordinator: ROUND 2
-    Coordinator->>Members: Share Message
-    Coordinator->>Members: Share Commitments
-    Members->>Members: Sign Message
-    Members-->>Coordinator: Share Signature Share
-
-    Note left of Coordinator: POST
-    Coordinator->>Coordinator: Aggregate Signature
-```
+<a href="https://raw.githubusercontent.com/BlockchainCommons/Learning-FROST-from-the-Command-Line/refs/heads/main/images/signing-1.jpg">
+  <img src="https://raw.githubusercontent.com/BlockchainCommons/Learning-FROST-from-the-Command-Line/refs/heads/main/images/signing-1.jpg" style="border: 1px solid black">
+</a>
 
 ### The Pre-Processed Process
 
@@ -205,27 +166,9 @@ signatures are preprocessed:
 10. Coordinator checks signature shares.
 11. Coordinator aggregates signature shares to produce signature.
 
-```mermaid
-sequenceDiagram
-    participant Server
-    participant Coordinator
-    participant Members
-
-    Note left of Server: PRE
-    Members->>Members: Create Nonces
-    Members->>Members: Create Commitments
-    Members-->>Server: Share Commitments
-
-    Note left of Server: ROUND 1
-    Coordinator-->>Server: Retrieve Commitments
-    Coordinator->>Members: Share Message
-    Coordinator->>Members: Share Commitments
-    Members->>Members: Sign Message
-    Members-->>Coordinator: Share Signature Share
-
-    Note left of Coordinator: POST
-    Coordinator->>Coordinator: Aggregate Signature
-```
+<a href="https://raw.githubusercontent.com/BlockchainCommons/Learning-FROST-from-the-Command-Line/refs/heads/main/images/signing-2.jpg">
+  <img src="https://raw.githubusercontent.com/BlockchainCommons/Learning-FROST-from-the-Command-Line/refs/heads/main/images/signing-2.jpg" style="border: 1px solid black">
+</a>
 
 Algorithmically, there is no difference between the two-round and
 pre-processing variants of FROST signatures. It's simply a question of
