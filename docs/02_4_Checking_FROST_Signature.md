@@ -107,7 +107,7 @@ The website [cyphr.me](https://cyphr.me/ed25519_tool/ed.html) offers a
 more general method for verifying ed25519 signatures, such as the one
 you created in this chapter.
 
-![](images/web-ed25519-validation.jpg)
+<a href="https://cyphr.me/ed25519_tool/ed.html"><img src="images/web-ed25519-validation.jpg"></a>
 
 To use it:
 
