@@ -1,7 +1,7 @@
 # Learning FROST from the Command Line 0.1
 ### _by Christopher Allen and Shannon Appelcline_
 
-![](images/lbtc-frost-screen.jpg)
+![](images/learning-frost-screen.jpg)
 
 Learning FROST from the Command Line is a tutorial that explains the
 basic of FROST and other Schnorr-based signature systems. It then uses
