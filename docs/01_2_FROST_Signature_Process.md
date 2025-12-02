@@ -166,8 +166,8 @@ signatures are preprocessed:
 10. Coordinator checks signature shares.
 11. Coordinator aggregates signature shares to produce signature.
 
-<a href="https://raw.githubusercontent.com/BlockchainCommons/Learning-FROST-from-the-Command-Line/refs/heads/main/images/signing-2.jpg">
-  <img src="https://raw.githubusercontent.com/BlockchainCommons/Learning-FROST-from-the-Command-Line/refs/heads/main/images/signing-2.jpg" style="border: 1px solid black">
+<a href="https://raw.githubusercontent.com/BlockchainCommons/Learning-FROST-from-the-Command-Line/refs/heads/main/images/signing-2.png">
+  <img src="https://raw.githubusercontent.com/BlockchainCommons/Learning-FROST-from-the-Command-Line/refs/heads/main/images/signing-2.png" style="border: 1px solid black">
 </a>
 
 Algorithmically, there is no difference between the two-round and
