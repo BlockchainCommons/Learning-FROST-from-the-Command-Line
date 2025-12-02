@@ -15,13 +15,12 @@ unilaterally splits a secret and shards it out to participants.
 
 See [§2.2](02_2_Creating_FROST_Secret_Shares_with_TDG.md) for more.
 
-```mermaid
-flowchart TD
-TDG[Trusted Dealer]
-TDG --> A[Alice]
-TDG --> B[Bob]
-TDG --> E[Eve]
-```
+<p align="center">
+  <a href="https://raw.githubusercontent.com/BlockchainCommons/Learning-FROST-from-the-Command-Line/refs/heads/main/images/zf-tdg.png">
+    <img src="https://raw.githubusercontent.com/BlockchainCommons/Learning-FROST-from-the-Command-Line/refs/heads/main/images/zf-tdg.png" style="border: 1px solid black; width: 400px;">
+  </a>
+</p>
+
 
 ### DKG by Hand
 
@@ -33,12 +32,12 @@ round 2. This is the heart of how FROST share creation works.)
 
 See [§3.1](03_1_Creating_FROST_Secret_Shares_with_DKG_Using_CLI.md) for more.
 
-```mermaid
-flowchart LR
-A[Alice] <--> B[Bob]
-A <--> E[Eve]
-B <--> E
-```
+<p align="center">
+  <a href="https://raw.githubusercontent.com/BlockchainCommons/Learning-FROST-from-the-Command-Line/refs/heads/main/images/zf-dkg-1.png">
+    <img src="https://raw.githubusercontent.com/BlockchainCommons/Learning-FROST-from-the-Command-Line/refs/heads/main/images/zf-dkg-1.png" style="border: 1px solid black; width: 400px;">
+  </a>
+</p>
+
 
 ### DKG with Server
 
@@ -48,16 +47,11 @@ best-of-both-worlds.
 
 See [§3.2](03_2_Creating_FROST_Secret_Shares_with_DKG_Using_Server.md) for more info.
 
-```mermaid
-flowchart TD
-DKG[frostd]
-DKG <--> A[Alice:
-frost-client dkg]
-DKG <--> B[Bob:
-frost-client dkg]
-DKG <--> E[Eve:
-frost-client dkg]
-```
+<p align="center">
+  <a href="https://raw.githubusercontent.com/BlockchainCommons/Learning-FROST-from-the-Command-Line/refs/heads/main/images/zf-dkg-2.png">
+    <img src="https://raw.githubusercontent.com/BlockchainCommons/Learning-FROST-from-the-Command-Line/refs/heads/main/images/zf-dkg-2.png" style="border: 1px solid black; width: 500px;">
+  </a>
+</p>
 
 ## Signing
 
@@ -71,21 +65,16 @@ the signers all connect with using their `participant` client.
 
 See [§2.3](2_3_Creating_FROST_Signature.md) for more.
 
-```mermaid
-flowchart TD
-TDG[coordinator]
-TDG <--> A[Alice: 
-participant]
-TDG <--> B[Bob:
-parcipant]
-TDG <--> E[Eve:
-participant]
-```
+<p align="center">
+  <a href="https://raw.githubusercontent.com/BlockchainCommons/Learning-FROST-from-the-Command-Line/refs/heads/main/images/zf-signing-1.png">
+    <img src="https://raw.githubusercontent.com/BlockchainCommons/Learning-FROST-from-the-Command-Line/refs/heads/main/images/zf-signing-1.png" style="border: 1px solid black; width: 500px;">
+  </a>
+</p>
 
 ### DKG Signing with Hand-Created Shares
 
 The exact same process can be used for signing with hand-created
-shares under ZZF FROST..
+shares under ZZF FROST.
 
 ### DKG Signing with Server-Created Shares
 
@@ -95,18 +84,11 @@ share creation now runs a signing `coordinator`.
 
 See [§3.2](03_2_Creating_FROST_Secret_Shares_with_DKG_Using_Server.md) for more info.
 
-```mermaid
-flowchart TD
-frostd
-DKG[frost-client coordinator]
-frostd <--> DKG
-DKG <--> A[Alice:
-frost-client participant]
-DKG <--> B[Bob:
-frost-client participant]
-DKG <--> E[Eve:
-frost-client participant]
-```
+<p align="center">
+  <a href="https://raw.githubusercontent.com/BlockchainCommons/Learning-FROST-from-the-Command-Line/refs/heads/main/images/zf-signing-2.png">
+    <img src="https://raw.githubusercontent.com/BlockchainCommons/Learning-FROST-from-the-Command-Line/refs/heads/main/images/zf-signing-2.png" style="border: 1px solid black; width: 600px;">
+  </a>
+</p>
 
 ## Summary: ZF FROST in a Nutshell
 
