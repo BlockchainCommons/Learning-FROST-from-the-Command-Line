@@ -1,1 +1,1 @@
-![](/assets/images/learningfrost-screen.jpg)
+![](/images/learningfrost-screen.jpg)
