@@ -4,3 +4,5 @@ repo_url: https://github.com/BlockchainCommons/Learning-FROST-from-the-Command-L
 
 theme:
   name: material
+  icon:
+    logo: material/snowflake
