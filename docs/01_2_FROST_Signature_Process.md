@@ -31,9 +31,7 @@ shards:
 4. Trusted Dealer (hopefully) erases secret & shares.
 
 <a href="https://raw.githubusercontent.com/BlockchainCommons/Learning-FROST-from-the-Command-Line/refs/heads/main/images/keygen-tdg.png">
-  <center>
-    <img src="https://raw.githubusercontent.com/BlockchainCommons/Learning-FROST-from-the-Command-Line/refs/heads/main/images/keygen-tdg.png" width="75%" style="border: 1px solid black">
-   </center>
+    <img src="https://raw.githubusercontent.com/BlockchainCommons/Learning-FROST-from-the-Command-Line/refs/heads/main/images/keygen-tdg.png" width="75%" style="border: 1px solid black; display: flex;">
 </a>
 
 The secret could also be generated in other ways, such as a member
