@@ -103,7 +103,7 @@ group verifying key.
 
 <p align="center">
   <a href="https://raw.githubusercontent.com/BlockchainCommons/Learning-FROST-from-the-Command-Line/refs/heads/main/images/keygen-dkg.png">
-    <img src="https://raw.githubusercontent.com/BlockchainCommons/Learning-FROST-from-the-Command-Line/refs/heads/main/images/keygen-dkg.png" style="border: 1px solid black; width: 400px;">
+    <img src="https://raw.githubusercontent.com/BlockchainCommons/Learning-FROST-from-the-Command-Line/refs/heads/main/images/keygen-dkg.png" style="border: 1px solid black; width: 500px;">
   </a>
 </p>
 
