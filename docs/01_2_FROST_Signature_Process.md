@@ -30,8 +30,8 @@ shards:
 3. Trusted Dealer sends private key shares & group verifying key to FROST group members.
 4. Trusted Dealer (hopefully) erases secret & shares.
 
-<a href="https://raw.githubusercontent.com/BlockchainCommons/Learning-FROST-from-the-Command-Line/refs/heads/main/images/keygen-tdg.jpg">
-  <img src="https://raw.githubusercontent.com/BlockchainCommons/Learning-FROST-from-the-Command-Line/refs/heads/main/images/keygen-tdg.jpg" style="border: 1px solid black">
+<a href="https://raw.githubusercontent.com/BlockchainCommons/Learning-FROST-from-the-Command-Line/refs/heads/main/images/keygen-tdg.png">
+  <img src="https://raw.githubusercontent.com/BlockchainCommons/Learning-FROST-from-the-Command-Line/refs/heads/main/images/keygen-tdg.png" style="border: 1px solid black">
 </a>
 
 The secret could also be generated in other ways, such as a member
@@ -99,8 +99,8 @@ response packages received back from all members at the end of Round
 10. Each member outputs their share of the private key and the full
 group verifying key.
 
-<a href="https://raw.githubusercontent.com/BlockchainCommons/Learning-FROST-from-the-Command-Line/refs/heads/main/images/keygen-dkg.jpg">
-  <img src="https://raw.githubusercontent.com/BlockchainCommons/Learning-FROST-from-the-Command-Line/refs/heads/main/images/keygen-dkg.jpg" style="border: 1px solid black">
+<a href="https://raw.githubusercontent.com/BlockchainCommons/Learning-FROST-from-the-Command-Line/refs/heads/main/images/keygen-dkg.png">
+  <img src="https://raw.githubusercontent.com/BlockchainCommons/Learning-FROST-from-the-Command-Line/refs/heads/main/images/keygen-dkg.png" style="border: 1px solid black">
 </a>
 
 ## The Signing Process
@@ -137,8 +137,8 @@ a result could censor the process if they wanted.
 9. Coordinator checks signature shares.
 10. Coordinator aggregates signature shares to produce signature.
 
-<a href="https://raw.githubusercontent.com/BlockchainCommons/Learning-FROST-from-the-Command-Line/refs/heads/main/images/signing-1.jpg">
-  <img src="https://raw.githubusercontent.com/BlockchainCommons/Learning-FROST-from-the-Command-Line/refs/heads/main/images/signing-1.jpg" style="border: 1px solid black">
+<a href="https://raw.githubusercontent.com/BlockchainCommons/Learning-FROST-from-the-Command-Line/refs/heads/main/images/signing-1.png">
+  <img src="https://raw.githubusercontent.com/BlockchainCommons/Learning-FROST-from-the-Command-Line/refs/heads/main/images/signing-1.png" style="border: 1px solid black">
 </a>
 
 ### The Pre-Processed Process
