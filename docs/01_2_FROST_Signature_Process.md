@@ -30,9 +30,11 @@ shards:
 3. Trusted Dealer sends private key shares & group verifying key to FROST group members.
 4. Trusted Dealer (hopefully) erases secret & shares.
 
-<a href="https://raw.githubusercontent.com/BlockchainCommons/Learning-FROST-from-the-Command-Line/refs/heads/main/images/keygen-tdg.png">
-    <img src="https://raw.githubusercontent.com/BlockchainCommons/Learning-FROST-from-the-Command-Line/refs/heads/main/images/keygen-tdg.png" style="border: 1px solid black; margin: auto !important; display: block !important; width: 400px;">
-</a>
+<p style="text-align: center">
+  <a href="https://raw.githubusercontent.com/BlockchainCommons/Learning-FROST-from-the-Command-Line/refs/heads/main/images/keygen-tdg.png">
+    <img src="https://raw.githubusercontent.com/BlockchainCommons/Learning-FROST-from-the-Command-Line/refs/heads/main/images/keygen-tdg.png" style="border: 1px solid black; width: 400px;">
+  </a>
+</p>
 
 The secret could also be generated in other ways, such as a member
 creating the secret and handing it to the dealer for distribution.
