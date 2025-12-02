@@ -16,8 +16,8 @@ use the command line interface. If not, there are many tutorials
 available, and I have one for Mac users at
 https://github.com/ChristopherA/intro-mac-command-line._
 
-* _You may prefer the easy to read [Learning FROST from the Command Line website](https://learningfrost.blockchaincommons.com/)._
-* _You may also be interested in our [Learning Bitcoin from the Command Line course](https://github.com/BlockchainCommons/Learning-Bitcoin-from-the-Command-Line/blob/master/README.md)._
+* _You may prefer the easy-to-read [**Learning FROST from the Command Line website**](https://learningfrost.blockchaincommons.com/)._
+* _You may also be interested in our [**Learning Bitcoin from the Command Line course**](https://github.com/BlockchainCommons/Learning-Bitcoin-from-the-Command-Line/blob/master/README.md)._
 
 ## Table of Contents
 
