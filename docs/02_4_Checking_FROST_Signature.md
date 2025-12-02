@@ -107,7 +107,7 @@ The website [cyphr.me](https://cyphr.me/ed25519_tool/ed.html) offers a
 more general method for verifying ed25519 signatures, such as the one
 you created in this chapter.
 
-<a href="https://cyphr.me/ed25519_tool/ed.html"><img src="https://raw.githubusercontent.com/BlockchainCommons/Learning-FROST-from-the-Command-Line/refs/heads/main/images/web-ed25519-validation.jpg" style="border: 2px solid black"></a>
+<a href="https://cyphr.me/ed25519_tool/ed.html"><img src="https://raw.githubusercontent.com/BlockchainCommons/Learning-FROST-from-the-Command-Line/refs/heads/main/images/web-ed25519-validation.jpg" style="border: 1px solid black"></a>
 
 To use it:
 
