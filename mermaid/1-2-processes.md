@@ -75,7 +75,3 @@ sequenceDiagram
     Note left of Coordinator: POST
     Coordinator->>Coordinator: Aggregate Signature
 ```
-
-    Note left of Member: POST
-    Member->>Member: Finalize
-```
