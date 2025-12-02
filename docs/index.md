@@ -1,10 +1,8 @@
-![](/images/learningfrost-screen.jpg)
-
-### PART ONE: LEARNING ABOUT FROST
+## Part One: Learning about FROST
 
 * [1.0: Introduction to FROST](01_0_Introduction.md)
  
-### PART TWO: FROST FROM THE COMMAND LINE
+## Part Two: FROST from the Command Line
 
 * [2.0: Signing with FROST](02_0_Signing_with_FROST.md)
 * [3.0: Advanced FROST Capabilities](03_0_Advanced_FROST.md)  
