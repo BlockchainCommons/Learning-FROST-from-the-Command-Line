@@ -101,9 +101,11 @@ response packages received back from all members at the end of Round
 10. Each member outputs their share of the private key and the full
 group verifying key.
 
-<a href="https://raw.githubusercontent.com/BlockchainCommons/Learning-FROST-from-the-Command-Line/refs/heads/main/images/keygen-dkg.png">
-  <img src="https://raw.githubusercontent.com/BlockchainCommons/Learning-FROST-from-the-Command-Line/refs/heads/main/images/keygen-dkg.png" style="border: 1px solid black">
-</a>
+<p align="center">
+  <a href="https://raw.githubusercontent.com/BlockchainCommons/Learning-FROST-from-the-Command-Line/refs/heads/main/images/keygen-dkg.png">
+    <img src="https://raw.githubusercontent.com/BlockchainCommons/Learning-FROST-from-the-Command-Line/refs/heads/main/images/keygen-dkg.png" style="border: 1px solid black; width: 400px;">
+  </a>
+</p>
 
 ## The Signing Process
 
@@ -139,9 +141,11 @@ a result could censor the process if they wanted.
 9. Coordinator checks signature shares.
 10. Coordinator aggregates signature shares to produce signature.
 
-<a href="https://raw.githubusercontent.com/BlockchainCommons/Learning-FROST-from-the-Command-Line/refs/heads/main/images/signing-1.png">
-  <img src="https://raw.githubusercontent.com/BlockchainCommons/Learning-FROST-from-the-Command-Line/refs/heads/main/images/signing-1.png" style="border: 1px solid black">
-</a>
+<p align="center">
+  <a href="https://raw.githubusercontent.com/BlockchainCommons/Learning-FROST-from-the-Command-Line/refs/heads/main/images/signing-1.png">
+    <img src="https://raw.githubusercontent.com/BlockchainCommons/Learning-FROST-from-the-Command-Line/refs/heads/main/images/signing-1.png" style="border: 1px solid black; width: 400px;">
+  </a>
+</p>
 
 ### The Pre-Processed Process
 
@@ -168,9 +172,12 @@ signatures are preprocessed:
 10. Coordinator checks signature shares.
 11. Coordinator aggregates signature shares to produce signature.
 
-<a href="https://raw.githubusercontent.com/BlockchainCommons/Learning-FROST-from-the-Command-Line/refs/heads/main/images/signing-2.png">
-  <img src="https://raw.githubusercontent.com/BlockchainCommons/Learning-FROST-from-the-Command-Line/refs/heads/main/images/signing-2.png" style="border: 1px solid black">
-</a>
+<p align="center">
+  <a href="https://raw.githubusercontent.com/BlockchainCommons/Learning-FROST-from-the-Command-Line/refs/heads/main/images/signing-1.png">
+    <img src="https://raw.githubusercontent.com/BlockchainCommons/Learning-FROST-from-the-Command-Line/refs/heads/main/images/signing-1.png" style="border: 1px solid black; width: 400px;">
+  </a>
+</p>
+
 
 Algorithmically, there is no difference between the two-round and
 pre-processing variants of FROST signatures. It's simply a question of
