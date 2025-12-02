@@ -33,8 +33,8 @@ round 2. This is the heart of how FROST share creation works.)
 See [§3.1](03_1_Creating_FROST_Secret_Shares_with_DKG_Using_CLI.md) for more.
 
 <p align="center">
-  <a href="https://raw.githubusercontent.com/BlockchainCommons/Learning-FROST-from-the-Command-Line/refs/heads/main/images/zf-dkg-1.png">
-    <img src="https://raw.githubusercontent.com/BlockchainCommons/Learning-FROST-from-the-Command-Line/refs/heads/main/images/zf-dkg-1.png" style="border: 1px solid black; width: 400px;">
+  <a href="https://raw.githubusercontent.com/BlockchainCommons/Learning-FROST-from-the-Command-Line/refs/heads/main/images/zf-dkg-1.jpg">
+    <img src="https://raw.githubusercontent.com/BlockchainCommons/Learning-FROST-from-the-Command-Line/refs/heads/main/images/zf-dkg-1.jpg" style="border: 1px solid black; width: 400px;">
   </a>
 </p>
 
@@ -48,8 +48,8 @@ best-of-both-worlds.
 See [§3.2](03_2_Creating_FROST_Secret_Shares_with_DKG_Using_Server.md) for more info.
 
 <p align="center">
-  <a href="https://raw.githubusercontent.com/BlockchainCommons/Learning-FROST-from-the-Command-Line/refs/heads/main/images/zf-dkg-2.png">
-    <img src="https://raw.githubusercontent.com/BlockchainCommons/Learning-FROST-from-the-Command-Line/refs/heads/main/images/zf-dkg-2.png" style="border: 1px solid black; width: 500px;">
+  <a href="https://raw.githubusercontent.com/BlockchainCommons/Learning-FROST-from-the-Command-Line/refs/heads/main/images/zf-dkg-2.jpg">
+    <img src="https://raw.githubusercontent.com/BlockchainCommons/Learning-FROST-from-the-Command-Line/refs/heads/main/images/zf-dkg-2.jpg" style="border: 1px solid black; width: 500px;">
   </a>
 </p>
 
@@ -66,8 +66,8 @@ the signers all connect with using their `participant` client.
 See [§2.3](2_3_Creating_FROST_Signature.md) for more.
 
 <p align="center">
-  <a href="https://raw.githubusercontent.com/BlockchainCommons/Learning-FROST-from-the-Command-Line/refs/heads/main/images/zf-signing-1.png">
-    <img src="https://raw.githubusercontent.com/BlockchainCommons/Learning-FROST-from-the-Command-Line/refs/heads/main/images/zf-signing-1.png" style="border: 1px solid black; width: 500px;">
+  <a href="https://raw.githubusercontent.com/BlockchainCommons/Learning-FROST-from-the-Command-Line/refs/heads/main/images/zf-signing-1.jpg">
+    <img src="https://raw.githubusercontent.com/BlockchainCommons/Learning-FROST-from-the-Command-Line/refs/heads/main/images/zf-signing-1.jpg" style="border: 1px solid black; width: 500px;">
   </a>
 </p>
 
@@ -85,8 +85,8 @@ share creation now runs a signing `coordinator`.
 See [§3.2](03_2_Creating_FROST_Secret_Shares_with_DKG_Using_Server.md) for more info.
 
 <p align="center">
-  <a href="https://raw.githubusercontent.com/BlockchainCommons/Learning-FROST-from-the-Command-Line/refs/heads/main/images/zf-signing-2.png">
-    <img src="https://raw.githubusercontent.com/BlockchainCommons/Learning-FROST-from-the-Command-Line/refs/heads/main/images/zf-signing-2.png" style="border: 1px solid black; width: 600px;">
+  <a href="https://raw.githubusercontent.com/BlockchainCommons/Learning-FROST-from-the-Command-Line/refs/heads/main/images/zf-signing-2.jpg">
+    <img src="https://raw.githubusercontent.com/BlockchainCommons/Learning-FROST-from-the-Command-Line/refs/heads/main/images/zf-signing-2.jpg" style="border: 1px solid black; width: 600px;">
   </a>
 </p>
 
