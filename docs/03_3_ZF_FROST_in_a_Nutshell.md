@@ -16,8 +16,8 @@ unilaterally splits a secret and shards it out to participants.
 See [§2.2](02_2_Creating_FROST_Secret_Shares_with_TDG.md) for more.
 
 <p align="center">
-  <a href="https://raw.githubusercontent.com/BlockchainCommons/Learning-FROST-from-the-Command-Line/refs/heads/main/images/zf-tdg.png">
-    <img src="https://raw.githubusercontent.com/BlockchainCommons/Learning-FROST-from-the-Command-Line/refs/heads/main/images/zf-tdg.png" style="border: 1px solid black; width: 400px;">
+  <a href="https://raw.githubusercontent.com/BlockchainCommons/Learning-FROST-from-the-Command-Line/refs/heads/main/images/zf-tdg.jpg">
+    <img src="https://raw.githubusercontent.com/BlockchainCommons/Learning-FROST-from-the-Command-Line/refs/heads/main/images/zf-tdg.jpg" style="border: 1px solid black; width: 400px;">
   </a>
 </p>
 
