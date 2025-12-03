@@ -9,3 +9,7 @@
 * [4.0: Using FROST with Bitcoin](04_0_FROST_and_Bitcoin.md)
 
 _This course is built from [GitHub](https://github.com/BlockchainCommons/Learning-FROST-from-the-Command-Line/blob/main/README.md). You can read there if you prefer._
+
+---
+
+_A grant for the creation of this course was provided by [HRF](https://hrf.org/)._
