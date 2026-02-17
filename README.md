@@ -48,7 +48,7 @@ https://github.com/ChristopherA/intro-mac-command-line._
 
 v1.0 of Learning FROST is currently in process
 
-#### 1.0.0 (???, 2025)
+#### 1.0.0 (12/2/25)
 
 * Initial release.
 
