@@ -1,4 +1,4 @@
-# Learning FROST from the Command Line 0.1
+# Learning FROST from the Command Line 1.0
 ### _by Christopher Allen and Shannon Appelcline_
 
 ![](images/learningfrost-screen.jpg)
