@@ -1,0 +1,1811 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://learningfrost.blockchaincommons.com/04_2_Signing_PSBTs_with_FROST/">
+      
+      
+        <link rel="prev" href="../04_1_Installing_Bitcoin_Tools/">
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.1">
+    
+    
+      
+        <title>4.2: Signing PSBTs with FROST - Learning FROST from the Command Line</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.484c7ddc.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#42-signing-psbts-with-frost" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="Learning FROST from the Command Line" class="md-header__button md-logo" aria-label="Learning FROST from the Command Line" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m20.79 13.95-2.33.62-2-1.13v-2.88l2-1.13 2.33.62.52-1.93-1.77-.47.46-1.77-1.93-.52-.62 2.33-2 1.13L13 7.38V5.12l1.71-1.71L13.29 2 12 3.29 10.71 2 9.29 3.41 11 5.12v2.26L8.5 8.82l-2-1.13-.58-2.33L4 5.88l.47 1.77-1.77.47.52 1.93 2.33-.62 2 1.13v2.89l-2 1.13-2.33-.62-.52 1.93 1.77.47L4 18.12l1.93.52.62-2.33 2-1.13L11 16.62v2.26l-1.71 1.71L10.71 22 12 20.71 13.29 22l1.41-1.41-1.7-1.71v-2.26l2.5-1.45 2 1.13.62 2.33 1.88-.51-.47-1.77 1.77-.47zM9.5 10.56 12 9.11l2.5 1.45v2.88L12 14.89l-2.5-1.45z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Learning FROST from the Command Line
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              4.2: Signing PSBTs with FROST
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/BlockchainCommons/Learning-FROST-from-the-Command-Line" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Learning FROST from the Command Line" class="md-nav__button md-logo" aria-label="Learning FROST from the Command Line" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m20.79 13.95-2.33.62-2-1.13v-2.88l2-1.13 2.33.62.52-1.93-1.77-.47.46-1.77-1.93-.52-.62 2.33-2 1.13L13 7.38V5.12l1.71-1.71L13.29 2 12 3.29 10.71 2 9.29 3.41 11 5.12v2.26L8.5 8.82l-2-1.13-.58-2.33L4 5.88l.47 1.77-1.77.47.52 1.93 2.33-.62 2 1.13v2.89l-2 1.13-2.33-.62-.52 1.93 1.77.47L4 18.12l1.93.52.62-2.33 2-1.13L11 16.62v2.26l-1.71 1.71L10.71 22 12 20.71 13.29 22l1.41-1.41-1.7-1.71v-2.26l2.5-1.45 2 1.13.62 2.33 1.88-.51-.47-1.77 1.77-.47zM9.5 10.56 12 9.11l2.5 1.45v2.88L12 14.89l-2.5-1.45z"/></svg>
+
+    </a>
+    Learning FROST from the Command Line
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/BlockchainCommons/Learning-FROST-from-the-Command-Line" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01_0_Introduction/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter One: Introduction to FROST
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01_1_Introducing_FROST/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1.1: Introducing FROST
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01_2_FROST_Signature_Process/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1.2: The FROST Signature Process
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01_3_FROST_vs_MuSig/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1.3: FROST vs MuSig2
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../02_0_Signing_with_FROST/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter Two: Signing with FROST
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../02_1_Installing_FROST_Tools/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2.1: Installing the FROST Tools
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../02_2_Creating_FROST_Secret_Shares_with_TDG/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2.2: Creating FROST Secret Shares with TDG
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../02_3_Creating_FROST_Signature/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2.3: Creating a FROST Signature
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../02_4_Checking_FROST_Signature/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2.4: Checking FROST Signatures
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../03_0_Advanced_FROST/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter Three: Advanced FROST Capabilities
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../03_1_Creating_FROST_Secret_Shares_with_DKG_Using_CLI/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    3.1: Creating FROST Secret Shares with DKG Using CLI
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../03_2_Creating_FROST_Secret_Shares_with_DKG_Using_Server/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    3.2: Creating FROST Secret Shares with DKG Using Server
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../03_3_ZF_FROST_in_a_Nutshell/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    3.3 ZF FROST in a Nutshell
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../03_4_Refreshing_FROST_Shares/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    3.4: Resharing Shares
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../04_0_FROST_and_Bitcoin/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter Four: FROST and Bitcoin
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../04_1_Installing_Bitcoin_Tools/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    4.1: Installing Bitcoin Tools
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    4.2: Signing PSBTs with FROST
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    4.2: Signing PSBTs with FROST
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#step-1-setting-up-your-work-space" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 1: Setting Up Your Work Space
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step-2-starting-a-regtest-daemon" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 2: Starting a Regtest Daemon
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step-3-creating-and-funding-a-bitcoin-address" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 3: Creating and Funding a Bitcoin Address
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step-4-creating-a-frost-group-with-dkg" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 4: Creating a FROST Group with DKG
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step-5-creating-a-frost-bitcoin-wallet" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 5: Creating a FROST Bitcoin Wallet
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step-6-sending-funds-to-the-frost-wallet" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 6: Sending Funds to the FROST Wallet
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step-7-creating-an-unsigned-psbt-for-the-frost-wallet" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 7: Creating an Unsigned PSBT for the FROST Wallet
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step-8-generating-a-signature-using-the-frost-group" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 8: Generating a Signature using the FROST Group
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step-9-signing-the-psbt-using-the-frost-group" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 9: Signing the PSBT using the FROST Group
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step-10-finalizing-and-sending-the-psbt" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 10: Finalizing and Sending the PSBT
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#summary-signing-psbts-with-frost" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Summary: Signing PSBTs with FROST
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#whats-next" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What's Next
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#step-1-setting-up-your-work-space" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 1: Setting Up Your Work Space
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step-2-starting-a-regtest-daemon" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 2: Starting a Regtest Daemon
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step-3-creating-and-funding-a-bitcoin-address" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 3: Creating and Funding a Bitcoin Address
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step-4-creating-a-frost-group-with-dkg" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 4: Creating a FROST Group with DKG
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step-5-creating-a-frost-bitcoin-wallet" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 5: Creating a FROST Bitcoin Wallet
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step-6-sending-funds-to-the-frost-wallet" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 6: Sending Funds to the FROST Wallet
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step-7-creating-an-unsigned-psbt-for-the-frost-wallet" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 7: Creating an Unsigned PSBT for the FROST Wallet
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step-8-generating-a-signature-using-the-frost-group" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 8: Generating a Signature using the FROST Group
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step-9-signing-the-psbt-using-the-frost-group" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 9: Signing the PSBT using the FROST Group
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step-10-finalizing-and-sending-the-psbt" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 10: Finalizing and Sending the PSBT
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#summary-signing-psbts-with-frost" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Summary: Signing PSBTs with FROST
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#whats-next" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What's Next
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="42-signing-psbts-with-frost">4.2: Signing PSBTs with FROST</h1>
+<p>You've now got all the tools you need to successfully send a Bitcoin
+transaction signed by a FROST group. But it's still going to take some
+work! This section will take you through the following major steps:</p>
+<p><strong><em>Setup:</em></strong></p>
+<ol>
+<li>Setting Up Your Work Space</li>
+<li>Starting a Regtest Daemon</li>
+<li>Creating and Funding a Bitcoin Wallet</li>
+<li>Creating a FROST Group with DKG</li>
+<li>Creating a FROST Bitcoin Wallet</li>
+<li>Sending Funds to the FROST Wallet</li>
+</ol>
+<p><strong><em>Signing:</em></strong></p>
+<ol>
+<li>Creating an Unsigned PSBT for the FROST Wallet</li>
+<li>Generating a Signature using the FROST Group</li>
+<li>Signing the PSBT using the FROST Group</li>
+<li>Finalizing and Sending the PSBT</li>
+</ol>
+<h2 id="step-1-setting-up-your-work-space">Step 1: Setting Up Your Work Space</h2>
+<p>First, set some shell variables that will make the rest of this
+tutorial easier.</p>
+<pre><code>DEMO_DIR=`pwd`/frost-signing-demo
+REG_DIR=&quot;$DEMO_DIR/regular-wallet&quot;
+FROST_DIR=&quot;$DEMO_DIR/frost-wallet&quot;
+NETWORK=regtest
+RPC_URL=127.0.0.1:18443 
+RPC_USER=test
+RPC_PASS=test
+RPC_AUTH=&quot;$RPC_USER:$RPC_PASS&quot;
+</code></pre>
+<p>Then create your directories:</p>
+<pre><code>mkdir -p &quot;$DEMO_DIR&quot; &quot;$REG_DIR&quot; &quot;$FROST_DIR&quot;
+cd &quot;$DEMO_DIR&quot;
+</code></pre>
+<h2 id="step-2-starting-a-regtest-daemon">Step 2: Starting a Regtest Daemon</h2>
+<p>This example uses the "regtest" network as a testing environment for
+Bitcoin rather than working with real funds.</p>
+<blockquote>
+<p>:book: <strong><em>What is Regtest?</em></strong> Bitcoin offers three different testing
+environments: testnet, signet, and regtest. Testnet works much like
+the regular Bitcoin network, but its coins have no value. Signet
+requires blocks be signed. Regtest gives the developer complete
+control over block creation. This example uses regtest for its testing
+so that you don't have to go to coin faucets or wait for transactions
+to be collected into blocks.</p>
+</blockquote>
+<p>To initiate regtest, start the Bitcoin Core <code>bitcoind</code>. Set flags to
+use the regtest network (<code>-regtest</code>), to run in the background
+(<code>-daemon</code>), to set an RPC user and password (<code>-rpcuser</code> and
+<code>-rpcpassword</code>), and to set a fallback transaction fee, so that your
+transactions will go through (<code>-fallbackfee</code>).</p>
+<pre><code>bitcoind -regtest -daemon -rpcuser=$RPC_USER -rpcpassword=$RPC_PASS -fallbackfee=0.00001
+</code></pre>
+<blockquote>
+<p>:warning: <strong>WARNING:</strong> Obviously, you would never use the <code>-rpcuser</code>
+and <code>-rpcpassword</code> arguments from the command-line for a real-world
+deployment, as they could be seen in the process list. But, they're
+fine for a test usage with regtest.</p>
+<p>:information_source: <strong>NOTE:</strong> You'd usually set up a <code>bitcoin.conf</code>
+file that would records things like your <code>$RPC_USER</code>, your
+<code>$RPC_PASS</code>, and the fact that you're using the regtest network. These
+examples will just include all of that material on the command line,
+which makes them longer, but also means you don't have to figure out
+where your configuration file is, which is probably preferred for a
+short Bitcoin example.</p>
+</blockquote>
+<h2 id="step-3-creating-and-funding-a-bitcoin-address">Step 3: Creating and Funding a Bitcoin Address</h2>
+<p>You'll first need to create your default regular Bitcoin wallet. This
+used to happen by default with <code>bitcoin-cli</code>, but no longer does.</p>
+<pre><code>bitcoin-cli -rpcuser=$RPC_USER \
+            -rpcpassword=$RPC_PASS \
+            -regtest \
+            createwallet regtest || \
+bitcoin-cli -rpcuser=$RPC_USER \
+            -rpcpassword=$RPC_PASS \
+            -regtest \
+        loadwallet regtest
+
+{
+  &quot;name&quot;: &quot;regtest&quot;
+}
+</code></pre>
+<p>You can now create an address in that wallet:</p>
+<pre><code>REG_ADDRESS=$(bitcoin-cli -rpcuser=$RPC_USER \
+                -rpcpassword=$RPC_PASS \
+                -regtest \
+                getnewaddress)
+</code></pre>
+<p>Finally, you can mine the genesis block to that address:</p>
+<pre><code>bitcoin-cli -rpcuser=$RPC_USER \
+              -rpcpassword=$RPC_PASS \
+          -regtest \                               
+          generatetoaddress 1 $REG_ADDRESS
+[
+  &quot;51817c46a4ba678ce1e64970eb1978e8827b7272409b877c3abe4849b01ae68b&quot;
+]
+</code></pre>
+<p>The <code>generatetoaddress</code> command is one of the magic regtest commands
+that lets you manipulate blocks to more easily test out Bitcoin. In
+this case, you are mining a (empty) block with the block reward for
+doing so going to the indicated address. So this command mines 1 block
+to your $REG_ADDRESS. With the 50 BTC reward for the first block,
+you're rich! (In fake regtest bitcoin.)</p>
+<p>Afterward, you will advance the blockchain by another 100 blocks:</p>
+<pre><code>bitcoin-cli -rpcuser=$RPC_USER \
+              -rpcpassword=$RPC_PASS \
+              -regtest \
+              -generate 100
+</code></pre>
+<blockquote>
+<p>:book: <strong><em>Why Mine 101 Blocks?</em></strong> The reward a miner gets for mining
+a block is called the "coinbase transaction". It can only be spent
+when it's 100 blocks deep in the blockchain. After you mine 101
+blocks, the first block you mined is 100 blocks deep, which means you
+can now spend the 50 Bitcoins you claimed for it.</p>
+</blockquote>
+<p>At this point, mining those additional 100 blocks will send the
+coinbase transactions to your wallet, even without the
+<code>generatetoaddress</code> command: they'll show up as you continue to
+advance blocks.</p>
+<p>Before you continue, you should verify you have coins to spend:</p>
+<pre><code>bitcoin-cli -rpcuser=$RPC_USER -rpcpassword=$RPC_PASS -regtest getbalance
+50.00000000
+</code></pre>
+<h2 id="step-4-creating-a-frost-group-with-dkg">Step 4: Creating a FROST Group with DKG</h2>
+<p>You can now create a Frost group using DKG, just like you did in
+<a href="../03_2_Creating_FROST_Secret_Shares_with_DKG_Using_Server/">§3.2</a>
+with one notable difference: you're going to be using the
+<code>secp256k1-tr</code> ciphersuite. Otherwise, everything else is identical.</p>
+<p>Here's the rapid-fire summary (with the reminder that in a real setup,
+each of the users should be on a different machine):</p>
+<p>Create the user credential files:</p>
+<pre><code>cd frost-wallet
+frost-client init -c alice.toml
+frost-client init -c bob.toml
+frost-client init -c eve.toml
+</code></pre>
+<p>Extract the public keys:</p>
+<pre><code>ALICE_PUBKEY=$(tq -f alice.toml -r 'communication_key.pubkey')
+ALICE_CONTACT=$(frost-client export --name &quot;Alice&quot; -c alice.toml 2&gt;&amp;1 | tail -1)
+BOB_PUBKEY=$(tq -f bob.toml -r 'communication_key.pubkey')
+BOB_CONTACT=$(frost-client export --name &quot;Bob&quot; -c bob.toml 2&gt;&amp;1 | tail -1)
+EVE_PUBKEY=$(tq -f eve.toml -r 'communication_key.pubkey') 
+EVE_CONTACT=$(frost-client export --name &quot;Eve&quot; -c eve.toml 2&gt;&amp;1 | tail -1)
+</code></pre>
+<p>Have each of the users transmit the information on their public keys
+to all the other users.</p>
+<p>Have each user import the other users' info into their credentials file:</p>
+<pre><code>frost-client import -c alice.toml $BOB_CONTACT
+frost-client import -c alice.toml $EVE_CONTACT
+
+frost-client import -c bob.toml $ALICE_CONTACT
+frost-client import -c bob.toml $EVE_CONTACT
+
+frost-client import -c eve.toml $ALICE_CONTACT
+frost-client import -c eve.toml $BOB_CONTACT
+</code></pre>
+<p>Make sure your <code>frostd</code> server is running with its certificate. If you
+skipped over that in §3.2, you can jump back there to <a href="secp256k1-tr">"Prepare the
+Server"</a>.</p>
+<p>Alice then runs the <code>frost-client</code> with the other <code>PUBKEY</code>s and the
+new <code>secp256k1-tr</code> cipher:</p>
+<pre><code>frost-client dkg -d &quot;Bitcoin DKG: Alice, Bob, Eve&quot; \
+-s 127.0.0.1:2744 \
+-S $BOB_PUBKEY,$EVE_PUBKEY \
+-t 2 \
+-C &quot;secp256k1-tr&quot; \
+-c alice.toml
+</code></pre>
+<p>Bob runs the client without the <code>PUBKEY</code>s.:</p>
+<pre><code>frost-client dkg -d &quot;DKG: Alice, Bob, Eve&quot; \
+-s 127.0.0.1:2744 \
+-t 2 \
+-C &quot;secp256k1-tr&quot; \
+-c bob.toml
+</code></pre>
+<p>Eve runs the client:</p>
+<pre><code>frost-client dkg -d &quot;DKG: Alice, Bob, Eve&quot; \
+-s 127.0.0.1:2744 \
+-t 2 \
+-C &quot;secp256k1-tr&quot; \
+-c eve.toml
+</code></pre>
+<p>As before, the clients will do all the talking among themselves (via
+the server) and then all the info will be output to the credentials files.</p>
+<blockquote>
+<p>:information_source: <strong>NOTE:</strong> You installed two updates to the ZF
+FROST tools in §4.1. The first of them, which adds secp256k1-tr as a
+ciphersuite, is used here. (As it happens, the second update is also
+hiding out the background, but more on that when we put it to more
+complete use during the signing ceremony.)</p>
+</blockquote>
+<p>Here's what Alice's credentials now look like:</p>
+<pre><code>version = 0
+
+[communication_key]
+privkey = &quot;51e60d2eb443d1955a862bc355e7ac5bbaea3fe171f056c4604748e9d1eea82b&quot;
+pubkey = &quot;9ed1c448119a6d1441aa2ca2fd584691ff122339e870780b247941cfa06d8d75&quot;
+
+[contact.Bob]
+name = &quot;Bob&quot;
+pubkey = &quot;61c0af67bea157aad7b0e8f4e27353281159fb747d91c48d39328dcdec4c6272&quot;
+
+[contact.Eve]
+name = &quot;Eve&quot;
+pubkey = &quot;fe36fe0b20ce9eff3e2050b3e24ce0e57b093425b8b5980c222f9e6d7df14b30&quot;
+
+[group.02213e68e3d071ebce9c491114dcbdc1ee76ed3f52b30f05b5f27d36f6fdf37c85]
+description = &quot;Bitcoin DKG: Alice, Bob, Eve&quot;
+ciphersuite = &quot;FROST-secp256k1-SHA256-TR-v1&quot;
+public_key_package = &quot;00230f8ab303348fd8ec2919a79d9976d5cf79626a74e99eb1004c05b115cb72f7e89f87fb2a0388881328732b7f62744e253bc980bd605bf75cefb18116a0d856d83e04857982e6aaeb3554d0a68d930c66bf206f63dc9306d358bfa18cf4712cbe3693097adc02bc496dfe1914c323b716f788130864d181a5aa4bb0154702d501941b310986fceeec13b5314aa5b0a8ce12dc6786a92a7f571cbaf5d2de1307d78ee98a7f1d1802fc61ad07349a15ceb8c60a0ba09c6c4f50f032f815495e5d865e158f5ac83629025106c0bcb903ba03587afbf2c769b2fcee2c8518ac383ff0849abd6bf46ba7eb&quot;
+key_package = &quot;00230f8ab3348fd8ec2919a79d9976d5cf79626a74e99eb1004c05b115cb72f7e89f87fb2a739c7d396e81a7929843d02d75aff78b5dfbe1c4c72d1c5c14eb0043b7100a910388881328732b7f62744e253bc980bd605bf75cefb18116a0d856d83e04857982025106c0bcb903ba03587afbf2c769b2fcee2c8518ac383ff0849abd6bf46ba7eb02&quot;
+server_url = &quot;127.0.0.1:2744&quot;
+internal_key = [
+    81,
+    6,
+    192,
+    188,
+    185,
+    3,
+    186,
+    3,
+    88,
+    122,
+    251,
+    242,
+    199,
+    105,
+    178,
+    252,
+    238,
+    44,
+    133,
+    24,
+    172,
+    56,
+    63,
+    240,
+    132,
+    154,
+    189,
+    107,
+    244,
+    107,
+    167,
+    235,
+]
+
+[group.02213e68e3d071ebce9c491114dcbdc1ee76ed3f52b30f05b5f27d36f6fdf37c85.participant.348fd8ec2919a79d9976d5cf79626a74e99eb1004c05b115cb72f7e89f87fb2a]
+identifier = &quot;348fd8ec2919a79d9976d5cf79626a74e99eb1004c05b115cb72f7e89f87fb2a&quot;
+pubkey = &quot;9ed1c448119a6d1441aa2ca2fd584691ff122339e870780b247941cfa06d8d75&quot;
+
+[group.02213e68e3d071ebce9c491114dcbdc1ee76ed3f52b30f05b5f27d36f6fdf37c85.participant.e6aaeb3554d0a68d930c66bf206f63dc9306d358bfa18cf4712cbe3693097adc]
+identifier = &quot;e6aaeb3554d0a68d930c66bf206f63dc9306d358bfa18cf4712cbe3693097adc&quot;
+pubkey = &quot;fe36fe0b20ce9eff3e2050b3e24ce0e57b093425b8b5980c222f9e6d7df14b30&quot;
+
+[group.02213e68e3d071ebce9c491114dcbdc1ee76ed3f52b30f05b5f27d36f6fdf37c85.participant.eeec13b5314aa5b0a8ce12dc6786a92a7f571cbaf5d2de1307d78ee98a7f1d18]
+identifier = &quot;eeec13b5314aa5b0a8ce12dc6786a92a7f571cbaf5d2de1307d78ee98a7f1d18&quot;
+pubkey = &quot;61c0af67bea157aad7b0e8f4e27353281159fb747d91c48d39328dcdec4c6272&quot;
+</code></pre>
+<p>Most importantly, note that this enew FROST group uses the Bitcoin-compatible ciphersuite:</p>
+<pre><code>ciphersuite = &quot;FROST-secp256k1-SHA256-TR-v1&quot;
+</code></pre>
+<p>Again, this part of the process was identical to what was in
+<a href="../03_2_Creating_FROST_Secret_Shares_with_DKG_Using_Server/">§3.2</a>
+other than the use of the "secp256k1-tr" ciphersuite on the
+<code>frost-client dkg</code> command lines.</p>
+<h2 id="step-5-creating-a-frost-bitcoin-wallet">Step 5: Creating a FROST Bitcoin Wallet</h2>
+<p>Though you now have a Bitcoin-ready FROST signing group, you still
+need to create a Bitcoin address for your FROST key. To do so, you
+must first extract some information about your FROST group.</p>
+<p>The following does so from Alice's credentials file.</p>
+<pre><code>GROUP_ID=$(grep -oE '^\[group\.[0-9a-f]+' alice.toml | head -1 | sed 's/^\[group\.//')
+PUBKEY_PKG=$(tq -f alice.toml -r group.$GROUP_ID.public_key_package)
+FROST_AGG_KEY=$(echo $PUBKEY_PKG | tail -c 65)
+</code></pre>
+<p>Note that the last variable (<code>FROST_AGG_KEY</code>) depends on knowing that
+the group verifying key is the last 32 bytes of the <code>public_key_package</code>.</p>
+<p>With that in hand, you create a descriptor for this address:</p>
+<pre><code>FROST_EXT_DESC=&quot;tr($FROST_AGG_KEY)&quot;
+</code></pre>
+<blockquote>
+<p>:book: <strong><em>What is a Descriptor?</em></strong> In the bad-'ole days, there was a
+proliferating set of methods for describing Bitcoin wallets. As
+different derivation methods appeared, this became problematic because
+it increased the odds of losing access to funds: you might know a seed
+or an HD key, but not how to get to the derivative key where funds
+were actually stored! <a href="https://en.bitcoin.it/wiki/BIP_0380">BIP 380</a>
+defined "output descriptors", a new methodology for defining wallets
+that included key material, derivation material, and methodology.</p>
+<p>:book: <strong>What is a "tr()" descriptor?</strong> A "tr()" descriptor defines
+a Taproot address, per <a href="https://github.com/bitcoin/bips/blob/master/bip-0386.mediawiki">BIP
+386</a>. It
+takes a key as an argument that may have been overlaid with a tree of
+additional ways to unlock an address. It defines a P2TR address.</p>
+</blockquote>
+<p>With that variable, you can now use <code>bitcoin-cli</code> to output the
+Taproot address linked to your group verifying key. (Due to the power
+of output descriptors, essentially all you're doing is asking for the
+address associated with "tr(your-public-key)".)</p>
+<p>This comes in two parts. First you have to fully qualify the
+descriptor by adding a checksum: <code>bitcoin-cli</code> requires this for all
+work with descriptors. Then you can ask <code>bitcoin-cli</code> to generate the
+address.</p>
+<p>You can do this with the following commands:</p>
+<pre><code>FROST_EXT_DESC_WITH_CS=$(bitcoin-cli -rpcuser=$RPC_USER -rpcpassword=$RPC_PASS -regtest getdescriptorinfo $FROST_EXT_DESC | jq -r .descriptor)
+FROST_ADDRESS=$(bitcoin-cli -rpcuser=$RPC_USER -rpcpassword=$RPC_PASS -regtest deriveaddresses $FROST_EXT_DESC_WITH_CS | jq -r '.[0]')
+</code></pre>
+<p>That should convert your FROST group verifying key (public key) into a
+valid Bitcoin address:</p>
+<pre><code>% echo $FROST_ADDRESS
+bcrt1pyylx3c7sw84ua8zfzy2de0wpaemw606jkv8std0j05m0dl0n0jzsuv3mk6
+</code></pre>
+<h2 id="step-6-sending-funds-to-the-frost-wallet">Step 6: Sending Funds to the FROST Wallet</h2>
+<p>You're now ready to send funds from your Bitcoin wallet to your FROST
+wallet. This is simply done with the <code>sendtoaddress command</code>:</p>
+<pre><code>bitcoin-cli -rpcuser=$RPC_USER \
+        -rpcpassword=$RPC_PASS \
+        -regtest \
+        sendtoaddress $FROST_ADDRESS 10.0
+</code></pre>
+<p>You'll get back a transaction ID:</p>
+<pre><code>f11f5188bf65f24aac5d4f6e943e0e2def511b2188bc0aec43291b1880a5864f
+</code></pre>
+<p>Since you're living in a regtest world, you need to create a new block
+to log that transaction:</p>
+<pre><code>bitcoin-cli -rpcuser=$RPC_USER \
+              -rpcpassword=$RPC_PASS \
+              -regtest \
+              -generate 1
+</code></pre>
+<p>Before you move on, you should make sure the transfer of funds
+occurred as expected.</p>
+<p>First, you can check the balance on your regular Bitcoin wallet:</p>
+<pre><code>bitcoin-cli -rpcuser=$RPC_USER -rpcpassword=$RPC_PASS -regtest getbalance
+
+89.99999835
+</code></pre>
+<p>The new balance is 89.99999835 BTC = 50 BTC (original balance) - 10
+BTC (sent) - 0.00000165 BTC (fallback fee) + 50 BTC (coinbase for
+block #2, since we're now on block #102).</p>
+<p>As for the FROST wallet, you'll be using <code>bdk-cli</code> to look at that,
+since <code>bitcoin-cli</code> doesn't do a good job of working with addresses
+that aren't in its wallet (and since it's convenient to use two
+different apps to control your two different wallets, particularly in
+a tutorial).</p>
+<p>BDK wants a bit more information on its wallets, which it divides
+between an "external descriptor" (which you've already defined) and an
+"internal descriptor", so you'll need to set that first.</p>
+<pre><code>FROST_INT_DESC=&quot;tr($FROST_AGG_KEY,pk($FROST_AGG_KEY))&quot;
+</code></pre>
+<blockquote>
+<p>:book: <strong><em>What are External &amp; Internal Descriptors?</em></strong> BDK uses a
+classic methodology of separating addresses that are meant to be given
+out (external) and those only intended for change (internal).</p>
+<p>:book: <strong>What is a "pk()" descriptor?</strong> A "pk()" descriptor defines
+an address by its public key, per <a href="https://en.bitcoin.it/wiki/BIP_0381#pk()">BIP
+381</a>. it describes a classic
+P2PK address.</p>
+</blockquote>
+<p>First, you must ask BDK to sync a wallet with those descriptors:</p>
+<pre><code>bdk-cli \
+  --network &quot;$NETWORK&quot; \
+  --datadir &quot;$FROST_DIR&quot; \
+  wallet \
+    --client-type rpc \
+    --database-type sqlite \
+    --url &quot;$RPC_URL&quot; \
+    -a &quot;$RPC_AUTH&quot; \
+    --ext-descriptor &quot;$FROST_EXT_DESC&quot; \
+    --int-descriptor &quot;$FROST_INT_DESC&quot; \
+    sync
+</code></pre>
+<p>Your <code>bdk-cli</code> commands will generally require defining a <code>wallet</code> and
+then giving it a command, like <code>sync</code>. For example, to check that the
+funds have gone through, you now access <code>wallet ... balance</code>.</p>
+<pre><code>bdk-cli \
+  --network &quot;$NETWORK&quot; \
+  --datadir &quot;$FROST_DIR&quot; \
+  wallet \
+    --client-type rpc \
+    --database-type sqlite \
+    --url &quot;$RPC_URL&quot; \
+    -a &quot;$RPC_AUTH&quot; \
+    --ext-descriptor &quot;$FROST_EXT_DESC&quot; \
+    --int-descriptor &quot;$FROST_INT_DESC&quot; \
+    balance
+</code></pre>
+<p>Here's the result:</p>
+<pre><code>{
+  &quot;satoshi&quot;: {
+    &quot;confirmed&quot;: 1000000000,
+    &quot;immature&quot;: 0,
+    &quot;trusted_pending&quot;: 0,
+    &quot;untrusted_pending&quot;: 0
+  }
+}
+</code></pre>
+<p>The Bitcoin wallet controlled by your FROST group has 10 BTC! You're
+down with the set up (at last!) and now ready for a threshold of FROST
+members to create and sign a transaction!</p>
+<h2 id="step-7-creating-an-unsigned-psbt-for-the-frost-wallet">Step 7: Creating an Unsigned PSBT for the FROST Wallet</h2>
+<p>You're now ready to create a transaction sending some funds back from
+the FROST wallet to the Bitcoin wallet, which will demonstrate using a
+FROST group signature for a Bitcoin transaction.</p>
+<p>To do so, you first must generate a new address for receipt on your
+regular Bitcoin wallet:</p>
+<pre><code>REG_NEW_ADDRESS=$(bitcoin-cli -rpcuser=$RPC_USER \                   
+                            -rpcpassword=$RPC_PASS \
+                            -regtest \
+                            getnewaddress)
+</code></pre>
+<blockquote>
+<p>:information_source: <strong>NOTE:</strong> It is best practice to generate a new
+address any time you receive digital funds.</p>
+</blockquote>
+<p>You can now create a PSBT that sends 100,000,000 satoshis (1 BTC) from
+your FROST wallet to that address on your regular Bitcoin wallet:</p>
+<pre><code>AMOUNT=100000000
+UNSIGNED_PSBT=$(bdk-cli \
+  --network &quot;$NETWORK&quot; \
+  --datadir &quot;$FROST_DIR&quot; \
+  wallet \
+    --client-type rpc \
+    --url &quot;$RPC_URL&quot; \
+    -a &quot;$RPC_AUTH&quot; \
+    --database-type sqlite \
+    --ext-descriptor &quot;$FROST_EXT_DESC&quot; \
+    --int-descriptor &quot;$FROST_INT_DESC&quot; \
+    create_tx \
+      --to ${REG_NEW_ADDRESS}:${AMOUNT} \
+      --fee_rate 1.5 \
+      --enable_rbf \
+    | jq -r '.psbt')
+echo &quot;$UNSIGNED_PSBT&quot; &gt; frost-to-reg.psbt
+</code></pre>
+<p>The PSBT should look something like this:</p>
+<pre><code>cat frost-to-reg.psbt
+
+cHNidP8BAH0CAAAAAU+GpYAYGylD7Aq8iCEbUe8tDj6Ubk9drEryZb+IUR/xAQAAAAD9////AnHopDUAAAAAIlEgFs9vu6vPBwD8EBesRxbdwciiciVtZq09kN40zOY7kYoA4fUFAAAAABYAFBViDlLjJ0fOX2EzxHimbQ9MArg2ZgAAAAABASsAypo7AAAAACJRICE+aOPQcevOnEkRFNy9we527T9Ssw8FtfJ9Nvb983yFIRZRBsC8uQO6A1h6+/LHabL87iyFGKw4P/CEmr1r9Gun6wUAuwK1jAEXIFEGwLy5A7oDWHr78sdpsvzuLIUYrDg/8ISavWv0a6frAAEFIFEGwLy5A7oDWHr78sdpsvzuLIUYrDg/8ISavWv0a6frAQYlAMAiIFEGwLy5A7oDWHr78sdpsvzuLIUYrDg/8ISavWv0a6frrCEHUQbAvLkDugNYevvyx2my/O4shRisOD/whJq9a/Rrp+slAWSQs+DhhYkKIfKdulcJ3Mk78IJyclunm7g4b6KrBgJduwK1jAAA
+</code></pre>
+<blockquote>
+<p>:book: <strong>What is a PSBT?</strong> A PSBT is a Partially Signed Bitcoin
+Transaction. The format was introduced in 2018 in Bitcoin Core 0.17
+and is defined in <a href="https://en.bitcoin.it/wiki/BIP_0174">BIP 174</a>. A
+PSBT divides up the creation of a transaction and the signing of the
+transaction, allowing the transaction to be passed around while it's
+unsigned or partially signed. This enables offline signatures and also
+supports multisigs, such as FROST group signatures.</p>
+</blockquote>
+<p>With a PSBT in hand, you now just need to sign it, which is the whole
+point of this exercise.</p>
+<h2 id="step-8-generating-a-signature-using-the-frost-group">Step 8: Generating a Signature using the FROST Group</h2>
+<p>To sign a Bitcoin transaction, the first thing you have to do is
+extract the sighash from the PSBT. This is done with the
+<code>sighash-helper</code> tool that you built in §4.1:</p>
+<pre><code>MSG=$(sighash-helper &lt; frost-to-reg.psbt)
+</code></pre>
+<blockquote>
+<p>:book: <strong>What is a Sighash?</strong> When Bitcoin signs a transaction, it
+actually signs a hash of the transaction: the sighash. Each
+transaction has multiple inputs (where funds are coming from) and
+multiple outputs (where funds are going to). Whether a sighash
+contains all, some, or none of the inputs and all, some, or none of
+the outputs is determined by a specific <code>sighash</code> flag, which is
+applied to each signature.</p>
+</blockquote>
+<p>You're now ready to use the ZF FROST <code>server</code> to sign your message,
+using the same procedure as
+<a href="../03_2_Creating_FROST_Secret_Shares_with_DKG_Using_Server/">§3.2</a>.</p>
+<p>In short:</p>
+<p>If you're already running the <code>frostd</code> server, kill it, to clear out
+any previous sessions. Then, restart <code>frostd</code></p>
+<pre><code>% frostd  --tls-cert localhost+3.pem --tls-key localhost+3-key.pem
+</code></pre>
+<p>Have Alice start the<code>coordinator</code> with a selected threshold of FROST
+group members and the sighash as the message input (sent here from the
+stdin, as shown with the <code>-m -</code> argument):</p>
+<pre><code>SIGNERS=&quot;$ALICE_PUBKEY,$BOB_PUBKEY&quot;
+printf '%s\n' &quot;$MSG&quot; | frost-client coordinator \
+  --group &quot;$GROUP_ID&quot; \
+  -s https://127.0.0.1:2744 \
+  -S &quot;$SIGNERS&quot; \
+  -m - \
+  -o sig.raw \
+  -c alice.toml
+</code></pre>
+<blockquote>
+<p>:information_source: <strong>NOTE:</strong> Obviously, you're again using the
+secp256k1-tr as a ciphersuite here, this time for signing. However,
+when the signing shares are brought together in round 2 of the signing
+process, you also take advantage of the other Blockchain Commons
+update to the ZF FROST tools: they're aggregated with a Taproot tweak.</p>
+<p>:book: <strong>What is a Taproot tweak?</strong> A P2TR Bitcoin script combines
+two elements: a locking script for a Schnorr signature and a tagged
+hash of a Merkle tree which contains additional ways in which the
+script may be unlocked. (This is the power of Taproot: traditional key
+access and script access are combined in a single package.) The tagged
+Merkle tree hash is simply added to the address thanks to the power of
+Schnorr aggregation. This is a "tweak". To sign then requires that the
+exact same tweak (e.g., the tagged Merkle tree hash) be added to one
+of the signing shares, to make the signature valid for the tweaked
+keys expected by Taproot. This happens as part of the signing process.</p>
+</blockquote>
+<p>Then each signer (including Alice) must join as a participant.</p>
+<p>Here's Alice doing so:</p>
+<pre><code>frost-client participant \
+  --group &quot;$GROUP_ID&quot; \
+  -s https://127.0.0.1:2744 \
+  -c alice.toml
+</code></pre>
+<p>Here's Bob:</p>
+<pre><code>frost-client participant \
+  --group &quot;$GROUP_ID&quot; \
+  -s https://127.0.0.1:2744 \
+  -c bob.toml
+</code></pre>
+<p>Each participant will see status updates and eventually be asked to sign:</p>
+<pre><code>Logging in...
+Joining signing session...
+Sending commitments to coordinator...
+Waiting for coordinator to send signing package.................
+Signing package received
+Message to be signed (hex-encoded):
+e24d7fad36af7e9e2fa2ecfaacc9e1cd3cadc19853ffc9bebf8787b19d02a305
+Do you want to sign it? (y/n)
+</code></pre>
+<p>But here's a puzzle! How do they know they're signing the right thing,
+as they can't backtrack a hash, which is what they're being asked to
+sign!</p>
+<p>The best practices methodology would be for Alice to send around the
+PSBT prior to initiating the FROST signing session.</p>
+<p>Ideally, each user could do a simple check with <code>bitcoin-cli</code>:</p>
+<pre><code>bitcoin-cli -rpcuser=$RPC_USER \
+                            -rpcpassword=$RPC_PASS \
+                            -regtest \
+                            decodepsbt psbt=`cat frost-to-reg.psbt`
+</code></pre>
+<p>However, tests suggest that this doesn't work correctly at the time of
+this writing. However, sites such as
+<a href="https://chainquery.com/bitcoin-cli/decodepsbt">chainquery</a> allow for
+testing of the RPC in a more robust environment. A JSON of the entire
+transaction should appear.</p>
+<p>The users would want to consult the inputs and outputs to make sure
+the right money is being sent to the right places. Afterward, they
+could each run <code>sighash-helper</code> to verify the hash of the PSBT they
+examined matched the hash they're signing. Then, they can give their
+OK for signature with their FROST share.</p>
+<p>(Yes, this is another place where the actual process would need to be
+much improved to make it accessible for real-life usage. Developers
+take note!)</p>
+<h2 id="step-9-signing-the-psbt-using-the-frost-group">Step 9: Signing the PSBT using the FROST Group</h2>
+<p>You've got a signature, you've now just got to attach it to the PSBT
+and send it out to the network.</p>
+<p>First, you should grab the hex of the signature:</p>
+<pre><code>SIG_HEX=$(xxd -p sig.raw | tr -d '\n')
+</code></pre>
+<p>It should look something like this:</p>
+<pre><code>0842a58b3072175540b587b94763ef967db3c9ad48a7cecf6ff788595e049528638b08c1a7c07fbe025956e938bb92ce1e26bbcfacc78a68f49195381c27148a
+</code></pre>
+<p>Next, you need to attach the signature to the PSBT. This is the other
+place where neither <code>bitcoin-cli</code> or <code>bdk-cli</code> had sufficient
+functionality. That's because they both expect you to do signing with
+their tool, where you instead signed with a FROST tool.</p>
+<p>That's where the <code>psbt-sig-attach</code> helper comes into play. If you look
+at the
+<a href="https://github.com/BlockchainCommons/Learning-FROST-from-the-Command-Line/blob/main/04_1_Installing_Bitcoin_Tools.md#creating-the-psbt-sig-attach-helper-tool">code</a>
+for the tool, you'll see that it attaches the signature to the 0th
+UTXO (input) of your transaction and flags it with the <code>SIGHASH_ALL</code>
+flag, meaning that the signature applies to all inputs and outputs.</p>
+<p>Here's how it's used. You just pipe the PSBT file into the
+<code>psbt-sig-attach</code> tool, and offer the signature as an argument.</p>
+<pre><code>SIGNED_PSBT=$(cat frost-to-reg.psbt | psbt-sig-attach &quot;$SIG_HEX&quot;)
+echo &quot;$SIGNED_PSBT&quot; &gt; frost-to-reg.signed.psbt
+</code></pre>
+<p>You'll now have a PSBT that is somewhat longer because it includes a
+signature. But, unlike the ECDSA signatures that were typically used
+on Bitcoin, this Schnorr (FROST) signature doesn't grow in size with
+the number of signers. This group signature, signed by both Alice and
+Bob, is exactly the same size as a signature made by one person!  And
+so the PSBT file is the same size as well! (That's one of the
+advantages of FROST).</p>
+<pre><code>cHNidP8BAH0CAAAAAU+GpYAYGylD7Aq8iCEbUe8tDj6Ubk9drEryZb+IUR/xAQAAAAD9////AnHopDUAAAAAIlEgFs9vu6vPBwD8EBesRxbdwciiciVtZq09kN40zOY7kYoA4fUFAAAAABYAFBViDlLjJ0fOX2EzxHimbQ9MArg2ZgAAAAABASsAypo7AAAAACJRICE+aOPQcevOnEkRFNy9we527T9Ssw8FtfJ9Nvb983yFARNACEKlizByF1VAtYe5R2Pvln2zya1Ip87Pb/eIWV4ElShjiwjBp8B/vgJZVuk4u5LOHia7z6zHimj0kZU4HCcUiiEWUQbAvLkDugNYevvyx2my/O4shRisOD/whJq9a/Rrp+sFALsCtYwBFyBRBsC8uQO6A1h6+/LHabL87iyFGKw4P/CEmr1r9Gun6wABBSBRBsC8uQO6A1h6+/LHabL87iyFGKw4P/CEmr1r9Gun6wEGJQDAIiBRBsC8uQO6A1h6+/LHabL87iyFGKw4P/CEmr1r9Gun66whB1EGwLy5A7oDWHr78sdpsvzuLIUYrDg/8ISavWv0a6frJQFkkLPg4YWJCiHynbpXCdzJO/CCcnJbp5u4OG+iqwYCXbsCtYwAAA==
+</code></pre>
+<h2 id="step-10-finalizing-and-sending-the-psbt">Step 10: Finalizing and Sending the PSBT</h2>
+<p>You can now ask <code>bdk-cli</code> to close out the PSBT and prepare it for transmission:</p>
+<pre><code>FINAL_PSBT=$(bdk-cli \
+  --network &quot;$NETWORK&quot; \
+  --datadir &quot;$FROST_DIR&quot; \
+  wallet \
+    --client-type rpc \
+    --url &quot;$RPC_URL&quot; \
+    -a &quot;$RPC_AUTH&quot; \
+    --database-type sqlite \
+    --ext-descriptor &quot;$FROST_EXT_DESC&quot; \
+    --int-descriptor &quot;$FROST_INT_DESC&quot; \
+    finalize_psbt $(&lt; frost-to-reg.signed.psbt) \
+  | jq -r '.psbt')
+</code></pre>
+<p>You can then broadcast it as a transmission:</p>
+<pre><code>TXID=$(bdk-cli \
+  --network &quot;$NETWORK&quot; \
+  --datadir &quot;$FROST_DIR&quot; \
+  wallet \
+    --client-type rpc \
+    --url &quot;$RPC_URL&quot; \
+    -a &quot;$RPC_AUTH&quot; \
+    --database-type sqlite \
+    --ext-descriptor &quot;$FROST_EXT_DESC&quot; \
+    --int-descriptor &quot;$FROST_INT_DESC&quot; \
+    broadcast \
+      --psbt &quot;$FINAL_PSBT&quot; | \
+    jq -r '.txid')
+</code></pre>
+<p>Since you're on regtest, you'll then need to advance a block:</p>
+<pre><code>bitcoin-cli -rpcuser=$RPC_USER \
+        -rpcpassword=$RPC_PASS \
+            -regtest \
+            -generate 1
+</code></pre>
+<p>Afterward, you can verify your balances.</p>
+<p>Here's the Bitcoin wallet:</p>
+<pre><code>bitcoin-cli -rpcuser=$RPC_USER -rpcpassword=$RPC_PASS -regtest getbalance
+
+140.99999835
+</code></pre>
+<p>That's 89.99999835 + 50 (new coinbase award for new block) +1 (transfer).</p>
+<p>You can similarly sync and check the balance of your FROST wallet with
+<code>bdk-cli</code>.</p>
+<pre><code>bdk-cli \
+  --network &quot;$NETWORK&quot; \
+  --datadir &quot;$FROST_DIR&quot; \
+  wallet \
+    --client-type rpc \
+    --database-type sqlite \
+    --url &quot;$RPC_URL&quot; \
+    -a &quot;$RPC_AUTH&quot; \
+    --ext-descriptor &quot;$FROST_EXT_DESC&quot; \
+    --int-descriptor &quot;$FROST_INT_DESC&quot; \
+    sync
+
+bdk-cli \
+  --network &quot;$NETWORK&quot; \
+  --datadir &quot;$FROST_DIR&quot; \
+  wallet \
+    --client-type rpc \
+    --database-type sqlite \
+    --url &quot;$RPC_URL&quot; \
+    -a &quot;$RPC_AUTH&quot; \
+    --ext-descriptor &quot;$FROST_EXT_DESC&quot; \
+    --int-descriptor &quot;$FROST_INT_DESC&quot; \
+    balance
+</code></pre>
+<p>The result is:</p>
+<pre><code>{
+  &quot;satoshi&quot;: {
+    &quot;confirmed&quot;: 899999857,
+    &quot;immature&quot;: 0,
+    &quot;trusted_pending&quot;: 0,
+    &quot;untrusted_pending&quot;: 0
+  }
+}
+</code></pre>
+<p>That's the 10 BTC minus the 1 BTC returned and the transaction fee.</p>
+<p>Congrats, you've proven a use case for FROST signing by signing a
+Bitcoin transaction! (Now get out there and design an easier way to
+do so!)</p>
+<h2 id="summary-signing-psbts-with-frost">Summary: Signing PSBTs with FROST</h2>
+<p>Though it took ten steps here, the first six steps of this demo were
+just setting things up so that you had a regular Bitcoin wallet and a
+FROST Bitcoin wallet and the FROST Bitcoin wallet had funds.</p>
+<p>Fundamentally, all that's required to sign a PSBT with FROST is:</p>
+<ol>
+<li>Create an unsigned PSBT for the transaction.</li>
+<li>Extract the <code>sighash</code> from the PSBT.</li>
+<li>Use FROST Tools to sign the <code>sighash</code> for the transaction.</li>
+<li>Insert the signature into the transaction.</li>
+<li>Finalize &amp; send the transaction.</li>
+</ol>
+<h2 id="whats-next">What's Next</h2>
+<p>That's it! We're considering expanding this tutorial in the future,
+per our <a href="TODO.md">TODO</a>, as Blockchain Commons has technologies such
+as <a href="https://developer.blockchaincommons.com/clubs/">Gordian Clubs</a> and
+<a href="https://developer.blockchaincommons.com/envelope/">Gordian Envelope</a>
+that provide other use cases for FROST, as well as tools such as
+<a href="https://developer.blockchaincommons.com/hubert/">Hubert</a> that can
+support FROST.</p>
+<p>But for the moment, you've got all the fundamentals of FROST, and
+should be ready to begin your own design.</p>
+<p>If you have questions or disagreements, please feel free to file
+<a href="https://github.com/BlockchainCommons/Learning-FROST-from-the-Command-Line/issues">Issues</a>
+and if you have corrections, particularly simple things like typos,
+please file
+<a href="https://github.com/BlockchainCommons/Learning-FROST-from-the-Command-Line/pulls">PRs</a>.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": [], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>

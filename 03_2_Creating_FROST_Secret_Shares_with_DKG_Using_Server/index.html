@@ -1,0 +1,1748 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://learningfrost.blockchaincommons.com/03_2_Creating_FROST_Secret_Shares_with_DKG_Using_Server/">
+      
+      
+        <link rel="prev" href="../03_1_Creating_FROST_Secret_Shares_with_DKG_Using_CLI/">
+      
+      
+        <link rel="next" href="../03_3_ZF_FROST_in_a_Nutshell/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.1">
+    
+    
+      
+        <title>3.2: Creating FROST Secret Shares with DKG Using Server - Learning FROST from the Command Line</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.484c7ddc.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#32-creating-frost-secret-shares-with-dkg-using-server" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="Learning FROST from the Command Line" class="md-header__button md-logo" aria-label="Learning FROST from the Command Line" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m20.79 13.95-2.33.62-2-1.13v-2.88l2-1.13 2.33.62.52-1.93-1.77-.47.46-1.77-1.93-.52-.62 2.33-2 1.13L13 7.38V5.12l1.71-1.71L13.29 2 12 3.29 10.71 2 9.29 3.41 11 5.12v2.26L8.5 8.82l-2-1.13-.58-2.33L4 5.88l.47 1.77-1.77.47.52 1.93 2.33-.62 2 1.13v2.89l-2 1.13-2.33-.62-.52 1.93 1.77.47L4 18.12l1.93.52.62-2.33 2-1.13L11 16.62v2.26l-1.71 1.71L10.71 22 12 20.71 13.29 22l1.41-1.41-1.7-1.71v-2.26l2.5-1.45 2 1.13.62 2.33 1.88-.51-.47-1.77 1.77-.47zM9.5 10.56 12 9.11l2.5 1.45v2.88L12 14.89l-2.5-1.45z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Learning FROST from the Command Line
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              3.2: Creating FROST Secret Shares with DKG Using Server
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/BlockchainCommons/Learning-FROST-from-the-Command-Line" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Learning FROST from the Command Line" class="md-nav__button md-logo" aria-label="Learning FROST from the Command Line" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m20.79 13.95-2.33.62-2-1.13v-2.88l2-1.13 2.33.62.52-1.93-1.77-.47.46-1.77-1.93-.52-.62 2.33-2 1.13L13 7.38V5.12l1.71-1.71L13.29 2 12 3.29 10.71 2 9.29 3.41 11 5.12v2.26L8.5 8.82l-2-1.13-.58-2.33L4 5.88l.47 1.77-1.77.47.52 1.93 2.33-.62 2 1.13v2.89l-2 1.13-2.33-.62-.52 1.93 1.77.47L4 18.12l1.93.52.62-2.33 2-1.13L11 16.62v2.26l-1.71 1.71L10.71 22 12 20.71 13.29 22l1.41-1.41-1.7-1.71v-2.26l2.5-1.45 2 1.13.62 2.33 1.88-.51-.47-1.77 1.77-.47zM9.5 10.56 12 9.11l2.5 1.45v2.88L12 14.89l-2.5-1.45z"/></svg>
+
+    </a>
+    Learning FROST from the Command Line
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/BlockchainCommons/Learning-FROST-from-the-Command-Line" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01_0_Introduction/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter One: Introduction to FROST
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01_1_Introducing_FROST/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1.1: Introducing FROST
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01_2_FROST_Signature_Process/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1.2: The FROST Signature Process
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01_3_FROST_vs_MuSig/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1.3: FROST vs MuSig2
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../02_0_Signing_with_FROST/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter Two: Signing with FROST
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../02_1_Installing_FROST_Tools/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2.1: Installing the FROST Tools
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../02_2_Creating_FROST_Secret_Shares_with_TDG/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2.2: Creating FROST Secret Shares with TDG
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../02_3_Creating_FROST_Signature/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2.3: Creating a FROST Signature
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../02_4_Checking_FROST_Signature/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2.4: Checking FROST Signatures
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../03_0_Advanced_FROST/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter Three: Advanced FROST Capabilities
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../03_1_Creating_FROST_Secret_Shares_with_DKG_Using_CLI/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    3.1: Creating FROST Secret Shares with DKG Using CLI
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    3.2: Creating FROST Secret Shares with DKG Using Server
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    3.2: Creating FROST Secret Shares with DKG Using Server
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#preparing-the-server" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Preparing the Server
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Preparing the Server">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#installing-the-server" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Installing the Server
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#installing-a-certificate" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Installing a Certificate
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#starting-the-server" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Starting the Server
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#preparing-the-users" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Preparing the Users
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Preparing the Users">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#create-user-credentials" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Create User Credentials
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#installing-tomlq" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Installing tomlq
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#extracting-the-contact-info" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Extracting the Contact Info
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#exchanging-the-contact-information" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exchanging the Contact Information
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#importing-the-contact-information" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Importing the Contact Information
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#creating-dkg-shares" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Creating DKG Shares
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Creating DKG Shares">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#connecting-to-the-server" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Connecting to the Server
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#signing-with-dkg-shares-generated-by-the-server" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Signing with DKG Shares Generated by the Server
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#verifying-with-dkg-shares-generated-by-the-server" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Verifying with DKG Shares Generated by the Server
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#accessing-the-public-key-package-programmatically" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Accessing the Public Key Package Programmatically
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#summary-creating-frost-secret-shares-with-dkg-using-server" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Summary: Creating FROST Secret Shares with DKG Using Server
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#whats-next" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What's Next
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../03_3_ZF_FROST_in_a_Nutshell/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    3.3 ZF FROST in a Nutshell
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../03_4_Refreshing_FROST_Shares/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    3.4: Resharing Shares
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../04_0_FROST_and_Bitcoin/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter Four: FROST and Bitcoin
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../04_1_Installing_Bitcoin_Tools/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    4.1: Installing Bitcoin Tools
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../04_2_Signing_PSBTs_with_FROST/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    4.2: Signing PSBTs with FROST
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#preparing-the-server" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Preparing the Server
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Preparing the Server">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#installing-the-server" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Installing the Server
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#installing-a-certificate" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Installing a Certificate
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#starting-the-server" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Starting the Server
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#preparing-the-users" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Preparing the Users
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Preparing the Users">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#create-user-credentials" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Create User Credentials
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#installing-tomlq" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Installing tomlq
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#extracting-the-contact-info" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Extracting the Contact Info
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#exchanging-the-contact-information" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exchanging the Contact Information
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#importing-the-contact-information" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Importing the Contact Information
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#creating-dkg-shares" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Creating DKG Shares
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Creating DKG Shares">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#connecting-to-the-server" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Connecting to the Server
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#signing-with-dkg-shares-generated-by-the-server" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Signing with DKG Shares Generated by the Server
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#verifying-with-dkg-shares-generated-by-the-server" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Verifying with DKG Shares Generated by the Server
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#accessing-the-public-key-package-programmatically" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Accessing the Public Key Package Programmatically
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#summary-creating-frost-secret-shares-with-dkg-using-server" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Summary: Creating FROST Secret Shares with DKG Using Server
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#whats-next" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What's Next
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="32-creating-frost-secret-shares-with-dkg-using-server">3.2: Creating FROST Secret Shares with DKG Using Server</h1>
+<p>The ZF FROST tools offers two ways to create DKG shares. The first
+way, demoed in
+<a href="../03_1_Creating_FROST_Secret_Shares_with_DKG_Using_CLI/">§3.1</a> forces
+users to hand-input all the communications being exchanged, which is a
+pragmatic UI (and a nice bit of hands-on experience to show you how it
+all works), but is prone to error.</p>
+<p>Fortunately, the ZF FROST tools have a better answer: a server-based
+methodology.</p>
+<h2 id="preparing-the-server">Preparing the Server</h2>
+<p>This DKG demo manages communication through a server, <code>frostd</code>, which
+must also have a certificate. Communication connections are
+authenticated, and communication is encrypted, providing a level of
+security that's appropriate for the use of the higher security profile
+of DKG. But the most important element may be the improved UI: the
+server takes care of things so that the user doesn't have to, largely
+elminating the opportunity for errors.</p>
+<h3 id="installing-the-server">Installing the Server</h3>
+<p><code>frostd</code> is the other major software available in the <code>frost-tools</code>
+repo. You can install it by changing back to the <code>frost-tools</code>
+directory that you cloned from GitHub and running <code>cargo install</code> for
+<code>frostd</code>:</p>
+<pre><code>% cargo install --path frostd
+</code></pre>
+<p>:information_source: <strong>NOTE:</strong> If you no longer have your
+<code>frost-tools</code> repo (or have lost track of it), refer to <a href="../02_1_Installing_FROST_Tools/">§2.1:
+Installing the FROST Tools</a> for the
+installation instructions.</p>
+<h3 id="installing-a-certificate">Installing a Certificate</h3>
+<p>The <a href="https://github.com/FiloSottile/mkcert"><code>mkcert</code> app</a> allows you
+to create test certificates on your machine. Look at the README in
+that repo for full installation instructions, but most simply you can:
+<code>brew install mkcert</code> (Mac); <code>sudo apt install libnss3-tools</code> (Linux);
+or <code>choco install mkcert</code> (Windows). If you use a different package
+manager, there are probably instructions on what to do at the
+<a href="https://github.com/FiloSottile/mkcert"><code>mkcert</code> repo</a>.</p>
+<p>After installing the <code>mkcert</code> software, you can create a testing
+certificate for your <code>localhost</code> machine with the following commands:</p>
+<pre><code>% mkcert -install
+</code></pre>
+<p>On a Mac, this will require you to enter your password for <code>sudo</code> and
+to update your system settings. Other systems will require slightly
+different verifications.</p>
+<p>You may also get some status reports including some errors like this,
+which are fine because you're not creating this certificate for
+Firefox:</p>
+<pre><code>Warning: &quot;certutil&quot; is not available, so the CA can't be automatically installed in Firefox! ⚠️
+</code></pre>
+<p>You can now create a certificate for your local machine:</p>
+<pre><code>% mkcert localhost 0.0.0.0 127.0.0.1 ::1
+
+Created a new certificate valid for the following names 📜
+ - &quot;localhost&quot;
+ - &quot;0.0.0.0&quot;
+ - &quot;127.0.0.1&quot;
+ - &quot;::1&quot;
+</code></pre>
+<p>You'll also be told where your certificates are, which should be something like::</p>
+<pre><code>The certificate is at &quot;./localhost+3.pem&quot; and the key at &quot;./localhost+3-key.pem&quot; ✅
+</code></pre>
+<p>(The precise filename will vary if you create for a different machine
+name and/or with a different number of aliases.)</p>
+<h3 id="starting-the-server">Starting the Server</h3>
+<p>You can now start the <code>frostd</code> server with that certificate:</p>
+<pre><code>% frostd  --tls-cert localhost+3.pem --tls-key localhost+3-key.pem
+</code></pre>
+<p>It will run in the foreground and report out messages to you:</p>
+<pre><code>2025-09-19T00:55:10.092611Z  INFO frostd: server running
+2025-09-19T00:55:10.093142Z  INFO frostd: starting HTTPS server at 0.0.0.0:2744
+</code></pre>
+<h2 id="preparing-the-users">Preparing the Users</h2>
+<p>Now, the users need to be able to talk to each other <em>securely</em> via
+that server.</p>
+<h3 id="create-user-credentials">Create User Credentials</h3>
+<p>To communicate sercurely, each user will need to create credentials,
+which can be done with the <code>frost-client</code> utility:</p>
+<pre><code>% frost-client init -c alice.toml
+% frost-client init -c bob.toml
+% frost-client init -c eve.toml
+</code></pre>
+<p>Usually, each user would do this on their own machine, but again for
+simplicity we're doing everything on a single machine.</p>
+<p>Here's what the <code>alice.toml</code>
+<a href="https://en.wikipedia.org/wiki/TOML">configuration</a> files looks like:</p>
+<pre><code>version = 0
+
+[communication_key]
+privkey = &quot;04692aef6190b43d9524d719e0a7f45689ea3265a36fe34e69c625a9b8ac2967&quot;
+pubkey = &quot;00d639b42342ec83031c0cfb0462cb759832fb4d7b7c5942edd3c067b465406f&quot;
+
+[contact]
+
+[group]
+</code></pre>
+<p>It contains a communication key, which is the last crucial element of
+the client-server setup, because it allows the members who will form
+the FROST group to authenticate each other and to encrypt
+communications, using the keypair.</p>
+<h3 id="installing-tomlq">Installing tomlq</h3>
+<p>In order to easily read those config files from the command line,
+you'll need a tool called <code>tq</code>, which is a Rust Tool that can be
+installed from the <a href="https://github.com/cryptaliagy/tomlq">tomlq repo</a>.</p>
+<pre><code>% git clone https://github.com/cryptaliagy/tomlq.git
+%  cd tomlq
+%  cargo install --path .
+</code></pre>
+<h3 id="extracting-the-contact-info">Extracting the Contact Info</h3>
+<p>Now you can use those TOML files, <code>tq</code>, and the <code>frost-client</code> to
+record the public key and the ZF FROST contact string for each user:</p>
+<pre><code>ALICE_PUBKEY=$(tq -f alice.toml -r 'communication_key.pubkey')
+ALICE_CONTACT=$(frost-client export --name &quot;Alice&quot; -c alice.toml 2&gt;&amp;1 | tail -1)
+BOB_PUBKEY=$(tq -f bob.toml -r 'communication_key.pubkey')
+BOB_CONTACT=$(frost-client export --name &quot;Bob&quot; -c bob.toml 2&gt;&amp;1 | tail -1)
+EVE_PUBKEY=$(tq -f eve.toml -r 'communication_key.pubkey') 
+EVE_CONTACT=$(frost-client export --name &quot;Eve&quot; -c eve.toml 2&gt;&amp;1 | tail -1)
+</code></pre>
+<p>The <code>PUBKEY</code> just contains the public key in the TOML file, while the
+contact string encodes that to allow it to be passed to another <code>frost-client</code>.
+Here's what they look like.</p>
+<pre><code>% echo $ALICE_PUBKEY
+00d639b42342ec83031c0cfb0462cb759832fb4d7b7c5942edd3c067b465406f
+% echo $ALICE_CONTACT
+zffrost1qyqq2stvd93k2gqq6cumgg6zajpsx8qvlvzx9jm4nqe0kntm03v59mwncpnmge2qdu8ya0ws
+</code></pre>
+<h3 id="exchanging-the-contact-information">Exchanging the Contact Information</h3>
+<p>At this point, in the real world, each user would have collected their
+own <code>PUBKEY</code> and <code>CONTACT</code>. Now, they would need to send these two
+long strings of data to each of the other users who will be
+participating in the FROST group. They could send it over a secure
+messaging system such as Signal, but it'd be better to meet in person
+so that you can verify that the information belongs to a known person.</p>
+<p>(In this example, we're simply assuming the strings we've stored in
+variables have gotten to the other users.)</p>
+<h3 id="importing-the-contact-information">Importing the Contact Information</h3>
+<p>The <code>frost-client</code> will directly digest the contact info.</p>
+<p>Each user needs to collect the information from each of the other
+users. So Alice would <code>import</code> the following into her <code>toml</code> file.:</p>
+<pre><code>frost-client import -c alice.toml $BOB_CONTACT
+frost-client import -c alice.toml $EVE_CONTACT
+</code></pre>
+<p>These commands will show the following results:</p>
+<pre><code>Imported this contact:
+Name: Bob
+Public Key: 2f232f8a6f69d7dac39cbadff58fc753066bed7ec7d2401acb838e1b033c2305
+</code></pre>
+<p>And:</p>
+<pre><code>Imported this contact:
+Name: Eve
+Public Key: f2f2f9344e203c1279e6997d8f9030d7727d36a2ba053a1ec3b1f3dae266a26d
+</code></pre>
+<p>Afterward, <code>alice.toml</code> should be updated accordingly:</p>
+<pre><code>version = 0
+
+[communication_key]
+privkey = &quot;04692aef6190b43d9524d719e0a7f45689ea3265a36fe34e69c625a9b8ac2967&quot;
+pubkey = &quot;00d639b42342ec83031c0cfb0462cb759832fb4d7b7c5942edd3c067b465406f&quot;
+
+[contact.Bob]
+name = &quot;Bob&quot;
+pubkey = &quot;2f232f8a6f69d7dac39cbadff58fc753066bed7ec7d2401acb838e1b033c2305&quot;
+
+[contact.Eve]
+name = &quot;Eve&quot;
+pubkey = &quot;f2f2f9344e203c1279e6997d8f9030d7727d36a2ba053a1ec3b1f3dae266a26d&quot;
+
+[group]
+</code></pre>
+<p>As shown, the ZF FROST contact info has been converted back to a
+public key. As long as Alice trusted the method of distribution for
+the contact info (and the source of that information) they now will be
+able to trust information from Bob or from Eve that is signed with the
+corresponding private key.</p>
+<p>Bob does the same:</p>
+<pre><code>frost-client import -c bob.toml $ALICE_CONTACT
+frost-client import -c bob.toml $EVE_CONTACT
+</code></pre>
+<p>As does Eve:</p>
+<pre><code>frost-client import -c eve.toml $ALICE_CONTACT
+frost-client import -c eve.toml $BOB_CONTACT
+</code></pre>
+<p>Besides importing the <code>CONTACT</code> into their <code>toml</code> file, each user
+would also set a <code>PUBKEY</code> variable for each other user, as doing so
+will make it easier to contact the server, momentarily.</p>
+<p>And now we've got a server and enough information to get started
+creating the DKG!</p>
+<h2 id="creating-dkg-shares">Creating DKG Shares</h2>
+<p>You're now ready to create shares using ZF FROST's server-based DKG
+method.</p>
+<p>You should already have <code>frostd</code> running. Each user will now run
+<code>frost-client</code> on their own terminal to connect to that server. The
+following command-line options are used when running <code>frost-client</code></p>
+<table>
+<thead>
+<tr>
+<th>Flag</th>
+<th>Description</th>
+<th>Default</th>
+<th>Options</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>-d</td>
+<td>Description</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>-s</td>
+<td>Server URL</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>-S</td>
+<td>Public Keys</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>-t</td>
+<td>Threshold</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>-C</td>
+<td>Cipher Suite</td>
+<td>ed25519</td>
+<td></td>
+</tr>
+<tr>
+<td>-c</td>
+<td>TOML File</td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h3 id="connecting-to-the-server">Connecting to the Server</h3>
+<p>The following commands will initiate the DKG Protocol. They should be
+used by the <em>first</em> user to connect.</p>
+<p>Alice runs:</p>
+<pre><code>% frost-client dkg -d &quot;DKG: Alice, Bob, Eve&quot; \
+-s 127.0.0.1:2744 \
+-S $BOB_PUBKEY,$EVE_PUBKEY \
+-t 2 \
+-c alice.toml
+</code></pre>
+<p>Note that:</p>
+<ul>
+<li>The <code>-d</code> description is just a label put into the individual's TOML file.</li>
+<li>The <code>-s</code> server name and port number will have appeared when the server started, but it should usually be <code>127.0.0.1:2744</code>.</li>
+<li>The <code>-S</code> public keys are why we saved those keys in <code>$PUBKEY</code> variables, but you could just as easily have entered them by hand. The first user to initiate the <code>dkg</code> connection enters the keys of the other two. They won't need to do so at all (and in fact, doing so caused the DKG to fail in our tests, which clearly shouldn't be the case if all the keys match).</li>
+<li>The <code>-t</code> is the threshold, in this case 2 out of the three pubkeys (the user's own and the ones entered as <code>-S</code>). If the number of pubkeys and/or the threshold don't match, things won't work! Everyone will just wait around, because there aren't enough participants to create the requested DKG.</li>
+<li>The <code>-c</code> is the config file for each individual user. This one is Alice's.</li>
+</ul>
+<p>Bob's command will then look like this:</p>
+<pre><code>% frost-client dkg -d &quot;DKG: Alice, Bob, Eve&quot; \
+-s 127.0.0.1:2744 \
+-t 2 \
+-c bob.toml
+</code></pre>
+<p>Eve's will look like this:</p>
+<pre><code>% frost-client dkg -d &quot;DKG: Alice, Bob, Eve&quot; \
+-s 127.0.0.1:2744 \
+-t 2 \
+-c eve.toml
+</code></pre>
+<p>Note that both omit the <code>-S</code> flag; not doing so might cause the DKG to hang.</p>
+<p>Each user should see the following:</p>
+<pre><code>Logging in...
+Creating DKG session...
+Getting session info...
+Waiting for other participants to send their Round 1 Packages............
+</code></pre>
+<p>Things will pause here while everyone connects ... and could get stuck
+here if there's a problem such as a discrepency between thresholds or
+public keys. (This is also where things got stuck when we tried to use
+the <code>-S</code> flag for non-initiating users.)</p>
+<p>But hopefully, everyone soon sees the following:</p>
+<pre><code>Waiting for other participants to send their broadcasted Round 1 Packages.....
+Waiting for other participants to send their Round 2 Packages....
+Group created; information written to alice.toml
+</code></pre>
+<p>That's right, it's all done automatically from the initial connection,
+as long as each user set up their initial comunication keys correctly!</p>
+<p>Here's a look at Alice's TOML after the process:</p>
+<pre><code>version = 0
+
+[communication_key]
+privkey = &quot;cb3d54011ad8c05d714ff2bb3b0466917723624ba89fd28b8df7c0a1b56b2e1a&quot;
+pubkey = &quot;492dd8fced4ec58490800ec6216ca3fff0ed7148fad20cd7a9da52e62d6ddf26&quot;
+
+[contact.Bob]
+name = &quot;Bob&quot;
+pubkey = &quot;6ba29fa51f76f6de6e99ce98767e56e9716fddb39c27bdf48d8d5458e22c8f77&quot;
+
+[contact.Eve]
+name = &quot;Eve&quot;
+pubkey = &quot;dcffe972745b7f9a9d44f422c4b60de3ffc18d913bbe22d17627f864ffd34f15&quot;
+
+[group.7de1487fe264ab9ae292fcbce0e5dc1bb5524c810beae7119de74c99aa313e6c]
+description = &quot;DKG: Alice, Bob, Eve&quot;
+ciphersuite = &quot;FROST-ED25519-SHA512-v1&quot;
+public_key_package = &quot;00b169f0da03577250dcbe4c4589fb88caa29634135be4a78b49f626d890a354cf4354859f050d69dc7af725101636926792b6ecc41a7e24dbe5ad92bc88e61619bfb433cb84b8a48843f96a8f5d9c0b19e24c8caea907a91b526c6a60da8797453d4b2c240df46c0a8e1dab98621d1dbbccb5f091b30cf469f77c035181b80580bb595a4ad382e52235a65875816d0fa17e771db3711a7c4c8afba36f5febcf1ef68e48af0fa46286abe1e5e1e8b4740752420da1eedf69b83a34e3b4f60bc7b8b1f9a02c757de1487fe264ab9ae292fcbce0e5dc1bb5524c810beae7119de74c99aa313e6c&quot;
+key_package = &quot;00b169f0da577250dcbe4c4589fb88caa29634135be4a78b49f626d890a354cf4354859f05ddb0f4708376b99de06d4a086c6c6371d7992102201ec39e6426555fa46abe040d69dc7af725101636926792b6ecc41a7e24dbe5ad92bc88e61619bfb433cb847de1487fe264ab9ae292fcbce0e5dc1bb5524c810beae7119de74c99aa313e6c02&quot;
+server_url = &quot;127.0.0.1:2744&quot;
+
+[group.7de1487fe264ab9ae292fcbce0e5dc1bb5524c810beae7119de74c99aa313e6c.participant.577250dcbe4c4589fb88caa29634135be4a78b49f626d890a354cf4354859f05]
+identifier = &quot;577250dcbe4c4589fb88caa29634135be4a78b49f626d890a354cf4354859f05&quot;
+pubkey = &quot;492dd8fced4ec58490800ec6216ca3fff0ed7148fad20cd7a9da52e62d6ddf26&quot;
+
+[group.7de1487fe264ab9ae292fcbce0e5dc1bb5524c810beae7119de74c99aa313e6c.participant.82e52235a65875816d0fa17e771db3711a7c4c8afba36f5febcf1ef68e48af0f]
+identifier = &quot;82e52235a65875816d0fa17e771db3711a7c4c8afba36f5febcf1ef68e48af0f&quot;
+pubkey = &quot;dcffe972745b7f9a9d44f422c4b60de3ffc18d913bbe22d17627f864ffd34f15&quot;
+
+[group.7de1487fe264ab9ae292fcbce0e5dc1bb5524c810beae7119de74c99aa313e6c.participant.b8a48843f96a8f5d9c0b19e24c8caea907a91b526c6a60da8797453d4b2c240d]
+identifier = &quot;b8a48843f96a8f5d9c0b19e24c8caea907a91b526c6a60da8797453d4b2c240d&quot;
+pubkey = &quot;6ba29fa51f76f6de6e99ce98767e56e9716fddb39c27bdf48d8d5458e22c8f77&quot;
+</code></pre>
+<p>It now contains the FROST group of Alice, Bob, and Eve, along with
+information on each participant.</p>
+<p>This is very much the sort of UI you want for DKG creation:
+automated.</p>
+<ol>
+<li>The users have private and public keys that are automatically generated.</li>
+<li>The DKG ceremony happens through a server that uses those keys to secure communication.</li>
+<li>All the user has to do is intiate a connection.</li>
+<li>Both rounds of communication happen in the background, then the DKG key shares are automatically stored.</li>
+</ol>
+<h2 id="signing-with-dkg-shares-generated-by-the-server">Signing with DKG Shares Generated by the Server</h2>
+<p>In order to sign with your new DKG shares, you must still be running
+<code>frostd</code>, and then you must run <code>frost-client coordinator</code> to connect
+to the server and manage the signing session.</p>
+<p><code>frost-client coordinator</code> can be run with the following flags:</p>
+<table>
+<thead>
+<tr>
+<th>Flag</th>
+<th>Description</th>
+<th>Default</th>
+<th>Options</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>-c</td>
+<td>Credentials</td>
+<td>credentials.toml</td>
+<td></td>
+</tr>
+<tr>
+<td>-g</td>
+<td>Group ID</td>
+<td>&lt;#&gt;</td>
+<td></td>
+</tr>
+<tr>
+<td>-m</td>
+<td>Message</td>
+<td><filename></td>
+<td></td>
+</tr>
+<tr>
+<td>-o</td>
+<td>Signature Output File</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>-r</td>
+<td>Randomizers</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>-s</td>
+<td>Server URL</td>
+<td><url></td>
+<td></td>
+</tr>
+<tr>
+<td>-S</td>
+<td>Signers</td>
+<td><public keys></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>:warning: <strong>WARNING:</strong> Note that <code>frost-client coordinator</code> is a
+different program from the <code>coordinator</code> that you previously ran. That
+was a standalone server, this is one that is run through <code>frostd</code>. As
+a result, some of the command-line options are different (and one even
+reuses the same argument for a different purpose, so be careful!).</p>
+<p>Everyone will need to know the Group ID of this FROST group to
+communicate. This appears throughout the credentials files in lines
+like this:</p>
+<pre><code>[group.f6b2f30a4f3a666110478eca120a9a7d19740390fff8bb2250eb274177e6dd22.participant.2cb07edbc49dbcac5aa169c6f0c417e3a170431db15265ffc90e9f161b87c108]
+</code></pre>
+<p>Alice can capture it as follows:</p>
+<pre><code>% GROUP_ID=$(grep -oE '^\[group\.[0-9a-f]+' alice.toml | head -1 | sed 's/^\[group\.//')
+</code></pre>
+<p>Alice can now start up the <code>coordinator</code> as follows.</p>
+<pre><code>frost-client coordinator --group $GROUP_ID -s 127.0.0.1:2744 -S &quot;$ALICE_PUBKEY,$BOB_PUBKEY&quot; -m board-meeting-250917.txt -o board-meeting-250917.sig -c alice.toml
+</code></pre>
+<p>She is supplying her credentials file, so that the <code>frost-client
+coordinator</code> can look up the group, and she is picking the two people
+who will sign: herself and Bob. Eve signing this transaction will not
+result in it being valid!</p>
+<p>Alice should see these results:</p>
+<pre><code>Reading message from board-meeting-250917.txt...
+Logging in...
+Creating signing session...
+Waiting for participants to send their commitments......
+</code></pre>
+<p>Now each of Alice and Bob need to run <code>frost-client participant</code> to do
+the actual signing. Yes, this does mean that Alice is running two
+programs, <code>frost-client coordinator</code> and the <code>frost-client
+participant</code>!</p>
+<p>This is a simple command that just requires the Group ID, the server URL, and the credentials file:</p>
+<pre><code>GROUP_ID=$(grep -oE '^\[group\.[0-9a-f]+' alice.toml | head -1 | sed 's/^\[group\.//')
+frost-client participant -g $GROUP_ID -s 127.0.1:2744 -c alice.toml
+</code></pre>
+<p>Bob does the same:</p>
+<pre><code>GROUP_ID=$(grep -oE '^\[group\.[0-9a-f]+' bob.toml | head -1 | sed 's/^\[group\.//')
+frost-client participant -g $GROUP_ID -s 127.0.0.1:2744 -c bob.toml
+</code></pre>
+<p>:warning: <strong>WARNING:</strong> Again <code>participant</code> and <code>frost-client
+participant</code> are different programs.</p>
+<p>They should each see:</p>
+<pre><code>Logging in...
+Joining signing session...
+Sending commitments to coordinator...
+Waiting for coordinator to send signing package...........
+Message to be signed (hex-encoded):
+446174653a20392f31372f32350a50726573656e743a20303130303030303030303030303030303030303030303030303030303030303030303030303030303030303030303030303030303030303030303030303030302c20303230303030303030303030303030303030303030303030303030303030303030303030303030303030303030303030303030303030303030303030303030300a0a4465636973696f6e733a0a2a20416c6c6f636174652024313020746f204a616d20696e2043656e7472616c205061726b2050617274790a2a20416c6c204d656d62657273204d75737420436f6e7472696275746520243520746f2047726f7570204b6974747920627920392f32342f32350a
+Do you want to sign it? (y/n)
+</code></pre>
+<p>Much as when <a href="https://github.com/BlockchainCommons/Learning-FROST-from-the-Command-Line/blob/main/02_3_Creating_FROST_Signature.md#checking-your-message">signing after
+TDG</a>,
+that hex-encoding should be checked so that you know what you're
+signing. That can be done with <code>echo "&lt;hex&gt;" | xxd -r -p</code>.</p>
+<p>After they sign, the participants should see:</p>
+<pre><code>Sending signature share to coordinator...
+Done
+</code></pre>
+<p>Then the coordinator should see:</p>
+<pre><code>Raw signature written to board-meeting-250917.sig
+</code></pre>
+<p>That's it. Due to the ease of use of the <code>frost-client</code> and <code>frostd</code>,
+the signing is done already!</p>
+<h2 id="verifying-with-dkg-shares-generated-by-the-server">Verifying with DKG Shares Generated by the Server</h2>
+<p>You can use the <code>frost-verify</code> program that you downloaded in
+<a href="../02_4_Checking_FROST_Signature/">§2.4</a> to check your new
+signature. You just need to account for the fact that your public key
+package is now stored in your credentials file (e.g., <code>alice.toml</code>)
+rather than a separate public key package file. To support this, you
+use the <code>-C</code> flag and list your credentials file rather than the <code>-P</code>
+flag that you used previously.</p>
+<pre><code>% frost-verify verify -m board-meeting-250917.txt -s board-meeting-250917.sig -C alice.toml
+✅ Signature verification: PASSED
+</code></pre>
+<h2 id="accessing-the-public-key-package-programmatically">Accessing the Public Key Package Programmatically</h2>
+<p>If you look at your credentials file, you'll see that the
+<code>public_key_package</code> is recorded by the ZF FROST server in hex, not an
+easy-to-read JSON file, as was the case when you used the previous CLI
+tools:</p>
+<p><code>public_key_package =
+"00b169f0da032cb07edbc49dbcac5aa169c6f0c417e3a170431db15265ffc90e9f161b87c10893b643f9c6aeb52b094407bc3be61faa261d304ec6db6337ad05811f4d6aa482aab71ca92218f843a1f673f1428737de78512df0efc9e1108e3a8624cd05b90c3415e1c341ad3ca3de173b4e274b2cb2551a3f2ffef8824892d8fabdfcf786f637087bae60ed73e128a3d6c383491e31403bddf40ef33b4531b2e1cb1a76310db7c3534af91f5e02880f8b38d8a11d77345d2219481292fc5a5ee03d8edd0a6bf6b2f30a4f3a666110478eca120a9a7d19740390fff8bb2250eb274177e6dd22"</code> This is a hex encoding of a Rust vector. If you decide that you
+want to work with this file programmatically, you can decode it using
+the <a href="https://docs.rs/serde/latest/serde/">Serde framework</a> for Rust,
+but that goes beyond the scope of this tutorial.</p>
+<h2 id="summary-creating-frost-secret-shares-with-dkg-using-server">Summary: Creating FROST Secret Shares with DKG Using Server</h2>
+<p>Creating shares with DKG, but using the ZF FROST server, demonstrates
+how easy FROST can be (once you get the server set up!). It's a lesson
+in accessibility for FROST developers.</p>
+<h2 id="whats-next">What's Next</h2>
+<p>To review the share creation methods demonstrated in §2.2, §3.1, and
+§3.2 as well as the signing methods demonstrated in §2.3, §3.1, and
+§3.3, continue with <a href="../03_3_ZF_FROST_in_a_Nutshell/">§3.3: ZF FROST in a
+Nutshell</a>.</p>
+<p>Or if you're comfortable with that already, jump to another FROST
+advanced feature in <a href="../03_4_Refreshing_FROST_Shares/">§3.4: Refreshing FROST
+Shares</a>.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": [], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>

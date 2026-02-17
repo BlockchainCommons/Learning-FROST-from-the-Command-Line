@@ -1,0 +1,1379 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://learningfrost.blockchaincommons.com/04_1_Installing_Bitcoin_Tools/">
+      
+      
+        <link rel="prev" href="../04_0_FROST_and_Bitcoin/">
+      
+      
+        <link rel="next" href="../04_2_Signing_PSBTs_with_FROST/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.1">
+    
+    
+      
+        <title>4.1: Installing Bitcoin Tools - Learning FROST from the Command Line</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.484c7ddc.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#41-installing-bitcoin-tools" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="Learning FROST from the Command Line" class="md-header__button md-logo" aria-label="Learning FROST from the Command Line" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m20.79 13.95-2.33.62-2-1.13v-2.88l2-1.13 2.33.62.52-1.93-1.77-.47.46-1.77-1.93-.52-.62 2.33-2 1.13L13 7.38V5.12l1.71-1.71L13.29 2 12 3.29 10.71 2 9.29 3.41 11 5.12v2.26L8.5 8.82l-2-1.13-.58-2.33L4 5.88l.47 1.77-1.77.47.52 1.93 2.33-.62 2 1.13v2.89l-2 1.13-2.33-.62-.52 1.93 1.77.47L4 18.12l1.93.52.62-2.33 2-1.13L11 16.62v2.26l-1.71 1.71L10.71 22 12 20.71 13.29 22l1.41-1.41-1.7-1.71v-2.26l2.5-1.45 2 1.13.62 2.33 1.88-.51-.47-1.77 1.77-.47zM9.5 10.56 12 9.11l2.5 1.45v2.88L12 14.89l-2.5-1.45z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Learning FROST from the Command Line
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              4.1: Installing Bitcoin Tools
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/BlockchainCommons/Learning-FROST-from-the-Command-Line" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Learning FROST from the Command Line" class="md-nav__button md-logo" aria-label="Learning FROST from the Command Line" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m20.79 13.95-2.33.62-2-1.13v-2.88l2-1.13 2.33.62.52-1.93-1.77-.47.46-1.77-1.93-.52-.62 2.33-2 1.13L13 7.38V5.12l1.71-1.71L13.29 2 12 3.29 10.71 2 9.29 3.41 11 5.12v2.26L8.5 8.82l-2-1.13-.58-2.33L4 5.88l.47 1.77-1.77.47.52 1.93 2.33-.62 2 1.13v2.89l-2 1.13-2.33-.62-.52 1.93 1.77.47L4 18.12l1.93.52.62-2.33 2-1.13L11 16.62v2.26l-1.71 1.71L10.71 22 12 20.71 13.29 22l1.41-1.41-1.7-1.71v-2.26l2.5-1.45 2 1.13.62 2.33 1.88-.51-.47-1.77 1.77-.47zM9.5 10.56 12 9.11l2.5 1.45v2.88L12 14.89l-2.5-1.45z"/></svg>
+
+    </a>
+    Learning FROST from the Command Line
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/BlockchainCommons/Learning-FROST-from-the-Command-Line" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01_0_Introduction/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter One: Introduction to FROST
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01_1_Introducing_FROST/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1.1: Introducing FROST
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01_2_FROST_Signature_Process/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1.2: The FROST Signature Process
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01_3_FROST_vs_MuSig/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1.3: FROST vs MuSig2
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../02_0_Signing_with_FROST/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter Two: Signing with FROST
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../02_1_Installing_FROST_Tools/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2.1: Installing the FROST Tools
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../02_2_Creating_FROST_Secret_Shares_with_TDG/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2.2: Creating FROST Secret Shares with TDG
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../02_3_Creating_FROST_Signature/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2.3: Creating a FROST Signature
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../02_4_Checking_FROST_Signature/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2.4: Checking FROST Signatures
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../03_0_Advanced_FROST/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter Three: Advanced FROST Capabilities
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../03_1_Creating_FROST_Secret_Shares_with_DKG_Using_CLI/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    3.1: Creating FROST Secret Shares with DKG Using CLI
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../03_2_Creating_FROST_Secret_Shares_with_DKG_Using_Server/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    3.2: Creating FROST Secret Shares with DKG Using Server
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../03_3_ZF_FROST_in_a_Nutshell/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    3.3 ZF FROST in a Nutshell
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../03_4_Refreshing_FROST_Shares/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    3.4: Resharing Shares
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../04_0_FROST_and_Bitcoin/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter Four: FROST and Bitcoin
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    4.1: Installing Bitcoin Tools
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    4.1: Installing Bitcoin Tools
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#equipment-inventory" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Equipment Inventory
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#installing-bitcoin-core" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Installing Bitcoin Core
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#installing-bdk-cli" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Installing bdk-cli
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#installing-the-blockchain-commons-version-of-frost" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Installing the Blockchain Commons Version of FROST
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#creating-the-sighash-helper-helper-tool" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Creating the sighash-helper Helper Tool
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#creating-the-psbt-sig-attach-helper-tool" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Creating the psbt-sig-attach Helper Tool
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#installing-jq-and-tq" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Installing jq and tq
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#checking-your-inventory" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Checking Your Inventory
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#summary-installing-bitcoin-tools" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Summary: Installing Bitcoin Tools
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#whats-next" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What's Next
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../04_2_Signing_PSBTs_with_FROST/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    4.2: Signing PSBTs with FROST
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#equipment-inventory" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Equipment Inventory
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#installing-bitcoin-core" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Installing Bitcoin Core
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#installing-bdk-cli" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Installing bdk-cli
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#installing-the-blockchain-commons-version-of-frost" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Installing the Blockchain Commons Version of FROST
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#creating-the-sighash-helper-helper-tool" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Creating the sighash-helper Helper Tool
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#creating-the-psbt-sig-attach-helper-tool" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Creating the psbt-sig-attach Helper Tool
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#installing-jq-and-tq" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Installing jq and tq
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#checking-your-inventory" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Checking Your Inventory
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#summary-installing-bitcoin-tools" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Summary: Installing Bitcoin Tools
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#whats-next" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What's Next
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="41-installing-bitcoin-tools">4.1: Installing Bitcoin Tools</h1>
+<p>Though signing Bitcoin transactions with a FROST group is now
+possible, none of the command line tools do quite what's
+required. Doing so instead requires using a branch of the ZF FROST
+Tools and a few hand constructed helpers, along with the excellent
+Bitcoin command-line tool, BDK, the Bitcoin Development Kit.</p>
+<h2 id="equipment-inventory">Equipment Inventory</h2>
+<p>This section will take you through the installation of the following
+tools, which together will allow you to sign and send a Bitcoin
+transaction:</p>
+<ul>
+<li>The Bitcoin Core client &amp; server</li>
+<li>The Bitcoin Development Kit</li>
+<li>Our version of the ZF FROST Tools with Secp256K1-TR Ciphersuite Support</li>
+<li>... Using the Taproot Tweak Branch</li>
+<li>The <code>sighash-helper</code> Tool   </li>
+<li>The <code>psbt-sig-attach</code> Tool</li>
+<li>The <code>jq</code> and <code>tq</code> stream editors</li>
+</ul>
+<p>Obviously, this is a complex process, though this tutorial will take
+you right through it. In walking through this process, you'll see not
+only how everything works, but also why it's very important to make
+this type of procedure much easier, to aid in the accessibility and so
+the usage of FROST.</p>
+<h2 id="installing-bitcoin-core">Installing Bitcoin Core</h2>
+<p>You will need Bitcoin Core to create and sign transactions.</p>
+<p>We would usually suggest <a href="https://github.com/BlockchainCommons/GordianServer-macOS">Gordian
+Server</a> as a
+best solution for running a Bitcoin node, but that is limited to Macs,
+and it offers more features than are really necessary for the simple
+regtest example here.</p>
+<p>So instead we suggest downloading the appropriate version of Bitcoin
+Core for your OS:</p>
+<p><a href="https://bitcoin.org/en/download">https://bitcoin.org/en/download</a></p>
+<p>Some pacakage managers may make this install even easier. For example,
+the following will install Bitcoin Core on your Mac if you use the
+Homebrew package installer:</p>
+<pre><code>% brew install bitcoin
+</code></pre>
+<p>This should install both <code>bitcoind</code> (the server) and <code>bitcoin-cli</code> (a
+command-line client).</p>
+<h2 id="installing-bdk-cli">Installing bdk-cli</h2>
+<p>Though Bitcoin has its own command-line app (<code>bitcoin-cli</code>), this
+example also uses <code>bdk-cli</code>, the <a href="https://github.com/bitcoindevkit/bdk-cli">Bitcoin Dev Kit
+CLI</a>. It's primarily used
+for work involving the FROST wallet, both because <code>bitcoin-cli</code>
+doesn't work well with addresses not created by it and because
+examples are simpler if you have two different apps for the two
+different wallets: <code>bitcoin-cli</code> is used for the regular Bitcoin
+wallet and <code>bdk-cli</code> for the FROST Bitcoin wallet.</p>
+<p>This is a <code>bdk-cli</code> crate, making this an easy install.</p>
+<pre><code>% cargo install bdk-cli --features rpc
+</code></pre>
+<p>Note that the <code>rpc</code> feature must be included to allow connection to
+the <code>bitcoind</code> server that you just installed.</p>
+<blockquote>
+<p>:book: <strong><em>What is RPC?</em></strong> RPC is "Remote Procedure Call", a protocol
+used to communicate between processes on different systems (or even on
+the same system). It includes an authorization protocol, which allows
+the remote server to authenticate a user connecting to it, using a
+user name and password.</p>
+</blockquote>
+<h2 id="installing-the-blockchain-commons-version-of-frost">Installing the Blockchain Commons Version of FROST</h2>
+<p>Blockchain Commons has patched the ZF FROST tools to offer the
+improvements required to sign Bitcoin transactions. This comes in two
+parts: one adds secp256k1-tr as a ciphersuite; and the other
+supplements that by incorporating the Taproot methodology for tweaking
+keys.</p>
+<blockquote>
+<p>:book: <strong><em>What is secp256k1?</em></strong> Bitcoin uses elliptic curve
+cryptography (ECC) for its core cryptographic functions, such as
+creating a public key from a private key. Any ECC calculations are
+done with a specific elliptic curve. The curve used by Bitcoin for its
+ECC calculations is secp256k1.</p>
+<p>:book: <strong><em>What is Taproot?</em></strong> Taproot was an upgrade to Bitcoin
+introduced in November 2021. It allows for the use of Schnorr
+signatures (including FROST signatures) with a new P2TR type of
+transaction. The P2TR transaction allows public keys and scripts to be
+secretly combined into a single <code>scriptPubKey</code> that locks a Bitcoin
+transaction. This is done with a "tweak".</p>
+<p>:book: <strong><em>So what is secp256k1-tr?</em></strong> It's a Schnorr signature using
+the secp256k1 curve that supports Taproot (and so FROST).</p>
+</blockquote>
+<p>You can install the updated version of the ZF FROST tools that
+includes both of these elements as follows:</p>
+<pre><code>% git clone https://github.com/BlockchainCommons/zcash-frost-tools
+% cd zcash-frost-tools 
+% git checkout taproot-tweak
+% cargo install --path frost-client &amp;&amp; cargo install --path frostd
+% cd ..
+</code></pre>
+<p>This will entirely replace the version of the ZF FROST tools that you
+installed in <a href="../02_1_Installing_FROST_Tools/">§2.1: Installing the FROST
+Tools</a>. You should see messages like the
+following indicating this during the installation:</p>
+<pre><code>Replacing /Users/ShannonA/.cargo/bin/coordinator
+Replacing /Users/ShannonA/.cargo/bin/dkg
+Replacing /Users/ShannonA/.cargo/bin/frost-client
+Replacing /Users/ShannonA/.cargo/bin/participant
+Replacing /Users/ShannonA/.cargo/bin/trusted-dealer
+
+...
+
+Replacing /Users/ShannonA/.cargo/bin/frostd
+Replaced package `frostd v0.1.0 (/Users/ShannonA/Documents/GitHub/FROST/frost-tools/frostd)` with `frostd v0.1.0 (/Users/ShannonA/Documents/GitHub/Blockchain-Commons/zcash-frost-tools/frostd)` (executable `frostd`)
+</code></pre>
+<p>The version numbers will be the same, but looking at your copies of the apps should indicate an update via new timestamps:</p>
+<pre><code>% ls -lagh `which frost-client`
+-rwxr-xr-x  1 staff    10M Nov  4 11:13 /Users/ShannonA/.cargo/bin/frost-client
+% ls -lagh `which frostd`
+-rwxr-xr-x  1 staff   7.0M Nov  4 11:14 /Users/ShannonA/.cargo/bin/frostd
+</code></pre>
+<h2 id="creating-the-sighash-helper-helper-tool">Creating the <code>sighash-helper</code> Helper Tool</h2>
+<p>Even <code>bdk-cli</code> and <code>bitcoin-cli</code> don't have everything required to
+sign a FROST transaction!</p>
+<p>To start with, there's no way to extract a signature hash from a
+transaction so that it can be signed by the ZF FROST tools. The
+<code>sighash-helper</code> tool is a simple Rust program that does so. You'll
+quickly create it by hand.</p>
+<p>First, create a Rust project:</p>
+<pre><code>% cargo new sighash-helper --bin
+Creating binary (application) `sighash-helper` package
+</code></pre>
+<p>This will create two files: <code>Cargo.toml</code>, which details the program
+and its dependencies; and <code>src/main.rs</code>, which contains the actual
+code for the program.</p>
+<p>You then need to add the following to the <code>[dependencies]</code> section of
+the <code>Cargo.toml</code>. If the section is currently empty (likely the case
+for a default file), you can do the following:</p>
+<pre><code>% cd sighash-helper
+% cat &gt;&gt; Cargo.toml
+bdk = { version = &quot;0.30.2&quot;, default-features = false, features = [&quot;std&quot;] }
+</code></pre>
+<p>You'll need to hit ^D at the end to close out the <code>cat</code>.</p>
+<p>Afterward your file should look something like:</p>
+<pre><code>[package]
+name = &quot;sighash-helper&quot;
+version = &quot;0.1.0&quot;
+edition = &quot;2024&quot;
+
+[dependencies]
+bdk = { version = &quot;0.30.2&quot;, default-features = false, features = [&quot;std&quot;] }
+</code></pre>
+<p>You should then input the following into <code>src/main.rs</code>:</p>
+<pre><code class="language-rust">use std::io::{self, Read};
+use std::str::FromStr;
+
+use bdk::bitcoin::psbt::PartiallySignedTransaction as Psbt;
+use bdk::bitcoin::sighash::{Prevouts, SighashCache, TapSighashType};
+
+fn main() {
+    // 1. read the base‑64 PSBT from stdin
+    let mut b64 = String::new();
+    io::stdin().read_to_string(&amp;mut b64).unwrap();
+    let psbt = Psbt::from_str(b64.trim()).expect(&quot;valid base64 PSBT&quot;);
+
+    // 2. assume exactly one input (enforced by the demo)
+    let tx = &amp;psbt.unsigned_tx;
+
+    // 3. clone the single witness_utxo so it lives long enough
+    let txout = psbt.inputs[0]
+        .witness_utxo
+        .as_ref()
+        .expect(&quot;witness_utxo present&quot;)
+        .clone();
+    let prevouts_arr = [txout];                 // concrete array on the stack
+    let prevouts = Prevouts::All(&amp;prevouts_arr);
+
+    // 4. compute Taproot key‑path sighash
+    let mut cache = SighashCache::new(tx);
+    let msg = cache
+        .taproot_key_spend_signature_hash(0, &amp;prevouts, TapSighashType::Default)
+        .expect(&quot;sighash&quot;);
+
+    // 5. print the 32‑byte message as hex
+    println!(&quot;{:064x}&quot;, msg);
+}
+</code></pre>
+<p>You can enter this with <code>cat &gt; src/main.rs</code> or use your favorite editor.</p>
+<p>You're now ready to install your <code>sighash-helper</code></p>
+<pre><code>% cargo install --path .
+% cd ..
+</code></pre>
+<h2 id="creating-the-psbt-sig-attach-helper-tool">Creating the <code>psbt-sig-attach</code> Helper Tool</h2>
+<p>There's also no way to add an arbitrary signature to a
+PSBT. (<code>bitcoin-cli</code> and <code>bdk-cli</code> both do so internally.)  This
+requires the creation of another helper tool, <code>psbt-sig-attach</code>.</p>
+<pre><code>% cargo new psbt-sig-attach --bin
+Creating binary (application) `psbt-sig-attach` package
+</code></pre>
+<p>Again, add dependencies:</p>
+<pre><code>% cd psbt-sig-attach
+% cat &gt;&gt; Cargo.toml
+bdk    = { version = &quot;0.30.2&quot;, default-features = false, features = [&quot;std&quot;] }
+base64 = &quot;0.22.1&quot;
+hex    = &quot;0.4&quot;
+bitcoin = &quot;0.30.2&quot;
+</code></pre>
+<p>Afterward, <code>Cargo.toml</code> should look like this:</p>
+<pre><code>[package]
+name = &quot;psbt-sig-attach&quot;
+version = &quot;0.1.0&quot;
+edition = &quot;2024&quot;
+
+[dependencies]
+bdk    = { version = &quot;0.30.2&quot;, default-features = false, features = [&quot;std&quot;] }
+base64 = &quot;0.22.1&quot;
+hex    = &quot;0.4&quot;
+bitcoin = &quot;0.30.2&quot;
+</code></pre>
+<p>Then, replace <code>src/main.rs</code> with the following:</p>
+<pre><code class="language-rust">use std::io::{self, Read};
+use std::str::FromStr;
+
+use bitcoin::{
+    psbt::PartiallySignedTransaction as Psbt,
+    secp256k1::schnorr::Signature as SchnorrSig,
+    sighash::TapSighashType,
+    taproot::Signature as TaprootSignature,
+};
+use hex::FromHex;
+
+fn main() {
+    // r||s hex comes as first CLI arg
+    let sig_hex = std::env::args()
+        .nth(1)
+        .expect(&quot;usage: psbt-sig-attach &lt;64-byte r||s hex&gt;&quot;);
+    let sig_vec = Vec::&lt;u8&gt;::from_hex(sig_hex.trim()).expect(&quot;hex sig&quot;);
+    assert_eq!(sig_vec.len(), 64, &quot;need 64-byte Schnorr sig&quot;);
+
+    // wrap in TaprootSignature with default sighash flag
+    let tap_sig = TaprootSignature {
+        sig: SchnorrSig::from_slice(&amp;sig_vec).expect(&quot;schnorr sig&quot;),
+        hash_ty: TapSighashType::Default,
+    };
+
+    // read base-64 PSBT from stdin
+    let mut b64 = String::new();
+    io::stdin().read_to_string(&amp;mut b64).unwrap();
+    let mut psbt = Psbt::from_str(b64.trim()).expect(&quot;base64 PSBT&quot;);
+
+    // insert signature in input 0
+    psbt.inputs[0].tap_key_sig = Some(tap_sig);
+
+    // write updated PSBT as base-64
+    println!(&quot;{}&quot;, psbt.to_string());
+}
+</code></pre>
+<p>Finally, install and leave the project behind:</p>
+<pre><code>% cargo install --path .
+% cd ..
+</code></pre>
+<h2 id="installing-jq-and-tq">Installing <code>jq</code> and <code>tq</code></h2>
+<p><code>jq</code> and <code>tq</code> are command-line stream editors. <code>jq</code> makes it easy to
+manipulate JSON files and <code>tq</code> makes it easy to manipulate TOML files.</p>
+<p>You should be able to install <code>jq</code> with a package manager.</p>
+<p>For UNIX:</p>
+<pre><code>% apt-get install jq
+</code></pre>
+<p>For Homebrew on Mac:</p>
+<pre><code>% brew install jq
+</code></pre>
+<p>You can also install <code>jq</code> directly from <a href="https://jqlang.org/">jqlang.org</a>.</p>
+<p>See <a href="https://github.com/BlockchainCommons/Learning-Bitcoin-from-the-Command-Line/blob/master/04_2__Interlude_Using_JQ.md">the interlude in Learning Bitcoin from the Command Line</a> if you're interested in learning more about <code>jq</code>.</p>
+<p>You should have already installed <code>tq</code> in §3.2. If you didn't <a href="https://github.com/BlockchainCommons/Learning-FROST-from-the-Command-Line/blob/main/03_2_Creating_FROST_Secret_Shares_with_DKG_Using_Server.md#installing-tomlq">refer
+to "Installing tomlq"
+there</a>
+for the easy instructions.</p>
+<h2 id="checking-your-inventory">Checking Your Inventory</h2>
+<p>You can check your inventory on most systems with the <code>which</code>
+command. If anything is missing, you'll need to either consult the
+appropriate section, above, for how to install, or perhaps just make
+sure your $PATH includes where the install happened.</p>
+<pre><code>% which bitcoind
+/opt/homebrew/bin/bitcoind
+% which bitcoin-cli
+/opt/homebrew/bin/bitcoin-cli
+% which bdk-cli
+/Users/ShannonA/.cargo/bin/bdk-cli
+% which frost-client
+/Users/ShannonA/.cargo/bin/frost-client
+% which frostd
+/Users/ShannonA/.cargo/bin/frostd
+% which sighash-helper
+/Users/ShannonA/.cargo/bin/sighash-helper
+% which psbt-sig-attach
+/Users/ShannonA/.cargo/bin/psbt-sig-attach
+% which jq
+/opt/homebrew/bin/jq
+% which tq
+/Users/ShannonA/.cargo/bin/tq
+</code></pre>
+<h2 id="summary-installing-bitcoin-tools">Summary: Installing Bitcoin Tools</h2>
+<p>To get ready for FROST signing of a Bitcoin transaction, you need to
+install:</p>
+<ul>
+<li><strong>bitcoind:</strong> The server that will run your <code>regtest</code> environment.</li>
+<li><strong>bitcoin-cli:</strong> Bitcoin's app, which will manage your basic Bitcoin wallet.</li>
+<li><strong>bdk-cli:</strong> The Bitcoin Dev Kit app, which will manage your FROST Bitcoin wallet.</li>
+<li><strong>ZF FROST Tools:</strong> An updated version of <code>frostd</code> and <code>frost-client</code>.</li>
+<li><strong>Helper Tools:</strong> Two small apps, <code>sighash-helper</code> and <code>psbt-sig-attach</code>, which are required to extract info from a PSBT and then import into it.</li>
+<li><strong>tq &amp; jq:</strong> Stream editors for structured JSON and TOML files.</li>
+</ul>
+<h2 id="whats-next">What's Next</h2>
+<p>You'll put this to use in <a href="../04_2_Signing_PSBTs_with_FROST/">§4.2: Signing PSBTs with
+FROST</a>.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": [], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>
