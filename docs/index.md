@@ -1,3 +1,8 @@
+# Learning FROST from the Command Line
+## by Shannon Appelcline
+
+#### A [Blockchain Commons Course](https://developer.blockchaincommons.com/courses/)
+
 Learning FROST from the Command Line explains what FROST is and how it
 differs from other signing systems. It also provides live
 demonstrations of FROST signing capabilities and shows how to use
