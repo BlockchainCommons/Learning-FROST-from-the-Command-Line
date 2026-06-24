@@ -1,3 +1,21 @@
+Learning FROST from the Command Line explains what FROST is and how it
+differs from other signing systems. It also provides live
+demonstrations of FROST signing capabilities and shows how to use
+FROST to sign Bitcoin transactions.
+
+<div style="float: right">
+  <p>
+    <a href="https://developer.blockchaincommons.com/resources/">
+      <img src="https://developer.blockchaincommons.com/assets/badges/cat-resources.png" width=150px>
+    </a>
+  </p>
+  <p>
+    <a href=".">
+      <img src="https://developer.blockchaincommons.com/assets/badges/learning-frost.png" width=150px>
+    </a>
+  </p>
+</div>
+
 ## Part One: Learning about FROST
 
 * [1.0: Introduction to FROST](01_0_Introduction.md)
