@@ -37,4 +37,8 @@ FROST to sign Bitcoin transactions.
 
 ---
 
-_This course is built from [GitHub](https://github.com/BlockchainCommons/Learning-FROST-from-the-Command-Line/blob/main/README.md). You can read there if you prefer. A grant for the creation of this course was provided by [HRF](https://hrf.org/)._
+_This course is built from
+[GitHub](https://github.com/BlockchainCommons/Learning-FROST-from-the-Command-Line/blob/main/README.md). You
+can read there if you prefer. A grant for the creation of this course
+was provided by [HRF](https://hrf.org/). Architecture of FROST work by
+Christopher Allen. Tools and process for signing Bitcoin transactions by Wolf McNally._
